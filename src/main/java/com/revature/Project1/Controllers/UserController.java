@@ -28,6 +28,7 @@ public class UserController {
     }
 
     @PostMapping
+    @CrossOrigin
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
