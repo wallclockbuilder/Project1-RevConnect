@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/followers")
+@CrossOrigin
 public class FollowerController {
 
     @Autowired

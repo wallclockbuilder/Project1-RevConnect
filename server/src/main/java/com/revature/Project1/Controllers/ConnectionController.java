@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/connections")
+@CrossOrigin
 public class ConnectionController {
 
     @Autowired
