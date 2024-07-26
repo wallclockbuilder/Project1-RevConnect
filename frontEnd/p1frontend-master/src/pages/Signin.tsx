@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/signin.css';
-import logo from '../pictures/logo.png';
-import { Link, useNavigate } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Signin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const { login } = useAuth();
 
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setErrorMessage('');
@@ -37,9 +39,8 @@ const Signin = () => {
                 const contentType = response.headers.get('Content-Type');
                 if (contentType && contentType.includes('application/json')) {
                     const responseBody = await response.json();
-                    console.log(responseBody);
-                    // Handle successful login
-                    navigate('/profile'); // Redirect to profile page
+                    console.log("Login Response Body:", responseBody);
+                    login(responseBody); 
                 } else {
                     throw new Error('Expected JSON response but received something else.');
                 }
@@ -53,7 +54,11 @@ const Signin = () => {
                 }
             }
         } catch (error) {
-            setErrorMessage(error.message || "Network error occurred. Please try again later.");
+            if (error instanceof Error) {
+                setErrorMessage(error.message || "Network error occurred. Please try again later.");
+            } else {
+                setErrorMessage("An unknown error occurred. Please try again later.");
+            }
         } finally {
             setLoading(false);
         }
@@ -61,7 +66,7 @@ const Signin = () => {
 
     return (
         <form className="form-signin" onSubmit={handleSubmit}>
-            <img className="mb-4" src={logo} alt="Logo" width="72" height="72" />
+            <img className="mb-4" src="\pictures\logo.png" alt="Logo" width="72" height="72" />
             <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label htmlFor="username" className="sr-only">Username</label>
             <input

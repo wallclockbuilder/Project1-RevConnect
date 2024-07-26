@@ -1,5 +1,7 @@
 package com.revature.Project1.Controllers;
 
+import com.revature.Project1.DTO.DtoConverter;
+import com.revature.Project1.DTO.UserDto;
 import com.revature.Project1.Models.User;
 import com.revature.Project1.Services.EmailService;
 import com.revature.Project1.Services.UserService;
@@ -22,27 +24,32 @@ public class UserController {
     private EmailService emailService;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserDto> getAllUsers() {
+        return userService.getAllUsers().stream()
+                .map(DtoConverter::toUserDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return user.map(value -> ResponseEntity.ok(DtoConverter.toUserDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserDto createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return DtoConverter.toUserDto(createdUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         Optional<User> user = userService.getUserById(id);
         if (user.isPresent()) {
             userDetails.setUserId(id);
-            return ResponseEntity.ok(userService.updateUser(userDetails));
+            User updatedUser = userService.updateUser(userDetails);
+            return ResponseEntity.ok(DtoConverter.toUserDto(updatedUser));
         } else {
             return ResponseEntity.notFound().build();
         }

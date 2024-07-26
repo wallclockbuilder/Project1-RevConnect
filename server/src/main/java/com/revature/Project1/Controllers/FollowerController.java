@@ -1,5 +1,6 @@
 package com.revature.Project1.Controllers;
 
+import com.revature.Project1.DTO.FollowDto;
 import com.revature.Project1.Models.Follower;
 import com.revature.Project1.Services.FollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+import com.revature.Project1.DTO.DtoConverter;
 @RestController
 @RequestMapping("/api/followers")
 @CrossOrigin
@@ -18,37 +19,46 @@ public class FollowerController {
     private FollowerService followerService;
 
     @GetMapping
-    public List<Follower> getAllFollowers() {
-        return followerService.getAllFollowers();
+    public List<FollowDto> getAllFollowers() {
+        return followerService.getAllFollowers().stream()
+                .map(DtoConverter::toFollowDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Follower> getFollowerById(@PathVariable Long id) {
+    public ResponseEntity<FollowDto> getFollowerById(@PathVariable Long id) {
         Optional<Follower> follower = followerService.getFollowerById(id);
-        return follower.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return follower.map(value -> ResponseEntity.ok(DtoConverter.toFollowDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/follower/{followerUserId}")
-    public List<Follower> getFollowersByFollowerUserId(@PathVariable Long followerUserId) {
-        return followerService.getUsersFollowedByUser(followerUserId);
+    public List<FollowDto> getFollowersByFollowerUserId(@PathVariable Long followerUserId) {
+        return followerService.getUsersFollowedByUser(followerUserId).stream()
+                .map(DtoConverter::toFollowDto)
+                .toList();
     }
 
     @GetMapping("/following/{followingUserId}")
-    public List<Follower> getFollowersByFollowingUserId(@PathVariable Long followingUserId) {
-        return followerService.getFollowersOfUser(followingUserId);
+    public List<FollowDto> getFollowersByFollowingUserId(@PathVariable Long followingUserId) {
+        return followerService.getFollowersOfUser(followingUserId).stream()
+                .map(DtoConverter::toFollowDto)
+                .toList();
     }
 
     @PostMapping
-    public Follower createFollower(@RequestBody Follower follower) {
-        return followerService.createFollower(follower);
+    public FollowDto createFollower(@RequestBody Follower follower) {
+        Follower savedFollower = followerService.createFollower(follower);
+        return DtoConverter.toFollowDto(savedFollower);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Follower> updateFollower(@PathVariable Long id, @RequestBody Follower followerDetails) {
+    public ResponseEntity<FollowDto> updateFollower(@PathVariable Long id, @RequestBody Follower followerDetails) {
         Optional<Follower> follower = followerService.getFollowerById(id);
         if (follower.isPresent()) {
             followerDetails.setFollowerId(id);
-            return ResponseEntity.ok(followerService.updateFollower(followerDetails));
+            Follower updatedFollower = followerService.updateFollower(followerDetails);
+            return ResponseEntity.ok(DtoConverter.toFollowDto(updatedFollower));
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -1,5 +1,7 @@
 package com.revature.Project1.Controllers;
 
+import com.revature.Project1.DTO.ConnectionDto;
+import com.revature.Project1.DTO.DtoConverter;
 import com.revature.Project1.Models.Connection;
 import com.revature.Project1.Services.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +20,43 @@ public class ConnectionController {
     private ConnectionService connectionService;
 
     @GetMapping
-    public List<Connection> getAllConnections() {
-        return connectionService.getAllConnections();
+    public List<ConnectionDto> getAllConnections() {
+        return connectionService.getAllConnections().stream()
+                .map(DtoConverter::toConnectionDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Connection> getConnectionById(@PathVariable Long id) {
+    public ResponseEntity<ConnectionDto> getConnectionById(@PathVariable Long id) {
         Optional<Connection> connection = connectionService.getConnectionById(id);
-        return connection.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return connection.map(value -> ResponseEntity.ok(DtoConverter.toConnectionDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/requester/{requesterId}")
-    public List<Connection> getConnectionsByRequesterId(@PathVariable Long requesterId) {
-        return connectionService.getConnectionsByRequesterId(requesterId);
+    public List<ConnectionDto> getConnectionsByRequesterId(@PathVariable Long requesterId) {
+        return connectionService.getConnectionsByRequesterId(requesterId).stream()
+                .map(DtoConverter::toConnectionDto)
+                .toList();
     }
 
     @GetMapping("/receiver/{receiverId}")
-    public List<Connection> getConnectionsByReceiverId(@PathVariable Long receiverId) {
-        return connectionService.getConnectionsByReceiverId(receiverId);
+    public List<ConnectionDto> getConnectionsByReceiverId(@PathVariable Long receiverId) {
+        return connectionService.getConnectionsByReceiverId(receiverId).stream()
+                .map(DtoConverter::toConnectionDto)
+                .toList();
     }
 
     @PostMapping
-    public Connection createConnection(@RequestBody Connection connection) {
-        return connectionService.createConnection(connection);
+    public ConnectionDto createConnection(@RequestBody Connection connection) {
+        Connection savedConnection = connectionService.createConnection(connection);
+        return DtoConverter.toConnectionDto(savedConnection);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Connection> updateConnection(@PathVariable Long id, @RequestBody Connection connection) {
-        return ResponseEntity.ok(connectionService.updateConnection(id, connection.getStatus()));
+    public ResponseEntity<ConnectionDto> updateConnection(@PathVariable Long id, @RequestBody Connection connection) {
+        Connection updatedConnection = connectionService.updateConnection(id, connection.getStatus());
+        return ResponseEntity.ok(DtoConverter.toConnectionDto(updatedConnection));
     }
 
     @DeleteMapping("/{id}")

@@ -1,6 +1,8 @@
 package com.revature.Project1.Controllers;
 
 
+import com.revature.Project1.DTO.DtoConverter;
+import com.revature.Project1.DTO.PostDto;
 import com.revature.Project1.Models.Post;
 import com.revature.Project1.Models.User;
 import com.revature.Project1.Services.PostService;
@@ -25,32 +27,40 @@ public class PostController {
     private UserService userService;
 
     @GetMapping
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    public List<PostDto> getAllPosts() {
+        return postService.getAllPosts().stream()
+                .map(DtoConverter::toPostDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
+    public ResponseEntity<PostDto> getPostById(@PathVariable Long id) {
         Optional<Post> post = postService.getPostById(id);
-        return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return post.map(value -> ResponseEntity.ok(DtoConverter.toPostDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/user/{userId}")
-    public List<Post> getPostsByUserId(@PathVariable Long userId) {
-        return postService.getPostsByUserId(userId);
+    public ResponseEntity<List<PostDto>> getPostsByUserId(@PathVariable Long userId) {
+        List<PostDto> postDtos = postService.getPostsByUserId(userId).stream()
+                .map(DtoConverter::toPostDto)
+                .toList();
+        return ResponseEntity.ok(postDtos);
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postService.createPost(post);
+    public PostDto createPost(@RequestBody Post post) {
+        Post savedPost = postService.createPost(post);
+        return DtoConverter.toPostDto(savedPost);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
+    public ResponseEntity<PostDto> updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
         Optional<Post> post = postService.getPostById(id);
         if (post.isPresent()) {
             postDetails.setPostId(id);
-            return ResponseEntity.ok(postService.updatePost(postDetails));
+            Post updatedPost = postService.updatePost(postDetails);
+            return ResponseEntity.ok(DtoConverter.toPostDto(updatedPost));
         } else {
             return ResponseEntity.notFound().build();
         }
