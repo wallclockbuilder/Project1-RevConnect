@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment as CommentType } from '../types';
+import { Comment as CommentType } from '../interface/types';
 
 interface CommentProps {
     comment: CommentType;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../components/Post';
 import config from '../config';
-import { Post as PostType, Comment as CommentType, Like as LikeType } from '../types';
+import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
 import AppNavbar from '../components/Navbar';
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<PostType[]>([]);
