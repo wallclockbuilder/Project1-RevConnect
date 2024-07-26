@@ -1,5 +1,7 @@
 package com.revature.Project1.Controllers;
 
+import com.revature.Project1.DTO.DtoConverter;
+import com.revature.Project1.DTO.NotificationDto;
 import com.revature.Project1.Models.Notification;
 import com.revature.Project1.Services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,37 +20,46 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @GetMapping
-    public List<Notification> getAllNotifications() {
-        return notificationService.getAllNotifications();
+    public List<NotificationDto> getAllNotifications() {
+        return notificationService.getAllNotifications().stream()
+                .map(DtoConverter::toNotificationDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Notification> getNotificationById(@PathVariable Long id) {
+    public ResponseEntity<NotificationDto> getNotificationById(@PathVariable Long id) {
         Optional<Notification> notification = notificationService.getNotificationById(id);
-        return notification.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return notification.map(value -> ResponseEntity.ok(DtoConverter.toNotificationDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/user/{userId}")
-    public List<Notification> getNotificationsByUserId(@PathVariable Long userId) {
-        return notificationService.getNotificationsByUserId(userId);
+    public List<NotificationDto> getNotificationsByUserId(@PathVariable Long userId) {
+        return notificationService.getNotificationsByUserId(userId).stream()
+                .map(DtoConverter::toNotificationDto)
+                .toList();
     }
 
     @GetMapping("/read/{read}")
-    public List<Notification> getNotificationsByRead(@PathVariable Boolean read) {
-        return notificationService.getNotificationsByRead(read);
+    public List<NotificationDto> getNotificationsByRead(@PathVariable Boolean read) {
+        return notificationService.getNotificationsByRead(read).stream()
+                .map(DtoConverter::toNotificationDto)
+                .toList();
     }
 
     @PostMapping
-    public Notification createNotification(@RequestBody Notification notification) {
-        return notificationService.createNotification(notification);
+    public NotificationDto createNotification(@RequestBody Notification notification) {
+        Notification savedNotification = notificationService.createNotification(notification);
+        return DtoConverter.toNotificationDto(savedNotification);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Notification> updateNotification(@PathVariable Long id, @RequestBody Notification notificationDetails) {
+    public ResponseEntity<NotificationDto> updateNotification(@PathVariable Long id, @RequestBody Notification notificationDetails) {
         Optional<Notification> notification = notificationService.getNotificationById(id);
         if (notification.isPresent()) {
             notificationDetails.setNotificationId(id);
-            return ResponseEntity.ok(notificationService.updateNotification(notificationDetails));
+            Notification updatedNotification = notificationService.updateNotification(notificationDetails);
+            return ResponseEntity.ok(DtoConverter.toNotificationDto(updatedNotification));
         } else {
             return ResponseEntity.notFound().build();
         }

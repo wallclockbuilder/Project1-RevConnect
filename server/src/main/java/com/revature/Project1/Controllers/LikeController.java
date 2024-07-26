@@ -1,5 +1,7 @@
 package com.revature.Project1.Controllers;
 
+import com.revature.Project1.DTO.DtoConverter;
+import com.revature.Project1.DTO.LikeDto;
 import com.revature.Project1.Models.Like;
 import com.revature.Project1.Services.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +20,30 @@ public class LikeController {
     private LikeService likeService;
 
     @GetMapping
-    public List<Like> getAllLikes() {
-        return likeService.getAllLikes();
+    public List<LikeDto> getAllLikes() {
+        return likeService.getAllLikes().stream()
+                .map(DtoConverter::toLikeDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Like> getLikeById(@PathVariable Long id) {
+    public ResponseEntity<LikeDto> getLikeById(@PathVariable Long id) {
         Optional<Like> like = likeService.getLikeById(id);
-        return like.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return like.map(value -> ResponseEntity.ok(DtoConverter.toLikeDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/post/{postId}")
-    public List<Like> getLikesByPostId(@PathVariable Long postId) {
-        return likeService.getLikesByPostId(postId);
+    public List<LikeDto> getLikesByPostId(@PathVariable Long postId) {
+        return likeService.getLikesByPostId(postId).stream()
+                .map(DtoConverter::toLikeDto)
+                .toList();
     }
 
     @PostMapping
-    public Like createLike(@RequestBody Like like) {
-        return likeService.createLike(like);
+    public LikeDto createLike(@RequestBody Like like) {
+        Like savedLike = likeService.createLike(like);
+        return DtoConverter.toLikeDto(savedLike);
     }
 
     @DeleteMapping("/{id}")

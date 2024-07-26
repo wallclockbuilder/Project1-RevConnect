@@ -23,6 +23,9 @@ public class ChatService {
     @Autowired
     private NotificationService notificationService;
 
+    public List<Chat> getMessagesBetweenUsers(Long user1Id, Long user2Id) {
+        return chatRepository.findAllBySenderAndReceiver(user1Id, user2Id);
+    }
 
 
     public List<Chat> getAllChats() {
