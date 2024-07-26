@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/signup.css'; 
 import logo from '../pictures/logo.png';
-import {  useNavigate } from 'react-router-dom';
-
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [bio, setBio] = useState('');
     const navigate = useNavigate(); // Initialize useNavigate
-
 
     const submitSignUp = async (e) => {
         e.preventDefault();
@@ -28,7 +26,10 @@ const Register = () => {
         const dto = {
             username: username,
             password: password,
-            email: email
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            bio: bio
         };
         const headers = {
             "Content-Type": "application/json"
@@ -44,7 +45,7 @@ const Register = () => {
             const responseBody = await response.json();
             console.log(responseBody);
             // Handle the response (e.g., show a success message, redirect, etc.)
-            navigate('/')
+            navigate('/');
         } catch (error) {
             console.error("Error during sign-up:", error);
             // Handle errors (e.g., show an error message)
@@ -60,6 +61,29 @@ const Register = () => {
                 <div className="register-form">
                     <form onSubmit={submitSignUp}>
                         <h1 className="h3 mb-3 font-weight-normal text-center">Register</h1>
+                        
+                        <label htmlFor="firstName" className="sr-only">First Name</label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            className="form-control" 
+                            placeholder="First Name" 
+                            required 
+                            value={firstName} 
+                            onChange={(e) => setFirstName(e.target.value)} 
+                        />
+                        
+                        <label htmlFor="lastName" className="sr-only">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            className="form-control" 
+                            placeholder="Last Name" 
+                            required 
+                            value={lastName} 
+                            onChange={(e) => setLastName(e.target.value)} 
+                        />
+                        
                         <label htmlFor="username" className="sr-only">Username</label>
                         <input 
                             type="text" 
@@ -71,6 +95,7 @@ const Register = () => {
                             value={username} 
                             onChange={(e) => setUsername(e.target.value)} 
                         />
+                        
                         <label htmlFor="inputEmail" className="sr-only">Email address</label>
                         <input 
                             type="email" 
@@ -81,6 +106,7 @@ const Register = () => {
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
                         />
+                        
                         <label htmlFor="inputPassword" className="sr-only">Password</label>
                         <input 
                             type="password" 
@@ -91,6 +117,7 @@ const Register = () => {
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
                         />
+                        
                         <label htmlFor="confirmPassword" className="sr-only">Confirm Password</label>
                         <input 
                             type="password" 
@@ -101,6 +128,17 @@ const Register = () => {
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)} 
                         />
+                        
+                        <label htmlFor="bio" className="sr-only">Bio</label>
+                        <textarea 
+                            id="bio" 
+                            className="form-control" 
+                            placeholder="Tell us about yourself" 
+                            rows="3" 
+                            value={bio} 
+                            onChange={(e) => setBio(e.target.value)} 
+                        ></textarea>
+                        
                         <button className="btn btn-primary btn-block" type="submit">Register</button>
                         <p className="mt-4 text-muted text-center">© 2024</p>
                     </form>

@@ -2,8 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/profile.css'; // Optional: If you want to include custom styles
 import { Helmet } from 'react-helmet';
+import { useAuth } from '../context/AuthContext';
 
-const Profile = () => {
+
+const Profile: React.FC = () => {
+
+    const { user, logout } = useAuth();
+
     return (
         <div id='profileBody'>
 
@@ -15,7 +20,7 @@ const Profile = () => {
                 <div className="row" id="user-profile">
                     <div className="col-lg-3 col-md-4 col-sm-4">
                         <div className="main-box clearfix">
-                            <h2>John Doe</h2>
+                            <h2>{user.firstName} {user.lastName}</h2>
                             <div className="profile-status">
                                 <i className="fa fa-check-circle"></i> Online
                             </div>
@@ -51,7 +56,7 @@ const Profile = () => {
                                             First Name
                                         </div>
                                         <div className="profile-user-details-value">
-                                            John
+                                            {user.firstName}
                                         </div>
                                     </div>
                                     <div className="profile-user-details clearfix">
@@ -59,16 +64,7 @@ const Profile = () => {
                                             Last Name
                                         </div>
                                         <div className="profile-user-details-value">
-                                            Doe
-                                        </div>
-                                    </div>
-                                    <div className="profile-user-details clearfix">
-                                        <div className="profile-user-details-label">
-                                            Address
-                                        </div>
-                                        <div className="profile-user-details-value">
-                                            10880 Malibu Point,
-                                            <br /> Malibu, Calif., 90265
+                                            {user.lastName}
                                         </div>
                                     </div>
                                     <div className="profile-user-details clearfix">
@@ -76,17 +72,10 @@ const Profile = () => {
                                             Email
                                         </div>
                                         <div className="profile-user-details-value">
-                                            johndoe@bootdey.com
+                                            {user.email}
                                         </div>
                                     </div>
-                                    <div className="profile-user-details clearfix">
-                                        <div className="profile-user-details-label">
-                                            Phone number
-                                        </div>
-                                        <div className="profile-user-details-value">
-                                            011 223 344 556 677
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div className="col-sm-4 profile-social">
                                     <ul className="fa-ul">
@@ -192,9 +181,9 @@ const Profile = () => {
                                             </div>
                                             <div className="conversation-new-message">
                                                 <form>
-                                                    <div className="form-group">
+                                                    {/* <div className="form-group">
                                                         <textarea className="form-control" rows="2" placeholder="Enter your message..."></textarea>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="clearfix">
                                                         <button type="submit" className="btn btn-success float-end">Send message</button>
                                                     </div>
