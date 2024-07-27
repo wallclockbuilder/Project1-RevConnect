@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../components/Post';
 import config from '../config';
-import { Post as PostType, Comment as CommentType, Like as LikeType } from '../types';
+import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
 import { useAuth } from '../context/AuthContext';
 
 const MyPost: React.FC = () => {
@@ -48,7 +48,9 @@ const MyPost: React.FC = () => {
     }, [user, token]);
 
     return (
+        
         <div className="my-posts">
+            
             <h1>My Posts</h1>
             {posts.map((post) => (
                 <Post

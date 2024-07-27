@@ -22,18 +22,18 @@ them to create and promote posts.
 
 ## User Stories
 #### As a user, I should be able to:
- - Register myself and create an account
- - Login to my account
- - Create a basic profile with name and bio
- - Create a post, like, comment and share the posts
- - Edit and delete the posts created by me
- - Send connect requests to users
- - Follow other users (normal users, Business users and content creators)
+ - Register myself and create an account(Done. Rest by Mawuli)
+ - Login to my account(Done)
+ - Create a basic profile with name and bio(anthony)
+ - Create a post, like, comment and share the posts(angela /griffin)
+ - Edit and delete the posts created by me(angela/griffin)
+ - Send connect requests to users(Mawuli - only confirmed connect requests can message each other)
+ - Follow other users (normal users, and content creators)(Mawuli - Anyone can follow anyone)
 
 ## Stretch Goals
- - Admin functionality - modify, delete posts and comments, ban users
- - Chat with other users in the application
- - Get email notifications about connect requests, a new follower, and any post activity in the following businesses users and content creators
+ - Admin functionality - modify, delete posts and comments, ban users(Nileema)
+ - Chat with other users in the application(Angela)
+ - Get email notifications about connect requests, a new follower, and any post activity in the following businesses users and content creators(Backend Done. Frontend left TODO by Mawuli)
 
 ## Functional Requirements
  - Users should be able to register and login
@@ -56,3 +56,8 @@ them to create and promote posts.
  - Use Spring framework, and the Core, Web, and Data modules for the server
  - Use React library for the SPA client
  - Validate and sanitize all user inputs in the client
+
+
+
+<!-- To set up email service -->
+

@@ -11,10 +11,11 @@ import ChatRoom from "./components/ChatRoom";
 import MyPosts from "./pages/MyPosts";
 
 
+
 function App() {
     return (
         <div className="App">
-
+            
             <Routes>
                 <Route path="/" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />

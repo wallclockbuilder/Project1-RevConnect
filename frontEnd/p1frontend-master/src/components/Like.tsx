@@ -1,5 +1,5 @@
 import React from 'react';
-import { Like as LikeType } from '../types';
+import { Like as LikeType } from '../interface/types';
 
 interface LikeProps {
     postId: number;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post as PostType, Comment as CommentType, Like as LikeType } from '../types';
+import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
 import Comment from './Comment';
 import Like from './Like';
 
