@@ -15,17 +15,17 @@ import java.util.Optional;
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
 
-    @Autowired
-    private FollowerService followerService;
+    private final PostRepository postRepository;
 
-    @Autowired
-    private NotificationService notificationService;
 
+
+    private final NotificationService notificationService;
     @Autowired
-    private EmailService emailService;
+    public PostService(PostRepository postRepository, NotificationService notificationService) {
+        this.postRepository = postRepository;
+        this.notificationService = notificationService;
+    }
 
     public List<Post> getAllPosts() {
         return postRepository.findAll();

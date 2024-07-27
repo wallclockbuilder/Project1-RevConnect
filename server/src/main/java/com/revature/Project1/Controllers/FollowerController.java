@@ -15,8 +15,13 @@ import com.revature.Project1.DTO.DtoConverter;
 @CrossOrigin
 public class FollowerController {
 
+
+    private final FollowerService followerService;
+
     @Autowired
-    private FollowerService followerService;
+    public FollowerController(FollowerService followerService) {
+        this.followerService = followerService;
+    }
 
     @GetMapping
     public List<FollowDto> getAllFollowers() {

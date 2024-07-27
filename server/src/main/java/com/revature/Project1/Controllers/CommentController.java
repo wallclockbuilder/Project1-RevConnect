@@ -19,11 +19,17 @@ import java.util.Optional;
 @CrossOrigin
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
+
+    private final CommentService commentService;
+
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public CommentController(CommentService commentService, UserService userService) {
+        this.commentService = commentService;
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<CommentDto> getAllComments() {

@@ -14,14 +14,20 @@ import java.util.Optional;
 @Service
 public class ChatService {
 
-    @Autowired
-    private ChatRepository chatRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final ChatRepository chatRepository;
 
+
+    private final UserRepository userRepository;
+
+
+    private final NotificationService notificationService;
     @Autowired
-    private NotificationService notificationService;
+    public ChatService(ChatRepository chatRepository, UserRepository userRepository, NotificationService notificationService) {
+        this.chatRepository = chatRepository;
+        this.userRepository = userRepository;
+        this.notificationService = notificationService;
+    }
 
     public List<Chat> getMessagesBetweenUsers(Long user1Id, Long user2Id) {
         return chatRepository.findAllBySenderAndReceiver(user1Id, user2Id);

@@ -15,14 +15,21 @@ import java.util.Optional;
 @Service
 public class ConnectionService {
 
-    @Autowired
-    private ConnectionRepository connectionRepository;
+
+    private final ConnectionRepository connectionRepository;
+
+
+    private final UserService userService;
+
+
+    private final NotificationService notificationService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private NotificationService notificationService;
+    public ConnectionService(ConnectionRepository connectionRepository, UserService userService, NotificationService notificationService) {
+        this.connectionRepository = connectionRepository;
+        this.userService = userService;
+        this.notificationService = notificationService;
+    }
 
     public List<Connection> getAllConnections() {
         return connectionRepository.findAll();

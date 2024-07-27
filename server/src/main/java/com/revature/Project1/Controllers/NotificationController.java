@@ -16,8 +16,12 @@ import java.util.Optional;
 @CrossOrigin
 public class NotificationController {
 
+
+    private final NotificationService notificationService;
     @Autowired
-    private NotificationService notificationService;
+    public NotificationController(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
 
     @GetMapping
     public List<NotificationDto> getAllNotifications() {

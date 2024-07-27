@@ -17,8 +17,13 @@ import java.util.Optional;
 @CrossOrigin
 public class ChatController {
 
+
+    private final ChatService chatService;
+
     @Autowired
-    private ChatService chatService;
+    public ChatController(ChatService chatService) {
+        this.chatService = chatService;
+    }
 
     @GetMapping
     public List<ChatDto> getAllChats() {

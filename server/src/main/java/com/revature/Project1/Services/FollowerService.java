@@ -13,14 +13,20 @@ import java.util.Optional;
 @Service
 public class FollowerService {
 
-    @Autowired
-    private FollowerRepository followerRepository;
+
+    private final FollowerRepository followerRepository;
+
+    private final UserService userService;
+
+
+    private final NotificationService notificationService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private NotificationService notificationService;
+    public FollowerService(FollowerRepository followerRepository, UserService userService, NotificationService notificationService) {
+        this.followerRepository = followerRepository;
+        this.userService = userService;
+        this.notificationService = notificationService;
+    }
 
     public List<Follower> getAllFollowers() {
         return followerRepository.findAll();

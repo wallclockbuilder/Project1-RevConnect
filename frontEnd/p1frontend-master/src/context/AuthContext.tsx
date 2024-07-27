@@ -12,7 +12,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<any>(null); // Replace 'any' with your actual user type
+    const [user, setUser] = useState<any>(null); 
     const [token, setToken] = useState<string | null>(null);
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(data.user);
         setToken(data.Authentication);
         localStorage.setItem('user', JSON.stringify(data.user));
-        Cookies.set('Authentication', data.Authentication, { expires: 7, path: '/' }); // Store token in a cookie for 7 days
+        Cookies.set('Authentication', data.Authentication, { expires: 7, path: '/' }); 
         console.log("Set Token in Cookie (login):", data.Authentication);
         navigate('/home');
     };

@@ -16,17 +16,20 @@ import java.util.Optional;
 @Service
 public class CommentService {
 
-    @Autowired
-    private CommentRepository commentRepository;
+
+    private final CommentRepository commentRepository;
+
+
+    private final PostRepository postRepository;
+
+    private final PostService postService;
 
     @Autowired
-    private PostRepository postRepository;
-
-    @Autowired
-    private NotificationService notificationService;
-
-    @Autowired
-    private PostService postService;
+    public CommentService(CommentRepository commentRepository, PostRepository postRepository, PostService postService) {
+        this.commentRepository = commentRepository;
+        this.postRepository = postRepository;
+        this.postService = postService;
+    }
 
     public List<Comment> getAllComments() {
         return commentRepository.findAll();

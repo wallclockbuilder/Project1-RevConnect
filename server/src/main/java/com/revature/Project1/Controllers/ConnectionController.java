@@ -16,8 +16,13 @@ import java.util.Optional;
 @CrossOrigin
 public class ConnectionController {
 
+
+    private final ConnectionService connectionService;
+
     @Autowired
-    private ConnectionService connectionService;
+    public ConnectionController(ConnectionService connectionService) {
+        this.connectionService = connectionService;
+    }
 
     @GetMapping
     public List<ConnectionDto> getAllConnections() {

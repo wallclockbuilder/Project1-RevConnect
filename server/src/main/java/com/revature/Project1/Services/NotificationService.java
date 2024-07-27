@@ -15,14 +15,16 @@ import java.util.Optional;
 @Service
 public class NotificationService {
 
-    @Autowired
-    private NotificationRepository notificationRepository;
 
-    @Autowired
-    private EmailService emailService;
+    private final NotificationRepository notificationRepository;
 
+
+    private final EmailService emailService;
     @Autowired
-    private UserRepository userRepository;
+    public NotificationService(NotificationRepository notificationRepository, EmailService emailService) {
+        this.notificationRepository = notificationRepository;
+        this.emailService = emailService;
+    }
 
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();

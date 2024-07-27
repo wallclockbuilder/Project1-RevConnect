@@ -16,8 +16,13 @@ import java.util.Optional;
 @CrossOrigin
 public class LikeController {
 
+
+    private final LikeService likeService;
+
     @Autowired
-    private LikeService likeService;
+    public LikeController(LikeService likeService) {
+        this.likeService = likeService;
+    }
 
     @GetMapping
     public List<LikeDto> getAllLikes() {

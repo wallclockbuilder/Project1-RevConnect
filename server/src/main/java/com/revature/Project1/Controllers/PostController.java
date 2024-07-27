@@ -20,11 +20,16 @@ import java.util.Optional;
 @CrossOrigin
 public class PostController {
 
-    @Autowired
-    private PostService postService;
 
+    private final PostService postService;
+
+
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public PostController(PostService postService, UserService userService) {
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<PostDto> getAllPosts() {

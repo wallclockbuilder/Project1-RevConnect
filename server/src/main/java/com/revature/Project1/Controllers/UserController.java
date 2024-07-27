@@ -17,11 +17,12 @@ import java.util.Optional;
 @CrossOrigin
 public class UserController {
 
-    @Autowired
-    private UserService userService;
 
+    private final UserService userService;
     @Autowired
-    private EmailService emailService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<UserDto> getAllUsers() {
