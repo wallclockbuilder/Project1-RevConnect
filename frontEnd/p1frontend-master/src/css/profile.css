@@ -34,9 +34,10 @@ h3 > span {
 	color: #fe635f;
 }
 #user-profile .profile-img {
-    width: 150px; /* Adjust width as needed */
-    height: 150px; /* Adjust height as needed */
-    border-radius: 50%; /* For a circular profile image */
+    width: 100%; /* Ensures the image takes up the full width of its container */
+    max-width: 150px; /* Limits the width to a maximum value */
+    height: auto; /* Adjusts height automatically to maintain aspect ratio */
+    border-radius: 50%; /* Keeps the circular shape */
     object-fit: cover; /* Ensures the image covers the area without stretching */
     border: 2px solid #ddd; /* Optional: Add a border around the image */
 }
@@ -120,10 +121,10 @@ h3 > span {
 #user-profile .profile-user-info .profile-user-details .profile-user-details-value {
 	margin-left: 120px;
 }
-#user-profile .profile-social li {
+#user-profile .profile-bio li {
 	padding: 4px 0;
 }
-#user-profile .profile-social li > i {
+#user-profile .profile-bio li > i {
 	padding-top: 6px;
 }
 @media only screen and (max-width: 767px) {
@@ -135,7 +136,7 @@ h3 > span {
 	#user-profile .profile-user-info .profile-user-details .profile-user-details-value {
 		margin-left: 0;
 	}
-	#user-profile .profile-social {
+	#user-profile .profile-bio {
 		margin-top: 20px;
 	}
 }
@@ -427,17 +428,17 @@ a:focus {
 	background-color: #eea59c;
 	color: #262525;
 }
-.table-stats .status-social-icon {
+.table-stats .status-bio-icon {
 	font-size: 1.9em;
 	vertical-align: bottom;
 }
-.table-stats .table-line-fb .status-social-icon {
+.table-stats .table-line-fb .status-bio-icon {
 	color: #556484;
 }
-.table-stats .table-line-twitter .status-social-icon {
+.table-stats .table-line-twitter .status-bio-icon {
 	color: #5885b8;
 }
-.table-stats .table-line-plus .status-social-icon {
+.table-stats .table-line-plus .status-bio-icon {
 	color: #a75d54;
 }
 
@@ -619,4 +620,8 @@ textarea.form-control {
     border-color: #e1e1e1;
     box-shadow: none;
     -webkit-box-shadow: none;
+}
+
+.profile-bio{
+	font-weight: bold;
 }
