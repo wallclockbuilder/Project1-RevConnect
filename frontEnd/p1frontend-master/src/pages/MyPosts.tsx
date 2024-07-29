@@ -8,6 +8,7 @@ const MyPost: React.FC = () => {
     const [posts, setPosts] = useState<PostType[]>([]);
     const [comments, setComments] = useState<CommentType[]>([]);
     const [likes, setLikes] = useState<LikeType[]>([]);
+    const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
     const { user, token } = useAuth();
 
     useEffect(() => {
@@ -20,7 +21,17 @@ const MyPost: React.FC = () => {
                     credentials: 'include'
                 });
                 const postsData = await postsResponse.json();
-                setPosts(postsData.filter((post: PostType) => post.userId === user?.userId));
+
+                // Filter posts for the current user
+                const userPosts = postsData.filter((post: PostType) => post.userId === user?.userId);
+
+                // Assign the content of filtered posts to singlePost
+                const contents = userPosts.map((post: PostType) => post.content);
+
+                // Set the contents to state
+                setSinglePostContents(contents);
+
+                setPosts(userPosts); // Update state with the filtered posts
 
                 const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, {
                     headers: {
@@ -48,10 +59,18 @@ const MyPost: React.FC = () => {
     }, [user, token]);
 
     return (
-        
         <div className="my-posts">
-            
-            <h1>My Posts</h1>
+            {/* <div className="single-posts">
+                {singlePostContents.length > 0 ? (
+                    <>
+                        {singlePostContents.map((content, index) => (
+                            <p key={index}>{content}</p>
+                        ))}
+                    </>
+                ) : (
+                    <p>No posts available.</p>
+                )}
+            </div> */}
             {posts.map((post) => (
                 <Post
                     key={post.postId}

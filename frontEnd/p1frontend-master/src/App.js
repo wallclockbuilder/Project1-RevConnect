@@ -23,6 +23,8 @@ function App() {
                 <Route path="/myposts" element={<ProtectedRoute><MyPosts /></ProtectedRoute>} />
                 {/* <Route path="/chat/*" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} /> */}
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                
+
             </Routes>
 
         </div>
