@@ -9,6 +9,8 @@ import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
+
+
 const App: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -39,6 +41,8 @@ const App: React.FC = () => {
                 <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
                 <Route path="/chat/:userId" element={<ProtectedRoute><ChatRoom /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                <Route path="/profile/:userId" element={<Profile />} />
+
             </Routes>
         </div>
     );

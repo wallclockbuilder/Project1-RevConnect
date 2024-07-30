@@ -4,6 +4,8 @@ import { Post as PostType, Comment as CommentType, Like as LikeType } from '../i
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../css/home.css';
+import { useAuth } from '../context/AuthContext';
+
 
 
 const Home: React.FC = () => {
@@ -12,6 +14,7 @@ const Home: React.FC = () => {
     const [likes, setLikes] = useState<LikeType[]>([]);
     const [newComments, setNewComments] = useState<{ [postId: number]: string }>({});
     const [likedPosts, setLikedPosts] = useState<{ [postId: number]: boolean }>({});
+    const { user, token } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -52,6 +55,8 @@ const Home: React.FC = () => {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                    
                 },
                 body: JSON.stringify({ postId, content: commentContent }),
             });
