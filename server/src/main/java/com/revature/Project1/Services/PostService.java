@@ -6,11 +6,15 @@ import com.revature.Project1.Models.Notification;
 import com.revature.Project1.Models.Post;
 import com.revature.Project1.Models.User;
 import com.revature.Project1.Repositories.PostRepository;
+import com.revature.Project1.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.revature.Project1.Services.UserService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PostService {
@@ -21,10 +25,13 @@ public class PostService {
 
 
     private final NotificationService notificationService;
+    private UserRepository userRepository;
+
     @Autowired
-    public PostService(PostRepository postRepository, NotificationService notificationService) {
+    public PostService(PostRepository postRepository, NotificationService notificationService, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.notificationService = notificationService;
+        this.userRepository = userRepository;
     }
 
     public List<Post> getAllPosts() {
@@ -65,4 +72,53 @@ public class PostService {
         User postOwner = post.getUser();
         notificationService.createNotification(postOwner, Notification.NotificationType.POST_ACTIVITY, "There is new activity on your post.");
     }
+
+    public boolean isPostTablePopulated() {
+        return postRepository.count() >= 3;
+    }
+
+    public void populateSamplePosts() {
+
+        List<User> users = userRepository.findAll();
+        if (users.size() < 3) {
+            throw new IllegalStateException("Not enough users to populate sample posts");
+        }
+
+        List<Set<Post>> samplePostsPerUser = List.of(
+                Set.of(
+                        new Post(users.get(0), "This is a sample post content 1."),
+                        new Post(users.get(0), "This is a sample post content 2."),
+                        new Post(users.get(0), "This is a sample post content 3."),
+                        new Post(users.get(0), "This is a sample post content 4."),
+                        new Post(users.get(0), "This is a sample post content 5."),
+                        new Post(users.get(0), "This is a sample post content 6."),
+                        new Post(users.get(0), "This is a sample post content 7.")
+                ),
+                Set.of(
+                        new Post(users.get(1), "This is a sample post content 1."),
+                        new Post(users.get(1), "This is a sample post content 2."),
+                        new Post(users.get(1), "This is a sample post content 3."),
+                        new Post(users.get(1), "This is a sample post content 4."),
+                        new Post(users.get(1), "This is a sample post content 5."),
+                        new Post(users.get(1), "This is a sample post content 6."),
+                        new Post(users.get(1), "This is a sample post content 7.")
+                ),
+                Set.of(
+                        new Post(users.get(2), "This is a sample post content 1."),
+                        new Post(users.get(2), "This is a sample post content 2."),
+                        new Post(users.get(2), "This is a sample post content 3."),
+                        new Post(users.get(2), "This is a sample post content 4."),
+                        new Post(users.get(2), "This is a sample post content 5."),
+                        new Post(users.get(2), "This is a sample post content 6."),
+                        new Post(users.get(2), "This is a sample post content 7.")
+                )
+        );
+
+        for (int i = 0; i < 3; i++) {
+            users.get(i).setPosts(samplePostsPerUser.get(i));
+        }
+
+        userRepository.saveAll(users);
+    }
+
 }
