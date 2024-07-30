@@ -54,6 +54,7 @@ const AppNavbar: React.FC = () => {
                     <Nav.Link as={Link} to="/chat">Chat</Nav.Link>
                     <Nav.Link as={Link} to="/connections">Connections</Nav.Link>
                     <Nav.Link as={Link} to="/follow">Follow</Nav.Link>
+                    <Nav.Link as={Link} to="/AdminPage">Admin</Nav.Link>
                 </Nav>
                 {user ? (
                     <Nav className="ms-auto">
