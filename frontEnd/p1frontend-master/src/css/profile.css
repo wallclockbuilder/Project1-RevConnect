@@ -265,9 +265,7 @@ h3 > span {
 	border-color: #bd9804;
 }
 
-.icon-box {
-	
-}
+
 .icon-box .btn {
 	border: 1px solid #e1e1e1;
 	margin-left: 3px;
@@ -624,4 +622,16 @@ textarea.form-control {
 
 .profile-bio{
 	font-weight: bold;
+}
+
+.like-icon {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.like-icon:hover {
+    color: #2aa493; /* Change to your preferred color */
+    background-color: #f0f0f0; /* Light background color for hover */
 }

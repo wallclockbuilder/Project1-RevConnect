@@ -1,0 +1,18 @@
+.like {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.like:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.btn-secondary {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    color: #dac4b0;
+}
+
+.btn-secondary:hover {
+    background-color: #e78c36;
+    transform: scale(1.05);
+}

@@ -65,7 +65,8 @@ const Signin = () => {
     };
 
     return (
-        <form className="form-signin" onSubmit={handleSubmit}>
+                <div className='bodySignin'>
+        <form className="form-signin " onSubmit={handleSubmit}>
             <img className="mb-4" src="\pictures\logo.png" alt="Logo" width="72" height="72" />
             <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label htmlFor="username" className="sr-only">Username</label>
@@ -78,7 +79,7 @@ const Signin = () => {
                 autoFocus
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-            />
+                />
             <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input
                 type="password"
@@ -88,7 +89,7 @@ const Signin = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            />
+                />
             <div className="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me" /> Remember me
@@ -103,6 +104,8 @@ const Signin = () => {
             </div>
             <p className="mt-5 mb-3 text-muted">&copy; 2024</p>
         </form>
+
+                </div>
     );
 };
 

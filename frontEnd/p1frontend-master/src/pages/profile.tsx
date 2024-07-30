@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/profile.css'; // Optional: If you want to include custom styles
+import '../css/profile.css'; 
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../context/AuthContext';
 import config from '../config';
@@ -21,56 +21,63 @@ const Profile: React.FC = () => {
     const [comments, setComments] = useState<CommentType[]>([]);
     const [likes, setLikes] = useState<LikeType[]>([]);
     const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
-    const { user, token, logout } = useAuth();
+    const { user, token } = useAuth();
     const [postDates, setPostDates] = useState<string[]>([]);
 
+    const fetchData = async () => {
+        try {
+            const postsResponse = await fetch(`${config.BASE_URL}/api/posts`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const postsData = await postsResponse.json();
+
+            // Filter posts for the current user
+            const userPosts = postsData.filter((post: PostType) => post.userId === user?.userId);
+
+            // Set the posts state with userPosts
+            setPosts(userPosts);
+
+            // Set the singlePostContents and createdAt separately for table
+            const contents = userPosts.map((post: PostType) => post.content);
+            const dates = userPosts.map((post: PostType) => formatDate(post.createdAt)); // Format dates
+
+            setSinglePostContents(contents);
+            setPostDates(dates); // Set formatted dates
+
+            const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const commentsData = await commentsResponse.json();
+            setComments(commentsData);
+
+            const likesResponse = await fetch(`${config.BASE_URL}/api/likes`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const likesData = await likesResponse.json();
+            setLikes(likesData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const postsResponse = await fetch(`${config.BASE_URL}/api/posts`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    credentials: 'include'
-                });
-                const postsData = await postsResponse.json();
-    
-                // Filter posts for the current user
-                const userPosts = postsData.filter((post: PostType) => post.userId === user?.userId);
-    
-                // Set the posts state with userPosts
-                setPosts(userPosts);
-    
-                // Set the singlePostContents and createdAt separately for table
-                const contents = userPosts.map((post: PostType) => post.content);
-                const dates = userPosts.map((post: PostType) => formatDate(post.createdAt)); // Format dates
-    
-                setSinglePostContents(contents);
-                setPostDates(dates); // Set formatted dates
-    
-                const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    credentials: 'include'
-                });
-                const commentsData = await commentsResponse.json();
-                setComments(commentsData);
-    
-                const likesResponse = await fetch(`${config.BASE_URL}/api/likes`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    credentials: 'include'
-                });
-                const likesData = await likesResponse.json();
-                setLikes(likesData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-    
-        fetchData();
+        fetchData(); // Initial fetch
+
+        // Polling every 10 seconds
+        const intervalId = setInterval(() => {
+            fetchData();
+        }, 10000); // Adjust the interval as needed
+
+        return () => clearInterval(intervalId); // Cleanup on component unmount
     }, [user, token]);
 
     return (
@@ -78,7 +85,7 @@ const Profile: React.FC = () => {
             <Helmet>
                 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
             </Helmet>
-    
+
             <div className="container bootstrap snippets bootdeys">
                 <div className="row" id="user-profile">
                     <div className="col-lg-3 col-md-4 col-sm-4">
@@ -88,13 +95,13 @@ const Profile: React.FC = () => {
                                 <i className="fa fa-check-circle"></i> Online
                             </div>
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Profile" className="profile-img img-responsive center-block" />
-    
+
                             <div className="profile-details">
                                 <ul className="fa-ul">
                                     <li><i className="fa-li fa fa-comment"></i>Posts: <span>{singlePostContents.length}</span></li>
                                 </ul>
                             </div>
-    
+
                             <div className="profile-message-btn center-block text-center">
                                 <a href="#" className="btn btn-success">
                                     <i className="fa fa-envelope"></i> Send message
@@ -102,7 +109,7 @@ const Profile: React.FC = () => {
                             </div>
                         </div>
                     </div>
-    
+
                     <div className="col-lg-9 col-md-8 col-sm-8">
                         <div className="main-box clearfix">
                             <div className="profile-header">
@@ -111,7 +118,7 @@ const Profile: React.FC = () => {
                                     <i className="fa fa-pencil-square fa-lg"></i> Edit profile
                                 </a>
                             </div>
-    
+
                             <div className="row profile-user-info">
                                 <div className="col-sm-8">
                                     <div className="profile-user-details clearfix">
@@ -148,7 +155,7 @@ const Profile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div className="tabs-wrapper profile-tabs">
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item">
@@ -158,7 +165,7 @@ const Profile: React.FC = () => {
                                         <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">followers</a>
                                     </li>
                                 </ul>
-    
+
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-posts">
                                         <div className="table-responsive">
@@ -189,7 +196,7 @@ const Profile: React.FC = () => {
                                             </table>
                                         </div>
                                     </div>
-    
+
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
                                             <li className="col-md-6">
@@ -213,7 +220,7 @@ const Profile: React.FC = () => {
                                         <br />
                                         <a href="#" className="btn btn-success float-end">View all users</a>
                                     </div>
-    
+
                                     <div className="tab-pane fade" id="tab-chat">
                                         <div className="conversation-wrapper">
                                             <div className="conversation-content">
@@ -251,7 +258,7 @@ const Profile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
                     </div>
                 </div>
