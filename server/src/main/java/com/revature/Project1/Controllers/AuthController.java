@@ -35,19 +35,26 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<LoginResponseDto> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest, HttpServletResponse response) throws Exception {
         User user = userService.getUserByUsername(authenticationRequest.getUsername());
+        if(user != null) {
+            if (!user.getActive()) {
+                throw new Exception("User account is inactive");
+            }
 
-        if (user != null && userService.checkPassword(authenticationRequest.getPassword(), user.getPassword())) {
-            final String jwt = jwtUtil.generateToken(user.getUsername());
-            System.out.println("Generated JWT: " + jwt);
-            Cookie cookie = new Cookie("Authentication", jwt);
+            if (userService.checkPassword(authenticationRequest.getPassword(), user.getPassword())) {
+                final String jwt = jwtUtil.generateToken(user.getUsername());
+                System.out.println("Generated JWT: " + jwt);
+                Cookie cookie = new Cookie("Authentication", jwt);
 
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            UserDto userDto = DtoConverter.toUserDto(user);
-            return ResponseEntity.ok(new LoginResponseDto(jwt, userDto));
+                cookie.setHttpOnly(true);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+                UserDto userDto = DtoConverter.toUserDto(user);
+                return ResponseEntity.ok(new LoginResponseDto(jwt, userDto));
+            } else {
+                throw new Exception("Invalid credentials");
+            }
         } else {
-            throw new Exception("Invalid credentials");
+            throw new Exception("User is null.");
         }
     }
 }
