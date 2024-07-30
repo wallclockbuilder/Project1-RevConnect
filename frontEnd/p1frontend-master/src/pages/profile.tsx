@@ -136,7 +136,8 @@ const Profile: React.FC = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ content: editingPostContent })
+                credentials: 'include',
+                body: JSON.stringify({ content: editingPostContent, user: { userId: user.userId } })
             });
             const updatedPost = await response.json();
             setPosts(posts.map(post => post.postId === editingPostId ? updatedPost : post));
