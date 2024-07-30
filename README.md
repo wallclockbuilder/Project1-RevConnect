@@ -33,7 +33,7 @@ them to create and promote posts.
 ## Stretch Goals
  - Admin functionality - modify, delete posts and comments, ban users(Nileema)
  - Chat with other users in the application(Angela)
- - Get email notifications about connect requests, a new follower, and any post activity in the following businesses users and content creators(Backend Done. Frontend left TODO by Mawuli)
+ - Get email notifications about connect requests, a new follower, and any post activity in the following users and content creators(Backend Done. Frontend left TODO by Mawuli)
 
 ## Functional Requirements
  - Users should be able to register and login

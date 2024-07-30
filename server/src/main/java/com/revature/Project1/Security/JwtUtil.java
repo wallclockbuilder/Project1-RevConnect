@@ -5,7 +5,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -14,10 +17,11 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
+@PropertySource("classpath:application.properties")
 public class JwtUtil {
-
     private final Key signingKey;
 
+    @Autowired
     public JwtUtil(@Value("${jwt.secret}") String secret) {
         byte[] keyBytes = Base64.getDecoder().decode(secret);
         if (keyBytes.length < 32) {

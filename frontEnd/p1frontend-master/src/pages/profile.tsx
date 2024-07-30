@@ -96,6 +96,11 @@ const Profile: React.FC = () => {
         return () => clearInterval(intervalId);
     }, [userId, user, token]);
 
+    const handleFollow = () => {
+        console.log('Follow clicked');
+    }
+    
+
     if (!profileUser) return <p>Loading user...</p>;
 
     const isCurrentUserProfile = user && user.userId === Number(userId);
@@ -187,11 +192,17 @@ const Profile: React.FC = () => {
                             </div>
 
                             {user && user.userId !== Number(userId) && (
-                                <div className="profile-message-btn center-block text-center">
-                                    <a href="#" className="btn btn-success">
-                                        <i className="fa fa-envelope"></i> Send message
-                                    </a>
-                                </div>
+                                <>
+                                    <div className="profile-message-btn center-block text-center">
+                                        <a href="#" className="btn btn-success">
+                                            <i className="fa fa-envelope"></i> Send message
+                                        </a>
+                                    </div>
+
+                                    <button className="btn btn-primary mt-2" onClick={handleFollow}>
+                                        <i className="fa fa-user-plus"></i>Follow
+                                    </button>
+                                </>
                             )}
                         </div>
                     </div>

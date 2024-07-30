@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class FollowDto {
     private Long followerId;
     private Long followerUserId;
-    private Long followingUserId;
+    private Long followeeUserId;
     private LocalDateTime createdAt;
 
     public Long getFollowerId() {
@@ -24,12 +24,12 @@ public class FollowDto {
         this.followerUserId = followerUserId;
     }
 
-    public Long getFollowingUserId() {
-        return followingUserId;
+    public Long getFolloweeUserId() {
+        return followeeUserId;
     }
 
-    public void setFollowingUserId(Long followingUserId) {
-        this.followingUserId = followingUserId;
+    public void setFolloweeUserId(Long followeeUserId) {
+        this.followeeUserId = followeeUserId;
     }
 
     public LocalDateTime getCreatedAt() {

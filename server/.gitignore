@@ -34,3 +34,8 @@ build/
 
 # Ignore application properties file
 src/main/resources/application.properties
+src/test/resources/application.properties
+
+# Ignore log files
+server/logs/application.log
+server/logs/*.gz
