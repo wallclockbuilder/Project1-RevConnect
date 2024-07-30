@@ -1,17 +1,87 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/profile.css'; // Optional: If you want to include custom styles
+import '../css/profile.css'; 
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../context/AuthContext';
+import config from '../config';
+import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
 
+const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', options); // Format as "Day, Date/Month"
+};
 
 const Profile: React.FC = () => {
+    const [posts, setPosts] = useState<PostType[]>([]);
+    const [comments, setComments] = useState<CommentType[]>([]);
+    const [likes, setLikes] = useState<LikeType[]>([]);
+    const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
+    const { user, token } = useAuth();
+    const [postDates, setPostDates] = useState<string[]>([]);
 
-    const { user, logout } = useAuth();
+    const fetchData = async () => {
+        try {
+            const postsResponse = await fetch(`${config.BASE_URL}/api/posts`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const postsData = await postsResponse.json();
+
+            // Filter posts for the current user
+            const userPosts = postsData.filter((post: PostType) => post.userId === user?.userId);
+
+            // Set the posts state with userPosts
+            setPosts(userPosts);
+
+            // Set the singlePostContents and createdAt separately for table
+            const contents = userPosts.map((post: PostType) => post.content);
+            const dates = userPosts.map((post: PostType) => formatDate(post.createdAt)); // Format dates
+
+            setSinglePostContents(contents);
+            setPostDates(dates); // Set formatted dates
+
+            const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const commentsData = await commentsResponse.json();
+            setComments(commentsData);
+
+            const likesResponse = await fetch(`${config.BASE_URL}/api/likes`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            const likesData = await likesResponse.json();
+            setLikes(likesData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData(); // Initial fetch
+
+        // Polling every 10 seconds
+        const intervalId = setInterval(() => {
+            fetchData();
+        }, 10000); // Adjust the interval as needed
+
+        return () => clearInterval(intervalId); // Cleanup on component unmount
+    }, [user, token]);
 
     return (
         <div id='profileBody'>
-
             <Helmet>
                 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
             </Helmet>
@@ -28,7 +98,7 @@ const Profile: React.FC = () => {
 
                             <div className="profile-details">
                                 <ul className="fa-ul">
-                                    <li><i className="fa-li fa fa-comment"></i>Posts: <span>828</span></li>
+                                    <li><i className="fa-li fa fa-comment"></i>Posts: <span>{singlePostContents.length}</span></li>
                                 </ul>
                             </div>
 
@@ -75,16 +145,14 @@ const Profile: React.FC = () => {
                                             {user.email}
                                         </div>
                                     </div>
-                                    
                                 </div>
-                                <div className="col-sm-4 profile-social">
-                                    <ul className="fa-ul">
-                                        <li><i className="fa-li fa fa-twitter-square"></i><a href="#">@scjohansson</a></li>
-                                        <li><i className="fa-li fa fa-linkedin-square"></i><a href="#">John Doe</a></li>
-                                        <li><i className="fa-li fa fa-facebook-square"></i><a href="#">John Doe</a></li>
-                                        <li><i className="fa-li fa fa-skype"></i><a href="#">Black_widow</a></li>
-                                        <li><i className="fa-li fa fa-instagram"></i><a href="#">Avenger_Scarlett</a></li>
-                                    </ul>
+                                <div className="col-sm-4 ">
+                                    <div className='profile-bio'>
+                                        My Bio:
+                                    </div>
+                                    <div className='profile-user-details-value'>
+                                        {user.bio}
+                                    </div>
                                 </div>
                             </div>
 
@@ -96,7 +164,6 @@ const Profile: React.FC = () => {
                                     <li className="nav-item">
                                         <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">followers</a>
                                     </li>
-
                                 </ul>
 
                                 <div className="tab-content">
@@ -104,29 +171,27 @@ const Profile: React.FC = () => {
                                         <div className="table-responsive">
                                             <table className="table">
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="text-center">
-                                                            <i className="fa fa-comment"></i>
-                                                        </td>
-                                                        <td>
-                                                            John Doe posted a comment in <a href="#">Avengers Initiative</a> project.
-                                                        </td>
-                                                        <td>
-                                                            2014/08/08 12:08
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center">
-                                                            <i className="fa fa-truck"></i>
-                                                        </td>
-                                                        <td>
-                                                            John Doe changed order status from <span className="badge bg-primary">Pending</span> to <span className="badge bg-success">Completed</span>
-                                                        </td>
-                                                        <td>
-                                                            2014/08/08 12:08
-                                                        </td>
-                                                    </tr>
-                                                    {/* Add more posts rows as needed */}
+                                                    {singlePostContents.length > 0 ? (
+                                                        singlePostContents.map((content, index) => (
+                                                            <tr key={index}>
+                                                                <td className="text-center">
+                                                                    <i className="fa fa-comment"></i>
+                                                                </td>
+                                                                <td>
+                                                                    <p>{content}</p>
+                                                                </td>
+                                                                <td>
+                                                                    {postDates[index] || 'No date available'}
+                                                                </td>
+                                                            </tr>
+                                                        ))
+                                                    ) : (
+                                                        <tr>
+                                                            <td colSpan={3} className="text-center">
+                                                                No posts available.
+                                                            </td>
+                                                        </tr>
+                                                    )}
                                                 </tbody>
                                             </table>
                                         </div>
