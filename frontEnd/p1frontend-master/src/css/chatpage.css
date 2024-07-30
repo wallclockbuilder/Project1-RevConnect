@@ -1,0 +1,48 @@
+.chat-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.chat-page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.no-chats {
+    text-align: center;
+    color: #777;
+}
+
+.chat-rooms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-room {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.chat-room:hover {
+    background-color: #e6f7ff;
+}
+
+.chat-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.chat-link:hover {
+    text-decoration: underline;
+}
