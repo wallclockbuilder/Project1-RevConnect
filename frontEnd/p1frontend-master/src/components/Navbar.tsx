@@ -34,24 +34,17 @@ const AppNavbar: React.FC = () => {
                 throw new Error('User not found');
             }
 
-            const { userId } = await response.json();
+            const userDetails = await response.json();
+            const { userId } = userDetails;
+            console.log(user);
 
-            // Fetch user details using userId
-            const userDetailsResponse = await fetch(`${config.BASE_URL}/api/getUserDetailsById?userId=${userId}`);
-            if (!userDetailsResponse.ok) {
-                throw new Error('User details not found');
-            }
-
-            const userDetails = await userDetailsResponse.json();
-            console.log(userDetails);
-
-            // Navigate to the user's profile page (assuming you have a route for it)
             navigate(`/profile/${userId}`);
         } catch (error) {
-            console.error(error);
+            console.error('Error fetching user details:', error);
             // Handle error (e.g., display a notification)
         }
     };
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand as={Link} to="/Home">RevatureConnect</Navbar.Brand>
@@ -64,14 +57,16 @@ const AppNavbar: React.FC = () => {
                 </Nav>
                 {user ? (
                     <Nav className="ms-auto">
-                        <Form className="d-flex me-auto search-form">
+                        <Form className="d-flex me-auto search-form" onSubmit={handleSearchSubmit}>
                             <FormControl 
                                 type="search"
                                 placeholder="Search"
                                 className="mr-2 search-input"
                                 aria-label="Search"
+                                value={searchInput}
+                                onChange={handleSearchChange}
                             />
-                            <Button className="search-button">Search</Button>
+                            <Button type="submit" className="search-button">Search</Button>
                         </Form>
                         <DropdownButton title={user.username} id="dropdown-menu-align-right" className="dropdown-menu-end">
                             <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
