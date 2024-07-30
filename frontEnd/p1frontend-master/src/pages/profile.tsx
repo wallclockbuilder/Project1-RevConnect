@@ -298,7 +298,7 @@ const Profile: React.FC = () => {
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
                                                                 </td>
-                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
                                                                         <form onSubmit={handleUpdatePost}>
@@ -315,13 +315,17 @@ const Profile: React.FC = () => {
                                                                             <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
                                                                         </form>
                                                                     ) : (
-                                                                        <>
+                                                                        <div>
+                                                                            <div>
                                                                             <p>{content}</p>
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
-                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
-                                                                        </>
+                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>):null} 
+                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>):null}                                           
+                                                                            </div>
+                                                                        </div>
                                                                     )}
-                                                                </td>) : null}
+                                                                </td>
                                                                 <td>
                                                                     {postDates[index] || 'No date available'}
                                                                 </td>
