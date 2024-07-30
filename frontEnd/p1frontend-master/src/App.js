@@ -7,7 +7,8 @@ import Profile from "./pages/profile";
 import Signin from "./pages/Signin";
 import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
-
+import ChatPage from "./pages/ChatPage";
+import ChatRoom from "./components/ChatRoom";
 const App: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
