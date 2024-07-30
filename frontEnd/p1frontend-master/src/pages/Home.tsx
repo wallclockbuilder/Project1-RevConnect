@@ -20,6 +20,9 @@ const Home: React.FC = () => {
             try {
                 const postsResponse = await fetch(`${config.BASE_URL}/api/posts`, { credentials: 'include' });
                 const postsData = await postsResponse.json();
+
+                // Sort posts by date descending (newest first)
+                postsData.sort((a:PostType, b:PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
                 setPosts(postsData);
 
                 const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, { credentials: 'include' });

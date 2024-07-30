@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import config from '../config';
-import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
+import { Post as PostType, Comment as CommentType, Like as LikeType, Post } from '../interface/types';
 
 const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -56,6 +56,10 @@ const Profile: React.FC = () => {
             });
             const postsData = await postsResponse.json();
             const userPosts = postsData.filter((post: PostType) => post.userId === fetchUserId);
+
+            // Sort posts by date descending
+            userPosts.sort((a:PostType, b:PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
             setPosts(userPosts);
 
             const contents = userPosts.map((post: PostType) => post.content);
@@ -108,13 +112,17 @@ const Profile: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-
                 },
                 credentials: 'include',
-                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId }, })
+                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId } })
             });
             const newPost = await response.json();
-            setPosts([...posts, newPost]);
+            
+            // Update posts state
+            setPosts([newPost, ...posts]); // Add new post to the beginning
+            setSinglePostContents([newPost.content, ...singlePostContents]);
+            setPostDates([formatDate(newPost.createdAt), ...postDates]);
+
             setNewPostContent('');
         } catch (error) {
             console.error("Error creating post:", error);
@@ -126,9 +134,10 @@ const Profile: React.FC = () => {
         setEditingPostContent(currentContent);
     };
 
-
     const handleUpdatePost = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (editingPostId === null) return;
+
         try {
             const response = await fetch(`${config.BASE_URL}/api/posts/${editingPostId}`, {
                 method: 'PUT',
@@ -140,14 +149,18 @@ const Profile: React.FC = () => {
                 body: JSON.stringify({ content: editingPostContent, user: { userId: user.userId } })
             });
             const updatedPost = await response.json();
+            
+            // Update posts state
             setPosts(posts.map(post => post.postId === editingPostId ? updatedPost : post));
+            setSinglePostContents(singlePostContents.map((content, index) => posts[index].postId === editingPostId ? updatedPost.content : content));
+            setPostDates(postDates.map((date, index) => posts[index].postId === editingPostId ? formatDate(updatedPost.createdAt) : date));
+
             setEditingPostId(null);
             setEditingPostContent('');
         } catch (error) {
             console.error("Error updating post:", error);
         }
     };
-
 
     const handleDeletePost = async (postId: number) => {
         try {
@@ -157,13 +170,18 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setPosts(posts.filter(post => post.postId !== postId));
+            // Update posts state
+            const updatedPosts = posts.filter(post => post.postId !== postId);
+            const updatedContents = singlePostContents.filter((_, index) => posts[index].postId !== postId);
+            const updatedDates = postDates.filter((_, index) => posts[index].postId !== postId);
+
+            setPosts(updatedPosts);
+            setSinglePostContents(updatedContents);
+            setPostDates(updatedDates);
         } catch (error) {
             console.error("Error deleting post:", error);
         }
     };
-
-
 
     return (
         <div id='profileBody'>
@@ -206,7 +224,6 @@ const Profile: React.FC = () => {
                                         <i className="fa fa-pencil-square fa-lg"></i> Edit profile
                                     </a>
                                 ) : null}
-
                             </div>
 
                             <div className="row profile-user-info">
