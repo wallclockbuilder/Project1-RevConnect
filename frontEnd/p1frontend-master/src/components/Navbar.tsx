@@ -1,19 +1,53 @@
-import React from 'react';
+import React, {  useState } from 'react';
+import config from '../config';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Navbar, Nav, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown, DropdownButton, Form, FormControl, Button } from 'react-bootstrap';
 import '../css/navbar.css';
-
 
 const AppNavbar: React.FC = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const [searchInput, setSearchInput] = useState('');
 
     const handleLogout = () => {
         logout();
         navigate('/');
     };
 
+    //search input value here 
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value);
+    };
+    const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            // Replace with your actual API endpoint and logic to fetch user ID by username
+            const response = await fetch(`${config.BASE_URL}/api/getUserIdByUsername?username=${searchInput}`);
+
+            if (!response.ok) {
+                throw new Error('User not found');
+            }
+
+            const { userId } = await response.json();
+
+            // Fetch user details using userId
+            const userDetailsResponse = await fetch(`${config.BASE_URL}/api/getUserDetailsById?userId=${userId}`);
+            if (!userDetailsResponse.ok) {
+                throw new Error('User details not found');
+            }
+
+            const userDetails = await userDetailsResponse.json();
+            console.log(userDetails);
+
+            // Navigate to the user's profile page (assuming you have a route for it)
+            navigate(`/profile/${userId}`);
+        } catch (error) {
+            console.error(error);
+            // Handle error (e.g., display a notification)
+        }
+    };
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand as={Link} to="/Home">RevatureConnect</Navbar.Brand>
@@ -25,7 +59,16 @@ const AppNavbar: React.FC = () => {
                     <Nav.Link as={Link} to="/follow">Follow</Nav.Link>
                 </Nav>
                 {user ? (
-                    <Nav className="ml-auto">
+                    <Nav className="ms-auto">
+                        <Form className="d-flex me-auto search-form">
+                            <FormControl 
+                                type="search"
+                                placeholder="Search"
+                                className="mr-2 search-input"
+                                aria-label="Search"
+                            />
+                            <Button className="search-button">Search</Button>
+                        </Form>
                         <DropdownButton title={user.username} id="dropdown-menu-align-right" className="dropdown-menu-end">
                             <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
                             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>

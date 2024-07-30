@@ -23,6 +23,9 @@ const Profile: React.FC = () => {
     const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
     const { user, token } = useAuth();
     const [postDates, setPostDates] = useState<string[]>([]);
+    const [newPostContent, setNewPostContent] = useState<string>('');
+   const [editingPostId, setEditingPostId] = useState<number | null>(null);
+   const [editingPostContent, setEditingPostContent] = useState<string>('');
 
     const fetchData = async () => {
         try {
@@ -79,6 +82,70 @@ const Profile: React.FC = () => {
 
         return () => clearInterval(intervalId); // Cleanup on component unmount
     }, [user, token]);
+
+    const handleCreatePost = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`${config.BASE_URL}/api/posts`,  {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  
+                },
+                 credentials: 'include' ,
+                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId },})
+            });
+            const newPost = await response.json();
+            setPosts([...posts, newPost]);
+            setNewPostContent('');
+        } catch (error) {
+            console.error("Error creating post:", error);
+        }
+    };
+
+    const handleEditPost = (postId: number, currentContent: string) => {
+        setEditingPostId(postId);
+        setEditingPostContent(currentContent);
+    };
+ 
+ 
+    const handleUpdatePost = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`${config.BASE_URL}/api/posts/${editingPostId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ content: editingPostContent })
+            });
+            const updatedPost = await response.json();
+            setPosts(posts.map(post => post.postId === editingPostId ? updatedPost : post));
+            setEditingPostId(null);
+            setEditingPostContent('');
+        } catch (error) {
+            console.error("Error updating post:", error);
+        }
+    };
+ 
+ 
+    const handleDeletePost = async (postId: number) => {
+        try {
+            await fetch(`${config.BASE_URL}/api/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setPosts(posts.filter(post => post.postId !== postId));
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
+    };
+ 
+ 
 
     return (
         <div id='profileBody'>
@@ -167,35 +234,68 @@ const Profile: React.FC = () => {
                                 </ul>
 
                                 <div className="tab-content">
-                                    <div className="tab-pane fade show active" id="tab-posts">
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <tbody>
-                                                    {singlePostContents.length > 0 ? (
-                                                        singlePostContents.map((content, index) => (
-                                                            <tr key={index}>
-                                                                <td className="text-center">
-                                                                    <i className="fa fa-comment"></i>
-                                                                </td>
-                                                                <td>
-                                                                    <p>{content}</p>
-                                                                </td>
-                                                                <td>
-                                                                    {postDates[index] || 'No date available'}
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    ) : (
-                                                        <tr>
-                                                            <td colSpan={3} className="text-center">
-                                                                No posts available.
-                                                            </td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                   <div className="tab-pane fade show active" id="tab-posts">
+                                       <form onSubmit={handleCreatePost} className="mb-4">
+                                           <div className="form-group">
+                                               <textarea
+                                                   className="form-control"
+                                                   rows={3}
+                                                   value={newPostContent}
+                                                   onChange={(e) => setNewPostContent(e.target.value)}
+                                                   placeholder="What's on your mind?"
+                                                   required
+                                               />
+                                           </div>
+                                           <button type="submit" className="btn btn-primary mt-2">Create Post</button>
+                                       </form>
+                                       <div className="table-responsive">
+                                           <table className="table">
+                                               <tbody>
+                                                   {singlePostContents.length > 0 ? (
+                                                       singlePostContents.map((content, index) => (
+                                                           <tr key={index}>
+                                                               <td className="text-center">
+                                                                   <i className="fa fa-comment"></i>
+                                                               </td>
+                                                               <td>
+                                                                   {editingPostId === posts[index].postId ? (
+                                                                       <form onSubmit={handleUpdatePost}>
+                                                                           <div className="form-group">
+                                                                               <textarea
+                                                                                   className="form-control"
+                                                                                   rows={3}
+                                                                                   value={editingPostContent}
+                                                                                   onChange={(e) => setEditingPostContent(e.target.value)}
+                                                                                   required
+                                                                               />
+                                                                           </div>
+                                                                           <button type="submit" className="btn btn-primary mt-2">Update Post</button>
+                                                                           <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
+                                                                       </form>
+                                                                   ) : (
+                                                                       <>
+                                                                           <p>{content}</p>
+                                                                           <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
+                                                                           <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
+                                                                       </>
+                                                                   )}
+                                                               </td>
+                                                               <td>
+                                                                   {postDates[index] || 'No date available'}
+                                                               </td>
+                                                           </tr>
+                                                       ))
+                                                   ) : (
+                                                       <tr>
+                                                           <td colSpan={3} className="text-center">
+                                                               No posts available.
+                                                           </td>
+                                                       </tr>
+                                                   )}
+                                               </tbody>
+                                           </table>
+                                       </div>
+                                   </div>
 
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
