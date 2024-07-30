@@ -9,18 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
-
-
     private final UserRepository userRepository;
-
-
-
     private final PasswordEncoder passwordEncoder;
+    
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -81,5 +78,23 @@ public class UserService {
     }
 
 
+    public boolean isUserTablePopulated() {
+        long userRepoCount = userRepository.count();
+        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("userRepository.count() = " + userRepoCount);
+        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
+        return userRepoCount > 3;
+    }
 
+    public void populateSampleUsers() {
+        List<User> sampleUsers = new ArrayList<>();
+        User user1 = new User("john_doe", "john.doe@example.com", "password", "John", "Doe", "Software Engineer", false, true);
+        sampleUsers.add(user1);
+        User user2 =new User("jane_doe", "jane.doe@example.com", "password", "Jane", "Doe", "Chief Technololgy Officer", false, true);
+        sampleUsers.add(user2);
+        User user3 = new User("jim_beam", "jim.beam@example.com", "password", "Jim", "Beam", "Chief Information Officer", false, true);
+        sampleUsers.add(user3);
+
+        userRepository.saveAll(sampleUsers);
+    }
 }

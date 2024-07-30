@@ -44,3 +44,8 @@ export interface Chat {
     message: string;
     createdAt: string;
 }
+
+export interface FollowDTO {
+    followerId: number;
+    followeeId: number;
+}

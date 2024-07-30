@@ -6,6 +6,7 @@ import com.revature.Project1.Models.User;
 import com.revature.Project1.Services.EmailService;
 import com.revature.Project1.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,14 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
-        return userService.getAllUsers().stream()
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers().stream()
                 .map(DtoConverter::toUserDto)
                 .toList();
+        System.out.println("usersDTO: " + users);
+        ResponseEntity response = new ResponseEntity<>(users, HttpStatus.OK);
+        System.out.println("response: " + response);
+        return response;
     }
 
     @GetMapping("/{id}")
