@@ -16,6 +16,7 @@ export interface Post {
     content: string;
     createdAt: string;
     updatedAt: string;
+    user: User;
 }
 
 export interface Comment {
