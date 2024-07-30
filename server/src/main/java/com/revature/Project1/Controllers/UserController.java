@@ -37,6 +37,12 @@ public class UserController {
         return user.map(value -> ResponseEntity.ok(DtoConverter.toUserDto(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        return Optional.of(user).map(value -> ResponseEntity.ok(DtoConverter.toUserDto(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public UserDto createUser(@RequestBody User user) {

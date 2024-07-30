@@ -54,7 +54,7 @@ public class ChatController {
                 .toList();
         return ResponseEntity.ok(chatDtos);
     }
-    @GetMapping("/chats/users/{user1Id}/{user2Id}")
+    @GetMapping("/users/{user1Id}/{user2Id}")
     public List<ChatDto> getMessagesBetweenUsers(@PathVariable Long user1Id, @PathVariable Long user2Id) {
         return chatService.getMessagesBetweenUsers(user1Id, user2Id).stream()
                 .map(DtoConverter::toChatDto)

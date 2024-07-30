@@ -631,7 +631,3 @@ textarea.form-control {
     border-radius: 50%;
 }
 
-.like-icon:hover {
-    color: #2aa493; /* Change to your preferred color */
-    background-color: #f0f0f0; /* Light background color for hover */
-}

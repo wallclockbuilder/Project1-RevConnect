@@ -23,7 +23,7 @@ const AppNavbar: React.FC = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${config.BASE_URL}/api/users/${searchInput}`, {
+            const response = await fetch(`${config.BASE_URL}/api/users/username/${searchInput}`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`, // Assuming user.token holds the token
                 },
@@ -36,7 +36,7 @@ const AppNavbar: React.FC = () => {
 
             const userDetails = await response.json();
             const { userId } = userDetails;
-            console.log(userDetails);
+            console.log(user);
 
             navigate(`/profile/${userId}`);
         } catch (error) {
