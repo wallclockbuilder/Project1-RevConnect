@@ -9,14 +9,10 @@ import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
-import MyPosts from "./pages/MyPosts";
-import Follow from "./components/Follow";
 
 
 
-function App() {
-const App: React.FC = () => {
->>>>>>> 10441f2 ( added back the chatpage and chatroom in the app.js , added search button and input in the navbar)
+const App = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -52,5 +48,6 @@ const App: React.FC = () => {
         </div>
     );
 }
+
 
 export default App;
