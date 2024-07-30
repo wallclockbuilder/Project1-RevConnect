@@ -1,4 +1,4 @@
-import React, { useEffect,  } from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Signup from "./pages/signup";

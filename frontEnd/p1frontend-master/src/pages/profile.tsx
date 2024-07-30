@@ -26,6 +26,7 @@ const Profile: React.FC = () => {
     const [comments, setComments] = useState<CommentType[]>([]);
     const [likes, setLikes] = useState<LikeType[]>([]);
     const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
+    const { user, token } = useAuth();
     const [postDates, setPostDates] = useState<string[]>([]);
     const [newPostContent, setNewPostContent] = useState<string>('');
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
@@ -175,6 +176,7 @@ const Profile: React.FC = () => {
                 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
             </Helmet>
 
+
             <div className="container bootstrap snippets bootdeys">
                 <div className="row" id="user-profile">
                     <div className="col-lg-3 col-md-4 col-sm-4">
@@ -207,6 +209,7 @@ const Profile: React.FC = () => {
                         </div>
                     </div>
 
+
                     <div className="col-lg-9 col-md-8 col-sm-8">
                         <div className="main-box clearfix">
                             <div className="profile-header">
@@ -218,6 +221,7 @@ const Profile: React.FC = () => {
                                 ) : null}
 
                             </div>
+
 
                             <div className="row profile-user-info">
                                 <div className="col-sm-8">
@@ -256,6 +260,7 @@ const Profile: React.FC = () => {
                                 </div>
                             </div>
 
+
                             <div className="tabs-wrapper profile-tabs">
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item">
@@ -265,6 +270,7 @@ const Profile: React.FC = () => {
                                         <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">Followers</a>
                                     </li>
                                 </ul>
+
 
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-posts">
@@ -332,6 +338,7 @@ const Profile: React.FC = () => {
                                         </div>
                                     </div>
 
+
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
                                             <li className="col-md-6">
@@ -390,6 +397,7 @@ const Profile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
