@@ -21,10 +21,10 @@ const AdminPage = () => {
     //Fetch users data //
     useEffect(() => {
         const fetchData = async () => {
-                await fetch(`${config.BASE_URL}/api/users`, { credentials: 'include' })
-                    .then(response => response.json())
-                    .then(data => setUsers(data))
-                    .catch(error => { console.error('Fetch Users error:', error) })
+            await fetch(`${config.BASE_URL}/api/users`, { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => setUsers(data))
+                .catch(error => { console.error('Fetch Users error:', error) })
         };
         fetchData();
     }, []);
@@ -39,9 +39,9 @@ const AdminPage = () => {
             },
             credentials: 'include',
         }).then(response => response.json())
-          .catch(error => { console.error('Ban error:', error)})
+            .catch(error => { console.error('Ban error:', error) })
 
-            alert("Ban is Successful")
+        alert("Ban is Successful")
     }
 
     //Unban User//
@@ -58,7 +58,7 @@ const AdminPage = () => {
 
         alert("Unban is Successful")
     }
-        
+
     // List of column to display in dataset//
     const columns = [
         {
@@ -66,14 +66,14 @@ const AdminPage = () => {
             //selector: (row: any) => row.userId,
             sortable: true,
             width: "60px",
-            cell: (row: any) => <div data-tag="allowRowEvents" style={{ fontWeight: 'bold' }}> {row.userId}</div> 
+            cell: (row: any) => <div data-tag="allowRowEvents" style={{ fontWeight: 'bold' }}> {row.userId}</div>
         },
         {
             name: "First Name",
             selector: (row: any) => row.firstName,
             sortable: true,
         },
-        { 
+        {
             name: "Last Name",
             selector: (row: any) => row.lastName,
             sortable: true,
@@ -96,8 +96,8 @@ const AdminPage = () => {
         {
             name: "Bio",
             selector: (row: any) => row.bio,
-            sortable: false, 
-        },   
+            sortable: false,
+        },
     ];
 
     //It gives header style in the dataset//
@@ -111,13 +111,13 @@ const AdminPage = () => {
     }
 
     //Search by userID//
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {  
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newUsers = users.filter((row) => {
             return (
                 row.userId
                     .toString()
-                    .includes(e.target.value));            
-        } );
+                    .includes(e.target.value));
+        });
         setFilterIndicator(true);
         setData(newUsers);
     };
@@ -135,7 +135,7 @@ const AdminPage = () => {
     return (
         <>
             <div className="container-fluid mt-3 bg-primary divMainContainer">
-               
+
                 <table className="table  tableSize ">
                     <DataTable
                         title="Admin Management App"
@@ -181,7 +181,7 @@ const AdminPage = () => {
                         responsive
                         customStyles={tableCustomStyles}
                     />
-                   
+
                 </table>
             </div>
         </>

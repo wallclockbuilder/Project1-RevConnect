@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/profile.css'; 
+import '../css/profile.css';
 import { Helmet } from 'react-helmet';
+import { useParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import config from '../config';
 import { Post as PostType, Comment as CommentType, Like as LikeType } from '../interface/types';
@@ -13,88 +14,104 @@ const formatDate = (dateString: string) => {
         month: '2-digit',
     };
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-GB', options); // Format as "Day, Date/Month"
+    return date.toLocaleDateString('en-GB', options);
 };
 
 const Profile: React.FC = () => {
+    const { userId } = useParams<{ userId?: string }>();
+    const { user, token } = useAuth();
+    const location = useLocation();
+    const [profileUser, setProfileUser] = useState<any>(null);
     const [posts, setPosts] = useState<PostType[]>([]);
     const [comments, setComments] = useState<CommentType[]>([]);
     const [likes, setLikes] = useState<LikeType[]>([]);
     const [singlePostContents, setSinglePostContents] = useState<string[]>([]);
-    const { user, token } = useAuth();
     const [postDates, setPostDates] = useState<string[]>([]);
     const [newPostContent, setNewPostContent] = useState<string>('');
-   const [editingPostId, setEditingPostId] = useState<number | null>(null);
-   const [editingPostContent, setEditingPostContent] = useState<string>('');
+    const [editingPostId, setEditingPostId] = useState<number | null>(null);
+    const [editingPostContent, setEditingPostContent] = useState<string>('');
 
     const fetchData = async () => {
+        const currentUserId = user?.userId;
+
+        if (!currentUserId) return;
+
         try {
+            const fetchUserId = userId ? Number(userId) : currentUserId;
+
+            const userResponse = await fetch(`${config.BASE_URL}/api/users/${fetchUserId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                credentials: 'include',
+            });
+            const userData = await userResponse.json();
+            setProfileUser(userData);
+
             const postsResponse = await fetch(`${config.BASE_URL}/api/posts`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
-                credentials: 'include'
+                credentials: 'include',
             });
             const postsData = await postsResponse.json();
-
-            // Filter posts for the current user
-            const userPosts = postsData.filter((post: PostType) => post.userId === user?.userId);
-
-            // Set the posts state with userPosts
+            const userPosts = postsData.filter((post: PostType) => post.userId === fetchUserId);
             setPosts(userPosts);
 
-            // Set the singlePostContents and createdAt separately for table
             const contents = userPosts.map((post: PostType) => post.content);
-            const dates = userPosts.map((post: PostType) => formatDate(post.createdAt)); // Format dates
+            const dates = userPosts.map((post: PostType) => formatDate(post.createdAt));
 
             setSinglePostContents(contents);
-            setPostDates(dates); // Set formatted dates
+            setPostDates(dates);
 
             const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
-                credentials: 'include'
+                credentials: 'include',
             });
             const commentsData = await commentsResponse.json();
             setComments(commentsData);
 
             const likesResponse = await fetch(`${config.BASE_URL}/api/likes`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
-                credentials: 'include'
+                credentials: 'include',
             });
             const likesData = await likesResponse.json();
             setLikes(likesData);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error('Error fetching data:', error);
         }
     };
 
     useEffect(() => {
-        fetchData(); // Initial fetch
+        fetchData();
 
-        // Polling every 10 seconds
         const intervalId = setInterval(() => {
             fetchData();
-        }, 10000); // Adjust the interval as needed
+        }, 10000);
 
-        return () => clearInterval(intervalId); // Cleanup on component unmount
-    }, [user, token]);
+        return () => clearInterval(intervalId);
+    }, [userId, user, token]);
+
+    if (!profileUser) return <p>Loading user...</p>;
+
+    const isCurrentUserProfile = user && user.userId === Number(userId);
 
     const handleCreatePost = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${config.BASE_URL}/api/posts`,  {
+            const response = await fetch(`${config.BASE_URL}/api/posts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                  
+
                 },
-                 credentials: 'include' ,
-                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId },})
+                credentials: 'include',
+                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId }, })
             });
             const newPost = await response.json();
             setPosts([...posts, newPost]);
@@ -108,8 +125,8 @@ const Profile: React.FC = () => {
         setEditingPostId(postId);
         setEditingPostContent(currentContent);
     };
- 
- 
+
+
     const handleUpdatePost = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
@@ -129,8 +146,8 @@ const Profile: React.FC = () => {
             console.error("Error updating post:", error);
         }
     };
- 
- 
+
+
     const handleDeletePost = async (postId: number) => {
         try {
             await fetch(`${config.BASE_URL}/api/posts/${postId}`, {
@@ -144,8 +161,8 @@ const Profile: React.FC = () => {
             console.error("Error deleting post:", error);
         }
     };
- 
- 
+
+
 
     return (
         <div id='profileBody'>
@@ -157,11 +174,11 @@ const Profile: React.FC = () => {
                 <div className="row" id="user-profile">
                     <div className="col-lg-3 col-md-4 col-sm-4">
                         <div className="main-box clearfix">
-                            <h2>{user.firstName} {user.lastName}</h2>
+                            <h2>{profileUser.firstName} {profileUser.lastName}</h2>
                             <div className="profile-status">
                                 <i className="fa fa-check-circle"></i> Online
                             </div>
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Profile" className="profile-img img-responsive center-block" />
+                            <img src={profileUser.profilePicture || "https://bootdey.com/img/Content/avatar/avatar1.png"} alt="Profile" className="profile-img img-responsive center-block" />
 
                             <div className="profile-details">
                                 <ul className="fa-ul">
@@ -169,11 +186,13 @@ const Profile: React.FC = () => {
                                 </ul>
                             </div>
 
-                            <div className="profile-message-btn center-block text-center">
-                                <a href="#" className="btn btn-success">
-                                    <i className="fa fa-envelope"></i> Send message
-                                </a>
-                            </div>
+                            {user && user.userId !== Number(userId) && (
+                                <div className="profile-message-btn center-block text-center">
+                                    <a href="#" className="btn btn-success">
+                                        <i className="fa fa-envelope"></i> Send message
+                                    </a>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -181,9 +200,12 @@ const Profile: React.FC = () => {
                         <div className="main-box clearfix">
                             <div className="profile-header">
                                 <h3><span>User info</span></h3>
-                                <a href="#" className="btn btn-primary edit-profile">
-                                    <i className="fa fa-pencil-square fa-lg"></i> Edit profile
-                                </a>
+                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                    <a href="/edit-profile" className="btn btn-primary edit-profile">
+                                        <i className="fa fa-pencil-square fa-lg"></i> Edit profile
+                                    </a>
+                                ) : null}
+
                             </div>
 
                             <div className="row profile-user-info">
@@ -193,7 +215,7 @@ const Profile: React.FC = () => {
                                             First Name
                                         </div>
                                         <div className="profile-user-details-value">
-                                            {user.firstName}
+                                            {profileUser.firstName}
                                         </div>
                                     </div>
                                     <div className="profile-user-details clearfix">
@@ -201,7 +223,7 @@ const Profile: React.FC = () => {
                                             Last Name
                                         </div>
                                         <div className="profile-user-details-value">
-                                            {user.lastName}
+                                            {profileUser.lastName}
                                         </div>
                                     </div>
                                     <div className="profile-user-details clearfix">
@@ -209,16 +231,16 @@ const Profile: React.FC = () => {
                                             Email
                                         </div>
                                         <div className="profile-user-details-value">
-                                            {user.email}
+                                            {profileUser.email}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-4 ">
+                                <div className="col-sm-4">
                                     <div className='profile-bio'>
                                         My Bio:
                                     </div>
                                     <div className='profile-user-details-value'>
-                                        {user.bio}
+                                        {profileUser.bio}
                                     </div>
                                 </div>
                             </div>
@@ -226,76 +248,78 @@ const Profile: React.FC = () => {
                             <div className="tabs-wrapper profile-tabs">
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item">
-                                        <a className="nav-link active" href="#tab-posts" data-bs-toggle="tab">posts</a>
+                                        <a className="nav-link active" href="#tab-posts" data-bs-toggle="tab">Posts</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">followers</a>
+                                        <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">Followers</a>
                                     </li>
                                 </ul>
 
                                 <div className="tab-content">
-                                   <div className="tab-pane fade show active" id="tab-posts">
-                                       <form onSubmit={handleCreatePost} className="mb-4">
-                                           <div className="form-group">
-                                               <textarea
-                                                   className="form-control"
-                                                   rows={3}
-                                                   value={newPostContent}
-                                                   onChange={(e) => setNewPostContent(e.target.value)}
-                                                   placeholder="What's on your mind?"
-                                                   required
-                                               />
-                                           </div>
-                                           <button type="submit" className="btn btn-primary mt-2">Create Post</button>
-                                       </form>
-                                       <div className="table-responsive">
-                                           <table className="table">
-                                               <tbody>
-                                                   {singlePostContents.length > 0 ? (
-                                                       singlePostContents.map((content, index) => (
-                                                           <tr key={index}>
-                                                               <td className="text-center">
-                                                                   <i className="fa fa-comment"></i>
-                                                               </td>
-                                                               <td>
-                                                                   {editingPostId === posts[index].postId ? (
-                                                                       <form onSubmit={handleUpdatePost}>
-                                                                           <div className="form-group">
-                                                                               <textarea
-                                                                                   className="form-control"
-                                                                                   rows={3}
-                                                                                   value={editingPostContent}
-                                                                                   onChange={(e) => setEditingPostContent(e.target.value)}
-                                                                                   required
-                                                                               />
-                                                                           </div>
-                                                                           <button type="submit" className="btn btn-primary mt-2">Update Post</button>
-                                                                           <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
-                                                                       </form>
-                                                                   ) : (
-                                                                       <>
-                                                                           <p>{content}</p>
-                                                                           <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
-                                                                           <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
-                                                                       </>
-                                                                   )}
-                                                               </td>
-                                                               <td>
-                                                                   {postDates[index] || 'No date available'}
-                                                               </td>
-                                                           </tr>
-                                                       ))
-                                                   ) : (
-                                                       <tr>
-                                                           <td colSpan={3} className="text-center">
-                                                               No posts available.
-                                                           </td>
-                                                       </tr>
-                                                   )}
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                   </div>
+                                    <div className="tab-pane fade show active" id="tab-posts">
+                                    {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                        <form onSubmit={handleCreatePost} className="mb-4">
+                                            <div className="form-group">
+                                                <textarea
+                                                    className="form-control"
+                                                    rows={3}
+                                                    value={newPostContent}
+                                                    onChange={(e) => setNewPostContent(e.target.value)}
+                                                    placeholder="What's on your mind?"
+                                                    required
+                                                />
+                                            </div>
+                                            <button type="submit" className="btn btn-primary mt-2">Create Post</button>
+                                        </form>):null}
+                                        <div className="table-responsive">
+                                            <table className="table">
+                                                <tbody>
+                                                    {singlePostContents.length > 0 ? (
+                                                        singlePostContents.map((content, index) => (
+                                                            <tr key={index}>
+                                                                <td className="text-center">
+                                                                    <i className="fa fa-comment"></i>
+                                                                </td>
+                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                <td>
+                                                                    {editingPostId === posts[index].postId ? (
+                                                                        <form onSubmit={handleUpdatePost}>
+                                                                            <div className="form-group">
+                                                                                <textarea
+                                                                                    className="form-control"
+                                                                                    rows={3}
+                                                                                    value={editingPostContent}
+                                                                                    onChange={(e) => setEditingPostContent(e.target.value)}
+                                                                                    required
+                                                                                />
+                                                                            </div>
+                                                                            <button type="submit" className="btn btn-primary mt-2">Update Post</button>
+                                                                            <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
+                                                                        </form>
+                                                                    ) : (
+                                                                        <>
+                                                                            <p>{content}</p>
+                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
+                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
+                                                                        </>
+                                                                    )}
+                                                                </td>) : null}
+                                                                <td>
+                                                                    {postDates[index] || 'No date available'}
+                                                                </td>
+                                                            </tr>
+                                                        ))
+                                                    ) : (
+                                                        <tr>
+                                                            <td colSpan={3} className="text-center">
+                                                                No posts available.
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
@@ -346,9 +370,6 @@ const Profile: React.FC = () => {
                                             </div>
                                             <div className="conversation-new-message">
                                                 <form>
-                                                    {/* <div className="form-group">
-                                                        <textarea className="form-control" rows="2" placeholder="Enter your message..."></textarea>
-                                                    </div> */}
                                                     <div className="clearfix">
                                                         <button type="submit" className="btn btn-success float-end">Send message</button>
                                                     </div>
@@ -358,13 +379,12 @@ const Profile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Profile;

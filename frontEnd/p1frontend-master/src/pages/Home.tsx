@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../css/home.css';
 import { useAuth } from '../context/AuthContext';
 
+
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<PostType[]>([]);
     const [comments, setComments] = useState<CommentType[]>([]);
@@ -53,6 +54,8 @@ const Home: React.FC = () => {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                    
                 },
                 body: JSON.stringify({ postId, content: commentContent }),
             });
