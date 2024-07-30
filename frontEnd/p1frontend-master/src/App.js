@@ -9,12 +9,12 @@ import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
-<<<<<<< HEAD
+import MyPosts from "./pages/MyPosts";
 import Follow from "./components/Follow";
 
 
-const App = () => {
-=======
+
+function App() {
 const App: React.FC = () => {
 >>>>>>> 10441f2 ( added back the chatpage and chatroom in the app.js , added search button and input in the navbar)
     const location = useLocation();
