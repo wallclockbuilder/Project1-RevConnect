@@ -4,7 +4,7 @@ import { Post as PostType, Comment as CommentType, Like as LikeType } from '../i
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../css/home.css';
-
+import { useAuth } from '../context/AuthContext';
 
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<PostType[]>([]);
@@ -12,6 +12,7 @@ const Home: React.FC = () => {
     const [likes, setLikes] = useState<LikeType[]>([]);
     const [newComments, setNewComments] = useState<{ [postId: number]: string }>({});
     const [likedPosts, setLikedPosts] = useState<{ [postId: number]: boolean }>({});
+    const { user, token } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -71,11 +72,34 @@ const Home: React.FC = () => {
         }
     };
 
-    const handleLikeClick = (postId: number) => {
-        setLikedPosts(prevState => ({
-            ...prevState,
-            [postId]: !prevState[postId]
-        }));
+    const handleLikeClick = async (postId: number) => {
+        const isLiked = likedPosts[postId];
+
+        try {
+            const response = await fetch(`${config.BASE_URL}/api/likes`, {
+                method: isLiked ? 'DELETE' : 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ postId }),
+            });
+
+            if (response.ok) {
+                setLikedPosts(prevState => ({
+                    ...prevState,
+                    [postId]: !isLiked
+                }));
+
+                const updatedLikes = await fetch(`${config.BASE_URL}/api/likes`, { credentials: 'include' });
+                const updatedLikesData = await updatedLikes.json();
+                setLikes(updatedLikesData);
+            } else {
+                console.error(`Error ${isLiked ? 'removing' : 'adding'} like`);
+            }
+        } catch (error) {
+            console.error(`Error ${isLiked ? 'removing' : 'adding'} like:`, error);
+        }
     };
 
     return (
