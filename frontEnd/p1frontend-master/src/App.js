@@ -9,6 +9,7 @@ import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
+import Follow from "./pages/FollowPage";
 
 
 

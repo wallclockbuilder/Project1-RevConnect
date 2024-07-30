@@ -19,7 +19,6 @@ const formatDate = (dateString: string) => {
 
 const Profile: React.FC = () => {
     const { userId } = useParams<{ userId?: string }>();
-    const { user, token } = useAuth();
     const location = useLocation();
     const [profileUser, setProfileUser] = useState<any>(null);
     const [posts, setPosts] = useState<PostType[]>([]);
