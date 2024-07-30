@@ -1,0 +1,45 @@
+.divMainContainer {
+    background: lightblue;
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 0;   
+    background-color:cadetblue;
+}
+
+.tableSize {
+    position:absolute;
+    left: 0;
+    width: 100%;
+    margin-left: 0;
+}
+
+.optionsBar {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    float:left;
+    margin-left: 0;
+    width: 100%;
+}
+
+.divForSearch {
+    position: absolute;
+    float:right;
+    right:0;
+    margin-right:10px;
+}
+
+.btnSize {
+    width:130px;
+    height:30px;
+    text-align: center;
+    margin:5px;
+    font-weight:600;
+}
+   .btnSize:hover {
+      color:deeppink;
+   }
+
+   
+
