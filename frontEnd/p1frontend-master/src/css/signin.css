@@ -1,38 +1,38 @@
-
-body {
-    height: 100%;
+/* Ensure the body takes up full height and uses flexbox for centering */
+.bodySignin {
+    height: 100vh; /* Full viewport height */
     margin: 0; 
-    background-color: #fff5e6;
     background: -webkit-linear-gradient(to right, #ff7e5f, #feb47b); /* For Safari 5.1 to 6.0 */
     background: linear-gradient(to right, #ff7e5f, #feb47b); /* Standard syntax */
-}
-
-body {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
 }
 
+/* Style for the form container */
 .form-signin {
     width: 100%;
     max-width: 330px; 
     padding: 15px;
     margin: 0 auto;
-
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #fff; /* Ensure form background is white for contrast */
+    border-radius: 8px; /* Optional: add rounded corners for a modern look */
+    transition: background-color 0.3s; /* Smooth transition effect */
 }
 
-
-.form-signin:hover{    
+/* Hover effect for the form */
+.form-signin:hover {
     background-color: #e28f5e; 
 }
 
+/* Style for the checkbox */
 .form-signin .checkbox {
     font-weight: 400;
 }
 
-
+/* Style for the form controls */
 .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -41,19 +41,19 @@ body {
     font-size: 16px;
 }
 
-
+/* Focus effect for form controls */
 .form-signin .form-control:focus {
     z-index: 2;
 }
 
-
+/* Style for email input */
 .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-
+/* Style for password input */
 .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
