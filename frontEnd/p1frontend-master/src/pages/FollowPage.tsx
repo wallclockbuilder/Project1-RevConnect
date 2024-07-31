@@ -15,8 +15,15 @@ const sampleFolloweesArray: User[] = [
 ];
 
 const FollowPage: React.FC = () => {
+<<<<<<< HEAD
+    const { user, token } = useAuth();
+    const [usersArray, setUsers] = useState<User[]>([]);
+
+    console.log("Initial users state in FollowPage:", usersArray);
+=======
     const [followees, setFollowees] = useState<User[]>(sampleFolloweesArray);
     const {token, user } = useAuth();
+>>>>>>> b16607016e5cc7f04bbea16873a1d6c65fc3126e
 
     useEffect(() => {
         const fetchFollowees = async () => {
@@ -51,8 +58,13 @@ const FollowPage: React.FC = () => {
             }
         };
 
+<<<<<<< HEAD
+        fetchUsers();
+    }, [token]);
+=======
         fetchFollowees();
     }, [user.userId, token]);
+>>>>>>> b16607016e5cc7f04bbea16873a1d6c65fc3126e
 
     useEffect(() => {
         setFollowees(sampleFolloweesArray);

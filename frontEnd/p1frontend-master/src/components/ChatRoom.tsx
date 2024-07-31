@@ -47,7 +47,7 @@ const ChatRoom = () => {
                 credentials: 'include',
                 body: JSON.stringify({
                     message: newMessage,
-                    sender: { userId: user.userId },
+                    sender: { userId: user?.userId },
                     receiver: { userId: Number(userId) },
                 }),
             });

@@ -36,6 +36,7 @@
     text-align: center;
     margin:5px;
     font-weight:600;
+    border: 80px;
 }
    .btnSize:hover {
       color:deeppink;

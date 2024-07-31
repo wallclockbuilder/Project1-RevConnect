@@ -6,10 +6,10 @@ import { Navbar, Nav, Dropdown, DropdownButton, Form, FormControl, Button } from
 import '../css/navbar.css';
 
 const AppNavbar: React.FC = () => {
-    const { user, logout } = useAuth();
+    const { user, token, logout } = useAuth();
     const navigate = useNavigate();
     const [searchInput, setSearchInput] = useState('');
-
+    console.log(user?.admin);
     const handleLogout = () => {
         logout();
         navigate('/');
@@ -25,7 +25,7 @@ const AppNavbar: React.FC = () => {
         try {
             const response = await fetch(`${config.BASE_URL}/api/users/username/${searchInput}`, {
                 headers: {
-                    'Authorization': `Bearer ${user.token}`, // Assuming user.token holds the token
+                    'Authorization': `Bearer ${token}`, 
                 },
                 credentials: 'include',
             });
@@ -41,8 +41,8 @@ const AppNavbar: React.FC = () => {
             navigate(`/profile/${userId}`);
         } catch (error) {
             console.error('Error fetching user details:', error);
-            // Handle error (e.g., display a notification)
         }
+
     };
 
     return (
@@ -54,6 +54,10 @@ const AppNavbar: React.FC = () => {
                     <Nav.Link as={Link} to="/chat">Chat</Nav.Link>
                     <Nav.Link as={Link} to="/connections">Connections</Nav.Link>
                     <Nav.Link as={Link} to="/follow">Follow</Nav.Link>
+                    {user?.admin && (
+                        <Nav.Link as={Link} to="/admin">Admin Page</Nav.Link>
+                    )}
+
                 </Nav>
                 {user ? (
                     <Nav className="ms-auto">
