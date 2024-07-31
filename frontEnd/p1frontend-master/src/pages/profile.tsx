@@ -390,6 +390,35 @@ const Profile: React.FC = () => {
                                                                     <i className="fa fa-comment"></i>
 
                                                                 </td>
+
+                                                              
+                                                                location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                    <td>
+                                                                        {editingPostId === posts[index].postId ? (
+                                                                            <form onSubmit={handleUpdatePost}>
+                                                                                <div className="form-group">
+                                                                                    <textarea
+                                                                                        className="form-control"
+                                                                                        rows={3}
+                                                                                        value={editingPostContent}
+                                                                                        onChange={(e) => setEditingPostContent(e.target.value)}
+                                                                                        required
+                                                                                    />
+                                                                                </div>
+                                                                                <button type="submit" className="btn btn-primary mt-2">Update Post</button>
+                                                                                <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
+                                                                            </form>
+                                                                        ) : (
+                                                                            <>
+                                                                                <p>{content}</p>
+                                                                                <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
+                                                                                <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
+                                                                            </>
+                                                                        )}
+                                                                    </td>) : null 
+                                                            
+
+                                                                
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
                                                                         <form onSubmit={handleUpdatePost}>
@@ -517,6 +546,7 @@ const Profile: React.FC = () => {
                 </div>
             </div>
         </div>
+
 
     );
 };

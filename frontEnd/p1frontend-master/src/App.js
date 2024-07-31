@@ -9,12 +9,16 @@ import MyPosts from "./pages/MyPosts";
 import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
+import AdminPage from "./pages/AdminPage";
 import Follow from "./pages/FollowPage";
 import Connect from "./components/Connect";
 import Admin from "./pages/AdminPage";
 
 
-const App = () => {
+
+
+const App: React.FC = () => {
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -47,7 +51,12 @@ const App = () => {
                 <Route path="/profile/:userId" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/connections" element={<ProtectedRoute><Connect /></ProtectedRoute>} />
                 <Route path="/follow" element={<ProtectedRoute><Follow /></ProtectedRoute>} />
+
                 <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+
+                <Route path="/AdminPage" element={<AdminPage />} />
+
+
             </Routes>
         </div>
     );

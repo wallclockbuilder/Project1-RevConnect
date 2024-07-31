@@ -57,6 +57,7 @@ const AppNavbar: React.FC = () => {
                     {user?.admin && (
                         <Nav.Link as={Link} to="/admin">Admin Page</Nav.Link>
                     )}
+
                 </Nav>
                 {user ? (
                     <Nav className="ms-auto">

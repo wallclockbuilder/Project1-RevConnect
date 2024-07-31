@@ -9,6 +9,7 @@ export interface User {
     bio?: string;
     active: boolean;
     admin: boolean;
+
 }
 
 export interface Post {
