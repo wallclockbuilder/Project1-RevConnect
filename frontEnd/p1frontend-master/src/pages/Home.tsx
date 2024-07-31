@@ -7,7 +7,6 @@ import '../css/home.css';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
-
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<PostType[]>([]);
     const [comments, setComments] = useState<CommentType[]>([]);
@@ -33,13 +32,22 @@ const Home: React.FC = () => {
                 const likesResponse = await fetch(`${config.BASE_URL}/api/likes`, { credentials: 'include' });
                 const likesData = await likesResponse.json();
                 setLikes(likesData);
+
+                // Initialize likedPosts state
+                const likedPostsInit: { [postId: number]: boolean } = {};
+                likesData.forEach((like: LikeType) => {
+                    if (like.userId === user.userId) {
+                        likedPostsInit[like.postId] = true;
+                    }
+                });
+                setLikedPosts(likedPostsInit);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [user.userId]); // Add user.userId as a dependency
 
     const handleCommentChange = (postId: number, value: string) => {
         setNewComments(prevState => ({
@@ -59,7 +67,6 @@ const Home: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-
                 },
                 body: JSON.stringify({ postId, content: commentContent }),
             });
@@ -81,28 +88,51 @@ const Home: React.FC = () => {
 
     const handleLikeClick = async (postId: number) => {
         const isLiked = likedPosts[postId];
-
+    
         try {
-            const response = await fetch(`${config.BASE_URL}/api/likes`, {
+            let url = `${config.BASE_URL}/api/likes`;
+    
+            if (isLiked) {
+                const like = likes.find(like => like.postId === postId && like.userId === user.userId);
+                if (like) {
+                    url = `${url}/${like.likeId}`;
+                }
+            }
+    
+            const response = await fetch(url, {
                 method: isLiked ? 'DELETE' : 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ postId }),
+                body: JSON.stringify({
+                    post: { postId },
+                    user: { userId: user.userId }
+                }),
             });
-
+    
             if (response.ok) {
                 setLikedPosts(prevState => ({
                     ...prevState,
                     [postId]: !isLiked
                 }));
-
+    
                 const updatedLikes = await fetch(`${config.BASE_URL}/api/likes`, { credentials: 'include' });
                 const updatedLikesData = await updatedLikes.json();
                 setLikes(updatedLikesData);
+
+                // Update likedPosts state based on updated likes data
+                const likedPostsInit: { [postId: number]: boolean } = {};
+                updatedLikesData.forEach((like: LikeType) => {
+                    if (like.userId === user.userId) {
+                        likedPostsInit[like.postId] = true;
+                    }
+                });
+                setLikedPosts(likedPostsInit);
             } else {
-                console.error(`Error ${isLiked ? 'removing' : 'adding'} like`);
+                const errorData = await response.json();
+                console.error(`Error ${isLiked ? 'removing' : 'adding'} like`, errorData);
             }
         } catch (error) {
             console.error(`Error ${isLiked ? 'removing' : 'adding'} like:`, error);

@@ -170,7 +170,9 @@ const Profile: React.FC = () => {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                credentials: 'include',
+
             });
             // Update posts state
             const updatedPosts = posts.filter(post => post.postId !== postId);
@@ -300,32 +302,6 @@ const Profile: React.FC = () => {
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
                                                                 </td>
-<<<<<<< HEAD
-                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                    <td>
-                                                                        {editingPostId === posts[index].postId ? (
-                                                                            <form onSubmit={handleUpdatePost}>
-                                                                                <div className="form-group">
-                                                                                    <textarea
-                                                                                        className="form-control"
-                                                                                        rows={3}
-                                                                                        value={editingPostContent}
-                                                                                        onChange={(e) => setEditingPostContent(e.target.value)}
-                                                                                        required
-                                                                                    />
-                                                                                </div>
-                                                                                <button type="submit" className="btn btn-primary mt-2">Update Post</button>
-                                                                                <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
-                                                                            </form>
-                                                                        ) : (
-                                                                            <>
-                                                                                <p>{content}</p>
-                                                                                <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
-                                                                                <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
-                                                                            </>
-                                                                        )}
-                                                                    </td>) : null}
-=======
                                                                 
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
@@ -354,7 +330,6 @@ const Profile: React.FC = () => {
                                                                         </div>
                                                                     )}
                                                                 </td>
->>>>>>> 4cac3914c88cd622f05ea581a9c5b21a60b80a74
                                                                 <td>
                                                                     {postDates[index] || 'No date available'}
                                                                 </td>
