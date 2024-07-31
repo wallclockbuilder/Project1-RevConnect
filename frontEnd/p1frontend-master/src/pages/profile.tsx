@@ -170,13 +170,15 @@ const Profile: React.FC = () => {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                credentials: 'include',
+ 
             });
             // Update posts state
             const updatedPosts = posts.filter(post => post.postId !== postId);
             const updatedContents = singlePostContents.filter((_, index) => posts[index].postId !== postId);
             const updatedDates = postDates.filter((_, index) => posts[index].postId !== postId);
-
+ 
             setPosts(updatedPosts);
             setSinglePostContents(updatedContents);
             setPostDates(updatedDates);
