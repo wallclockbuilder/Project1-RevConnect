@@ -7,6 +7,7 @@ export interface User {
     firstName?: string;
     lastName?: string;
     bio?: string;
+    active?: boolean;
 }
 
 export interface Post {

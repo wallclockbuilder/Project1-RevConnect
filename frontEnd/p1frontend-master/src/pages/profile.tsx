@@ -302,8 +302,9 @@ const Profile: React.FC = () => {
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
                                                                 </td>
-<<<<<<< HEAD
-                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+
+                                                              
+                                                                location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
                                                                     <td>
                                                                         {editingPostId === posts[index].postId ? (
                                                                             <form onSubmit={handleUpdatePost}>
@@ -326,8 +327,9 @@ const Profile: React.FC = () => {
                                                                                 <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
                                                                             </>
                                                                         )}
-                                                                    </td>) : null}
-=======
+                                                                    </td>) : null 
+                                                            
+
                                                                 
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
@@ -356,23 +358,23 @@ const Profile: React.FC = () => {
                                                                         </div>
                                                                     )}
                                                                 </td>
->>>>>>> 4cac3914c88cd622f05ea581a9c5b21a60b80a74
-                                                                <td>
-                                                                    {postDates[index] || 'No date available'}
-                                                                </td>
-                                                            </tr>
+
+<td>
+    {postDates[index] || 'No date available'}
+</td>
+                                                            </tr >
                                                         ))
                                                     ) : (
-                                                        <tr>
-                                                            <td colSpan={3} className="text-center">
-                                                                No posts available.
-                                                            </td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+    <tr>
+        <td colSpan={3} className="text-center">
+            No posts available.
+        </td>
+    </tr>
+)}
+                                                </tbody >
+                                            </table >
+                                        </div >
+                                    </div >
 
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
@@ -433,13 +435,13 @@ const Profile: React.FC = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                </div >
+                            </div >
+                        </div >
+                    </div >
+                </div >
+            </div >
+        </div >
     );
 };
 
