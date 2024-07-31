@@ -38,7 +38,7 @@ const Home: React.FC = () => {
                 // Initialize likedPosts state
                 const likedPostsInit: { [postId: number]: boolean } = {};
                 likesData.forEach((like: LikeType) => {
-                    if (like.userId === user.userId) {
+                    if (like.userId === user?.userId) {
                         likedPostsInit[like.postId] = true;
                     }
                 });
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
         };
 
         fetchData();
-    }, [user.userId]); // Add user.userId as a dependency
+    }, [user?.userId]); // Add user.userId as a dependency
 
     const handleCommentChange = (postId: number, value: string) => {
         setNewComments(prevState => ({
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
 
             if (response.ok) {
                 const newComment = await response.json();
-                newComment.username = user.username;
+                newComment.username = user?.username;
                 setComments(prevState => [...prevState, newComment]);
                 setNewComments(prevState => ({
                     ...prevState,
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
             let url = `${config.BASE_URL}/api/likes`;
     
             if (isLiked) {
-                const like = likes.find(like => like.postId === postId && like.userId === user.userId);
+                const like = likes.find(like => like.postId === postId && like.userId === user?.userId);
                 if (like) {
                     url = `${url}/${like.likeId}`;
                 }
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
                 },
                 body: JSON.stringify({
                     post: { postId },
-                    user: { userId: user.userId }
+                    user: { userId: user?.userId }
                 }),
             });
     
@@ -133,7 +133,7 @@ const Home: React.FC = () => {
                 // Update likedPosts state based on updated likes data
                 const likedPostsInit: { [postId: number]: boolean } = {};
                 updatedLikesData.forEach((like: LikeType) => {
-                    if (like.userId === user.userId) {
+                    if (like.userId === user?.userId) {
                         likedPostsInit[like.postId] = true;
                     }
                 });

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { User } from '../interface/types';
 
 const FollowPage: React.FC = () => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [usersArray, setUsers] = useState<User[]>([]);
 
     console.log("Initial users state in FollowPage:", usersArray);
@@ -16,7 +16,7 @@ const FollowPage: React.FC = () => {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 };
                 const url = `http://localhost:9090/api/users`;
@@ -44,7 +44,7 @@ const FollowPage: React.FC = () => {
         };
 
         fetchUsers();
-    }, [user.token]);
+    }, [token]);
 
     useEffect(() => {
         console.log("Users state after fetchUsers is called:", usersArray);

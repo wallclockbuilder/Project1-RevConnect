@@ -132,7 +132,7 @@ const Profile: React.FC = () => {
 
     if (!profileUser) return <p>Loading user...</p>;
 
-    const isCurrentUserProfile = user.userId === Number(profileUser.userId);
+    const isCurrentUserProfile = user?.userId === Number(profileUser.userId);
 
 
     const handleCreatePost = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -145,7 +145,7 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
-                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId } })
+                body: JSON.stringify({ content: newPostContent, user: { userId: user?.userId } })
             });
             const newPost = await response.json();
 
@@ -177,7 +177,7 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
-                body: JSON.stringify({ content: editingPostContent, user: { userId: user.userId } })
+                body: JSON.stringify({ content: editingPostContent, user: { userId: user?.userId } })
             });
             const updatedPost = await response.json();
 
@@ -226,7 +226,7 @@ const Profile: React.FC = () => {
                 },
                 credentials: 'include',
                 body: JSON.stringify({
-                    requester: { userId: user.userId },
+                    requester: { userId: user?.userId },
                     receiver: { userId: Number(userId) },
                     status: 'PENDING'
                 })
@@ -310,7 +310,7 @@ const Profile: React.FC = () => {
                         <div className="main-box clearfix">
                             <div className="profile-header">
                                 <h3><span>User info</span></h3>
-                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                     <a href="/edit-profile" className="btn btn-primary edit-profile">
                                         <i className="fa fa-pencil-square fa-lg"></i> Edit profile
                                     </a>
@@ -366,7 +366,7 @@ const Profile: React.FC = () => {
 
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-posts">
-                                        {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                        {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                             <form onSubmit={handleCreatePost} className="mb-4">
                                                 <div className="form-group">
                                                     <textarea
@@ -409,9 +409,9 @@ const Profile: React.FC = () => {
                                                                         <div>
                                                                             <div>
                                                                                 <p>{content}</p>
-                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                                                                     <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
-                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                                                                     <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
                                                                                 <button className="btn btn-info btn-sm small-btn" onClick={() => handleSharePost(posts[index].postId)}>Share</button>
                                                                             </div>

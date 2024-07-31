@@ -11,7 +11,7 @@ import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
 import Follow from "./pages/FollowPage";
 import Connect from "./components/Connect";
-
+import Admin from "./pages/AdminPage";
 
 
 const App = () => {
@@ -47,6 +47,7 @@ const App = () => {
                 <Route path="/profile/:userId" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/connections" element={<ProtectedRoute><Connect /></ProtectedRoute>} />
                 <Route path="/follow" element={<ProtectedRoute><Follow /></ProtectedRoute>} />
+                <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
             </Routes>
         </div>
     );
