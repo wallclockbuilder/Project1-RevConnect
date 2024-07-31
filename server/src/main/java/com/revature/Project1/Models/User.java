@@ -229,11 +229,11 @@ public class User {
         this.followers = followers;
     }
 
-    public Set<Follower> getFollowing() {
+    public Set<Follower> getfollowing() {
         return following;
     }
 
-    public void setFollowing(Set<Follower> following) {
+    public void setfollowing(Set<Follower> following) {
         this.following = following;
     }
 
