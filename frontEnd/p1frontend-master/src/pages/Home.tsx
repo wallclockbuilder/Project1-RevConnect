@@ -68,7 +68,11 @@ const Home: React.FC = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ postId, content: commentContent }),
+                body: JSON.stringify({
+                    post: { postId },
+                    user: { userId: user?.userId },
+                    content: commentContent
+                }),
             });
 
             if (response.ok) {
@@ -85,6 +89,7 @@ const Home: React.FC = () => {
             console.error("Error submitting comment:", error);
         }
     };
+
 
     const handleLikeClick = async (postId: number) => {
         const isLiked = likedPosts[postId];
@@ -144,56 +149,69 @@ const Home: React.FC = () => {
             <div className="container mt-4">
                 <div className="row">
                     <h1 className="mb-4 text-center">Home</h1>
-                    {posts.map((post) => (
-                        <div className="col-lg-4 col-md-6 mb-4" key={post.postId}>
-                            <div className="card shadow-sm">
-                                <div className="card-body">
-                                    <h5 className="card-title">
-                                        <div key={post.postId}>
-                                            <Link to={`/profile/${post.userId}`}>
-                                                <h3>{post.username}</h3>
-                                            </Link>
-                                            <p>{post.content}</p>
-                                            <span>{new Date(post.createdAt).toLocaleString('en-us', {
-                                                weekday: 'long',
-                                                month: 'long',
-                                                day: '2-digit',
-                                                year: 'numeric'
-                                            })}</span>
+                    {posts.length > 0 ? (
+                        posts.map((post) => (
+                            <div className="col-lg-4 col-md-6 mb-4" key={post.postId}>
+                                <div className="card shadow-sm">
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            <div key={post.postId}>
+                                                <Link to={`/profile/${post.userId}`}>
+                                                    <h3>{post.username}</h3>
+                                                </Link>
+                                                <p>{post.content}</p>
+                                                <span>{new Date(post.createdAt).toLocaleString('en-us', {
+                                                    weekday: 'long',
+                                                    month: 'long',
+                                                    day: '2-digit',
+                                                    year: 'numeric'
+                                                })}</span>
+                                            </div>
+                                        </h5>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <i
+                                                className={`fas fa-thumbs-up like ${likedPosts[post.postId] ? 'text-primary' : 'text-secondary'}`}
+                                                style={{ cursor: 'pointer', fontSize: '1.5em' }}
+                                                onClick={() => handleLikeClick(post.postId)}
+                                            ></i>
+                                            <small className="text-muted">
+                                                {likes.filter(like => like.postId === post.postId).length} Likes
+                                            </small>
                                         </div>
-                                    </h5>
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <i
-                                            className={`fas fa-thumbs-up like ${likedPosts[post.postId] ? 'text-primary' : 'text-secondary'}`}
-                                            style={{ cursor: 'pointer', fontSize: '1.5em' }}
-                                            onClick={() => handleLikeClick(post.postId)}
-                                        ></i>
-                                        <small className="text-muted">
-                                            {likes.filter(like => like.postId === post.postId).length} Likes
-                                        </small>
+                                        <div className="mt-3">
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="Add a comment..."
+                                                value={newComments[post.postId] || ''}
+                                                onChange={(e) => handleCommentChange(post.postId, e.target.value)}
+                                            />
+                                            <button
+                                                className="btn btn-sm btn-secondary mt-2"
+                                                onClick={() => handleCommentSubmit(post.postId)}
+                                            >
+                                                Submit Comment
+                                            </button>
+                                        </div>
+                                        <div className="comments mt-3">
+                                            {comments.filter(comment => comment.postId === post.postId).map((comment) => (
+                                                <div key={comment.commentId} className="comment mb-2">
+                                                    <strong>{comment.username}</strong>: {comment.content}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="mt-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Add a comment..."
-                                            value={newComments[post.postId] || ''}
-                                            onChange={(e) => handleCommentChange(post.postId, e.target.value)}
-                                        />
-                                        <button
-                                            className="btn btn-sm btn-secondary mt-2"
-                                            onClick={() => handleCommentSubmit(post.postId)}
-                                        >
-                                            Submit Comment
-                                        </button>
+                                    <div className="card-footer text-muted">
+                                        {comments.filter(comment => comment.postId === post.postId).length} Comments
                                     </div>
-                                </div>
-                                <div className="card-footer text-muted">
-                                    {comments.filter(comment => comment.postId === post.postId).length} Comments
                                 </div>
                             </div>
+                        ))
+                    ) : (
+                        <div className="text-center">
+                            <p>No posts available.</p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>
