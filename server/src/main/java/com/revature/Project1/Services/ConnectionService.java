@@ -46,7 +46,9 @@ public class ConnectionService {
     public List<Connection> getConnectionsByReceiverId(Long receiverId) {
         return connectionRepository.findByReceiverUserId(receiverId);
     }
-
+    public Connection findAllByRequesterAndReceiver(Long user1Id, Long user2Id) {
+        return connectionRepository.findAllByRequesterAndReceiver(user1Id, user2Id);
+    }
     public Connection createConnection(Connection connection) {
         connection.setStatus(Connection.Status.PENDING);
         Connection newConnection = connectionRepository.save(connection);

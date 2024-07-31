@@ -35,6 +35,15 @@ export interface Like {
     createdAt: string;
 }
 
+export interface Connection {
+    connectionId: number;
+    requesterId: number;
+    requesterUsername: string;
+    receiverId: number;
+    receiverUsername: string;
+    status: string;
+}
+
 export interface Chat {
     chatId: number;
     senderId: number;

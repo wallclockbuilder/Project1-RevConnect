@@ -51,7 +51,15 @@ public class ConnectionController {
                 .map(DtoConverter::toConnectionDto)
                 .toList();
     }
-
+    @GetMapping("/{user1Id}/{user2Id}")
+    public ResponseEntity<ConnectionDto> findAllByRequesterAndReceiver(@PathVariable Long user1Id, @PathVariable Long user2Id) {
+        Connection connection = connectionService.findAllByRequesterAndReceiver(user1Id, user2Id);
+        if (connection == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(DtoConverter.toConnectionDto(connection));
+        }
+    }
     @PostMapping
     public ConnectionDto createConnection(@RequestBody Connection connection) {
         Connection savedConnection = connectionService.createConnection(connection);
