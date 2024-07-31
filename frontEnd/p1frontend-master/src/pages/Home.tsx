@@ -14,6 +14,8 @@ const Home: React.FC = () => {
     const [newComments, setNewComments] = useState<{ [postId: number]: string }>({});
     const [likedPosts, setLikedPosts] = useState<{ [postId: number]: boolean }>({});
     const { user, token } = useAuth();
+    const [shareUrl, setShareUrl] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,6 +79,7 @@ const Home: React.FC = () => {
 
             if (response.ok) {
                 const newComment = await response.json();
+                newComment.username = user.username;
                 setComments(prevState => [...prevState, newComment]);
                 setNewComments(prevState => ({
                     ...prevState,
@@ -144,6 +147,18 @@ const Home: React.FC = () => {
         }
     };
 
+    const handleSharePost = (postId: any) => {
+        const url = `${window.location.origin}/post/${postId}`;
+        setShareUrl(url);
+        setShowModal(true);
+    };
+
+    const handleCopyUrl = () => {
+        navigator.clipboard.writeText(shareUrl);
+        alert('URL copied to clipboard!');
+    };
+
+
     return (
         <div className="home">
             <div className="container mt-4">
@@ -160,6 +175,7 @@ const Home: React.FC = () => {
                                                     <h3>{post.username}</h3>
                                                 </Link>
                                                 <p>{post.content}</p>
+                                                <button className="btn btn-info btn-sm small-btn" onClick={() => handleSharePost(post.postId)}>Share</button>
                                                 <span>{new Date(post.createdAt).toLocaleString('en-us', {
                                                     weekday: 'long',
                                                     month: 'long',
@@ -212,6 +228,26 @@ const Home: React.FC = () => {
                             <p>No posts available.</p>
                         </div>
                     )}
+                     {showModal && (
+                                                        <div className="modal" tabIndex={-1} style={{ display: 'block' }}>
+                                                            <div className="modal-dialog">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h5 className="modal-title">Share Post</h5>
+
+                                                                    </div>
+                                                                    <div className="modal-body">
+                                                                        <p>Copy the URL below to share the post:</p>
+                                                                        <input type="text" className="form-control" value={shareUrl} readOnly />
+                                                                    </div>
+                                                                    <div className="modal-footer">
+                                                                        <button type="button" className="btn btn-primary" onClick={handleCopyUrl}>Copy URL</button>
+                                                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
                 </div>
             </div>
         </div>
