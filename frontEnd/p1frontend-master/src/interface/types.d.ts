@@ -60,6 +60,6 @@ export interface Chat {
 }
 
 export interface FollowDTO {
-    followerId: number;
-    followeeId: number;
+    followerUserId: number;
+    followeeUserId: number;
 }
