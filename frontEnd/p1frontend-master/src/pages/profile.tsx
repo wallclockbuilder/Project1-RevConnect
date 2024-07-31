@@ -390,8 +390,6 @@ const Profile: React.FC = () => {
                                                                     <i className="fa fa-comment"></i>
 
                                                                 </td>
-
-
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
                                                                         <form onSubmit={handleUpdatePost}>
