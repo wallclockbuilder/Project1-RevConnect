@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/profile.css';
 import { Helmet } from 'react-helmet';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import config from '../config';
 import { Post as PostType, Comment as CommentType, Like as LikeType, Post } from '../interface/types';
+import { useNavigate } from 'react-router-dom';
 
 const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -30,6 +31,7 @@ const Profile: React.FC = () => {
     const [newPostContent, setNewPostContent] = useState<string>('');
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [editingPostContent, setEditingPostContent] = useState<string>('');
+
 
     const fetchData = async () => {
         const currentUserId = user?.userId;
@@ -58,7 +60,7 @@ const Profile: React.FC = () => {
             const userPosts = postsData.filter((post: PostType) => post.userId === fetchUserId);
 
             // Sort posts by date descending
-            userPosts.sort((a:PostType, b:PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+            userPosts.sort((a: PostType, b: PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
             setPosts(userPosts);
 
@@ -117,7 +119,7 @@ const Profile: React.FC = () => {
                 body: JSON.stringify({ content: newPostContent, user: { userId: user.userId } })
             });
             const newPost = await response.json();
-            
+
             // Update posts state
             setPosts([newPost, ...posts]); // Add new post to the beginning
             setSinglePostContents([newPost.content, ...singlePostContents]);
@@ -149,7 +151,7 @@ const Profile: React.FC = () => {
                 body: JSON.stringify({ content: editingPostContent, user: { userId: user.userId } })
             });
             const updatedPost = await response.json();
-            
+
             // Update posts state
             setPosts(posts.map(post => post.postId === editingPostId ? updatedPost : post));
             setSinglePostContents(singlePostContents.map((content, index) => posts[index].postId === editingPostId ? updatedPost.content : content));
@@ -207,9 +209,9 @@ const Profile: React.FC = () => {
 
                             {user && user.userId !== Number(userId) && (
                                 <div className="profile-message-btn center-block text-center">
-                                    <a href="#" className="btn btn-success">
-                                        <i className="fa fa-envelope"></i> Send message
-                                    </a>
+                                    <Link to={`/chat/${userId}`} className="btn btn-success">
+                                        <i className="fa fa-envelope"></i> Message
+                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -275,20 +277,20 @@ const Profile: React.FC = () => {
 
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-posts">
-                                    {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                        <form onSubmit={handleCreatePost} className="mb-4">
-                                            <div className="form-group">
-                                                <textarea
-                                                    className="form-control"
-                                                    rows={3}
-                                                    value={newPostContent}
-                                                    onChange={(e) => setNewPostContent(e.target.value)}
-                                                    placeholder="What's on your mind?"
-                                                    required
-                                                />
-                                            </div>
-                                            <button type="submit" className="btn btn-primary mt-2">Create Post</button>
-                                        </form>):null}
+                                        {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                            <form onSubmit={handleCreatePost} className="mb-4">
+                                                <div className="form-group">
+                                                    <textarea
+                                                        className="form-control"
+                                                        rows={3}
+                                                        value={newPostContent}
+                                                        onChange={(e) => setNewPostContent(e.target.value)}
+                                                        placeholder="What's on your mind?"
+                                                        required
+                                                    />
+                                                </div>
+                                                <button type="submit" className="btn btn-primary mt-2">Create Post</button>
+                                            </form>) : null}
                                         <div className="table-responsive">
                                             <table className="table">
                                                 <tbody>
@@ -299,29 +301,29 @@ const Profile: React.FC = () => {
                                                                     <i className="fa fa-comment"></i>
                                                                 </td>
                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                <td>
-                                                                    {editingPostId === posts[index].postId ? (
-                                                                        <form onSubmit={handleUpdatePost}>
-                                                                            <div className="form-group">
-                                                                                <textarea
-                                                                                    className="form-control"
-                                                                                    rows={3}
-                                                                                    value={editingPostContent}
-                                                                                    onChange={(e) => setEditingPostContent(e.target.value)}
-                                                                                    required
-                                                                                />
-                                                                            </div>
-                                                                            <button type="submit" className="btn btn-primary mt-2">Update Post</button>
-                                                                            <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
-                                                                        </form>
-                                                                    ) : (
-                                                                        <>
-                                                                            <p>{content}</p>
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
-                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
-                                                                        </>
-                                                                    )}
-                                                                </td>) : null}
+                                                                    <td>
+                                                                        {editingPostId === posts[index].postId ? (
+                                                                            <form onSubmit={handleUpdatePost}>
+                                                                                <div className="form-group">
+                                                                                    <textarea
+                                                                                        className="form-control"
+                                                                                        rows={3}
+                                                                                        value={editingPostContent}
+                                                                                        onChange={(e) => setEditingPostContent(e.target.value)}
+                                                                                        required
+                                                                                    />
+                                                                                </div>
+                                                                                <button type="submit" className="btn btn-primary mt-2">Update Post</button>
+                                                                                <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
+                                                                            </form>
+                                                                        ) : (
+                                                                            <>
+                                                                                <p>{content}</p>
+                                                                                <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>
+                                                                                <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>
+                                                                            </>
+                                                                        )}
+                                                                    </td>) : null}
                                                                 <td>
                                                                     {postDates[index] || 'No date available'}
                                                                 </td>
@@ -387,11 +389,14 @@ const Profile: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className="conversation-new-message">
-                                                <form>
-                                                    <div className="clearfix">
-                                                        <button type="submit" className="btn btn-success float-end">Send message</button>
-                                                    </div>
-                                                </form>
+
+                                                <div className="clearfix">
+                                                    <Link to={`/chat/${userId}`}>
+                                                        <button type="submit" className="btn btn-success float-end">Send Message</button>
+                                                    </Link>
+
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

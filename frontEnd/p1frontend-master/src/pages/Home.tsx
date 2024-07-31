@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../css/home.css';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 
 const Home: React.FC = () => {
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
                 const postsData = await postsResponse.json();
 
                 // Sort posts by date descending (newest first)
-                postsData.sort((a:PostType, b:PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                postsData.sort((a: PostType, b: PostType) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
                 setPosts(postsData);
 
                 const commentsResponse = await fetch(`${config.BASE_URL}/api/comments`, { credentials: 'include' });
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                    
+
                 },
                 body: JSON.stringify({ postId, content: commentContent }),
             });
@@ -119,7 +120,9 @@ const Home: React.FC = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">
                                         <div key={post.postId}>
-                                            <h3>{post.username}</h3>
+                                            <Link to={`/profile/${post.userId}`}>
+                                                <h3>{post.username}</h3>
+                                            </Link>
                                             <p>{post.content}</p>
                                             <span>{new Date(post.createdAt).toLocaleString('en-us', {
                                                 weekday: 'long',
