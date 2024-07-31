@@ -23,9 +23,12 @@ export interface Comment {
     commentId: number;
     postId: number;
     userId: number;
+    username: string;
     content: string;
     createdAt: string;
     updatedAt: string;
+    user: User;
+    post: Post;
 }
 
 export interface Like {
