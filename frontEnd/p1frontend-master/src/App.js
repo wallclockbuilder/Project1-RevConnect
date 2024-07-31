@@ -10,6 +10,7 @@ import AppNavbar from "./components/Navbar";
 import ChatPage from "./pages/ChatPage";
 import ChatRoom from "./components/ChatRoom";
 import Follow from "./pages/FollowPage";
+import Connect from "./components/Connect";
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
                 <Route path="/chat/:userId" element={<ProtectedRoute><ChatRoom /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/profile/:userId" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                <Route path="/connections" element={<ProtectedRoute><Connect /></ProtectedRoute>} />
                 <Route path="/follow" element={<ProtectedRoute><Follow /></ProtectedRoute>} />
             </Routes>
         </div>

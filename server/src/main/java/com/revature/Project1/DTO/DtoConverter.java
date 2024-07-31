@@ -54,7 +54,9 @@ public class DtoConverter {
         ConnectionDto dto = new ConnectionDto();
         dto.setConnectionId(connection.getConnectionId());
         dto.setRequesterId(connection.getRequester().getUserId());
+        dto.setRequesterUsername(connection.getRequester().getUsername());
         dto.setReceiverId(connection.getReceiver().getUserId());
+        dto.setReceiverUsername(connection.getReceiver().getUsername());
         dto.setStatus(connection.getStatus().toString());
         dto.setCreatedAt(connection.getCreatedAt());
         dto.setUpdatedAt(connection.getUpdatedAt());
@@ -64,7 +66,7 @@ public class DtoConverter {
         FollowDto dto = new FollowDto();
         dto.setFollowerId(follow.getFollowerId());
         dto.setFollowerUserId(follow.getFollower().getUserId());
-        dto.setFolloweeUserId(follow.getFollowing().getUserId());
+        dto.setFollowingUserId(follow.getFollowing().getUserId());
         dto.setCreatedAt(follow.getCreatedAt());
         return dto;
     }

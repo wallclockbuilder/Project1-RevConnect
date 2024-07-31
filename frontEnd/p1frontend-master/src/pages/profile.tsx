@@ -31,6 +31,7 @@ const Profile: React.FC = () => {
     const [newPostContent, setNewPostContent] = useState<string>('');
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [editingPostContent, setEditingPostContent] = useState<string>('');
+    const [connectionStatus, setConnectionStatus] = useState<string | null>(null);
 
 
     const fetchData = async () => {
@@ -93,18 +94,44 @@ const Profile: React.FC = () => {
     };
 
     useEffect(() => {
+
         fetchData();
 
+
+        const fetchConnectionStatus = async () => {
+            try {
+                const response = await fetch(`${config.BASE_URL}/api/connections/${user?.userId}/${userId}`, {
+                    credentials: 'include',
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setConnectionStatus(data.status);
+                } else {
+                    setConnectionStatus(null);
+                }
+            } catch (error) {
+                console.error('Error fetching connection status:', error);
+            }
+        };
+
+        if (user && user.userId !== Number(userId)) {
+            fetchConnectionStatus();
+        }
         const intervalId = setInterval(() => {
             fetchData();
         }, 10000);
 
         return () => clearInterval(intervalId);
+
+
+
     }, [userId, user, token]);
 
     if (!profileUser) return <p>Loading user...</p>;
 
-    const isCurrentUserProfile = user && user.userId === Number(userId);
+    const isCurrentUserProfile = user.userId === Number(profileUser.userId);
+
 
     const handleCreatePost = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -172,13 +199,13 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
-
+ 
             });
             // Update posts state
             const updatedPosts = posts.filter(post => post.postId !== postId);
             const updatedContents = singlePostContents.filter((_, index) => posts[index].postId !== postId);
             const updatedDates = postDates.filter((_, index) => posts[index].postId !== postId);
-
+ 
             setPosts(updatedPosts);
             setSinglePostContents(updatedContents);
             setPostDates(updatedDates);
@@ -186,6 +213,35 @@ const Profile: React.FC = () => {
             console.error("Error deleting post:", error);
         }
     };
+
+    const sendConnectionRequest = async () => {
+        try {
+            const response = await fetch(`${config.BASE_URL}/api/connections`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    requester: { userId: user.userId },
+                    receiver: { userId: Number(userId) },
+                    status: 'PENDING'
+                })
+            });
+
+            if (response.ok) {
+                setConnectionStatus('PENDING');
+                alert('Connection request sent!');
+            } else {
+                alert('Failed to send connection request.');
+            }
+        } catch (error) {
+            console.error('Error sending connection request:', error);
+        }
+    };
+
+
 
     return (
         <div id='profileBody'>
@@ -208,14 +264,30 @@ const Profile: React.FC = () => {
                                     <li><i className="fa-li fa fa-comment"></i>Posts: <span>{singlePostContents.length}</span></li>
                                 </ul>
                             </div>
-
-                            {user && user.userId !== Number(userId) && (
+                            {!isCurrentUserProfile ? (
                                 <div className="profile-message-btn center-block text-center">
                                     <Link to={`/chat/${userId}`} className="btn btn-success">
                                         <i className="fa fa-envelope"></i> Message
                                     </Link>
+                                    {connectionStatus === null ? (
+                                        <button onClick={sendConnectionRequest} className="btn btn-primary">
+                                            <i className="fa fa-user-plus"></i> Connect
+                                        </button>
+                                    ) : connectionStatus === 'PENDING' ? (
+                                        <button className="btn btn-warning" disabled>
+                                            Pending
+                                        </button>
+                                    ) : connectionStatus === 'ACCEPTED' ? (
+                                        <button className="btn btn-success" disabled>
+                                            Connected
+                                        </button>
+                                    ) : (
+                                        <button className="btn btn-danger" disabled>
+                                            Declined
+                                        </button>
+                                    )}
                                 </div>
-                            )}
+                            ): null}
                         </div>
                     </div>
 
@@ -302,7 +374,6 @@ const Profile: React.FC = () => {
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
                                                                 </td>
-                                                                
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
                                                                         <form onSubmit={handleUpdatePost}>
@@ -321,11 +392,11 @@ const Profile: React.FC = () => {
                                                                     ) : (
                                                                         <div>
                                                                             <div>
-                                                                            <p>{content}</p>
-                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>):null} 
-                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>):null}                                           
+                                                                                <p>{content}</p>
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                                    <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                                    <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
                                                                             </div>
                                                                         </div>
                                                                     )}
@@ -396,14 +467,9 @@ const Profile: React.FC = () => {
                                             </div>
                                             <div className="conversation-new-message">
 
-                                                <div className="clearfix">
-                                                    <Link to={`/chat/${userId}`}>
-                                                        <button type="submit" className="btn btn-success float-end">Send Message</button>
-                                                    </Link>
-
-                                                </div>
 
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -413,6 +479,7 @@ const Profile: React.FC = () => {
                 </div>
             </div>
         </div>
+        
     );
 };
 
