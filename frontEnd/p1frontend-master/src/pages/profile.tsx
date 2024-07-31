@@ -392,7 +392,7 @@ const Profile: React.FC = () => {
                                                                 </td>
 
                                                               
-                                                                location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                                                location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                                                     <td>
                                                                         {editingPostId === posts[index].postId ? (
                                                                             <form onSubmit={handleUpdatePost}>
