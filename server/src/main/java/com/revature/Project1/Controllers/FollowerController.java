@@ -6,15 +6,15 @@ import com.revature.Project1.Models.User;
 import com.revature.Project1.Services.FollowerService;
 import com.revature.Project1.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import com.revature.Project1.DTO.DtoConverter;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/users/{userId}/followers")
 @CrossOrigin
+@RequestMapping("/api/users/{userId}")
 public class FollowerController {
 
 
@@ -28,11 +28,11 @@ public class FollowerController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<FollowDto> getAllFollowers() {
-        return followerService.getAllFollowers().stream()
-                .map(DtoConverter::toFollowDto)
-                .toList();
+    @GetMapping("/followers")
+    public List<User> getAllFollowersByUserId(@PathVariable Long userId) {
+        return followerService.getFollowersOfUser(userId).stream()
+                .map(Follower::getFollower)
+                .collect(Collectors.toList());
     }
 
 //    @GetMapping("/{id}")
@@ -55,24 +55,37 @@ public class FollowerController {
 //                .map(DtoConverter::toFollowDto)
 //                .toList();
 //    }
-
-
-    @PostMapping
-//    public FollowDto createFollower(@RequestBody Follower follower) {
-        public FollowDto createFollower(@RequestBody FollowDto followDto){
-        User userFollower = new User(), userToFollow = new User();
-        Optional<User> user = userService.getUserById(followDto.getFollowerUserId());
-        if(user.isPresent()){
-            userFollower = user.get();
-        }
-        Optional<User> otherUser = userService.getUserById(followDto.getFolloweeUserId());
-        if(otherUser.isPresent()) {
-            userToFollow = otherUser.get();
-        }
-        Follower follower = new Follower(userFollower, userToFollow);
-        Follower savedFollower = followerService.createFollower(follower);
-        return DtoConverter.toFollowDto(savedFollower);
+    @GetMapping("/followees")
+    public List<User> getUsersFollowedByUserId(@PathVariable Long userId){
+        return followerService.getUsersFollowedByUser(userId).stream()
+                .map(Follower::getFollower)
+                .toList();
     }
+
+    @PostMapping("/followers")
+//    public FollowDto createFollower(@RequestBody Follower follower) {
+        public List<User> createFollower(@RequestBody FollowDto followDto){
+        System.out.println("-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--==--==-=-=-=-=-" +
+                "FollowDTO Incoming: " + followDto +
+                "followerUserID: " + followDto.getFollowerUserId() +
+                 "followeeUserId: " + followDto.getFolloweeUserId());
+        User userFollower = userService.getUserById(followDto.getFollowerUserId())
+                .orElseThrow(() -> new RuntimeException("Follower user not found"));
+        User userToFollow = userService.getUserById(followDto.getFolloweeUserId())
+                .orElseThrow(() -> new RuntimeException("User to follow not found"));
+
+        Follower follower = new Follower(userFollower, userToFollow);
+        followerService.createFollower(follower);
+        return followerService.getFollowersOfUser(userFollower.getUserId())
+                .stream()
+                .map(Follower::getFollower)
+                .toList();
+    }
+
+
+
+
+
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<FollowDto> updateFollower(@PathVariable Long id, @RequestBody Follower followerDetails) {
@@ -86,7 +99,7 @@ public class FollowerController {
 //        }
 //    }
 
-//    @DeleteMapping("/{id}")
+//    @DeleteMapping("/followers")
 //    public ResponseEntity<Void> deleteFollower(@PathVariable Long id) {
 //        followerService.deleteFollower(id);
 //        return ResponseEntity.noContent().build();

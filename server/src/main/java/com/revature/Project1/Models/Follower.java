@@ -56,7 +56,7 @@ public class Follower {
         return following;
     }
 
-    public void setFollowing(User following) {
+    public void setfollowing(User following) {
         this.following = following;
     }
 
