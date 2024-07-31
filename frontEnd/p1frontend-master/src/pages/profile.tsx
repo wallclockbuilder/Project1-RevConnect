@@ -402,7 +402,7 @@ const Profile: React.FC = () => {
                                                                                     required
                                                                                 />
                                                                             </div>
-                                                                            <button type="submit" className="btn btn-primary mt-2">Update Post</button>
+                                                                            <button type="submit" className="btn btn-custom btn-edit mt-2">Update Post</button>
                                                                             <button type="button" className="btn btn-secondary mt-2 ms-2" onClick={() => { setEditingPostId(null); setEditingPostContent(''); }}>Cancel</button>
                                                                         </form>
                                                                     ) : (
@@ -410,12 +410,11 @@ const Profile: React.FC = () => {
                                                                             <div>
                                                                                 <p>{content}</p>
                                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                                    <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
+                                                                                    <button className="btn btn-custom btn-edit btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
                                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                                    <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
-                                                                                <button className="btn btn-info btn-sm small-btn" onClick={() => handleSharePost(posts[index].postId)}>Share</button>
+                                                                                    <button className="btn btn-custom btn-delete btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
+                                                                                <button className="btn btn-custom btn-share btn-sm small-btn ms-2" onClick={() => handleSharePost(posts[index].postId)}>Share</button>
                                                                             </div>
-
                                                                         </div>
                                                                     )}
                                                                 </td>
