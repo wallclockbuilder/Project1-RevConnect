@@ -4,9 +4,9 @@ import "../css/Follow.css";
 import { useAuth } from '../context/AuthContext';
 
 const sampleFollowersArray: User[] = [
-    { userId: 7, username: 'dwight_schrute', email: 'dwight@example.com', firstName: 'Dwight', lastName: 'Schrute' },
-    { userId: 8, username: 'angela_martin', email: 'angela@example.com', firstName: 'Angela', lastName: 'Martin' },
-    { userId: 9, username: 'kevin_malone', email: 'kevin@example.com', firstName: 'Kevin', lastName: 'Malone' }
+    { userId: 7, username: 'dwight_schrute', email: 'dwight@example.com', firstName: 'Dwight', lastName: 'Schrute', active: true , admin: false},
+    { userId: 8, username: 'angela_martin', email: 'angela@example.com', firstName: 'Angela', lastName: 'Martin', active: true , admin: false},
+    { userId: 9, username: 'kevin_malone', email: 'kevin@example.com', firstName: 'Kevin', lastName: 'Malone' , active: true , admin: false},
 ];
 
 const Followers: React.FC = () => {
@@ -16,38 +16,40 @@ const Followers: React.FC = () => {
     useEffect(() => {
         const fetchFollowers = async () => {
             try {
-                const url = `http://localhost:9090/api/users/${user.userId}/followers`;
-                const response = await fetch(url, {
-                    method: "GET",
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const contentType = response.headers.get("Content-Type");
-                    if (contentType && contentType.includes("application/json")) {
-                        const data = await response.json();
-                        if (Array.isArray(data)) {
-                            setFollowers(data);
+                if (user !== null) {
+                    const url = `http://localhost:9090/api/users/${user.userId}/followers`;
+                    const response = await fetch(url, {
+                        method: "GET",
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+    
+                    if (response.ok) {
+                        const contentType = response.headers.get("Content-Type");
+                        if (contentType && contentType.includes("application/json")) {
+                            const data = await response.json();
+                            if (Array.isArray(data)) {
+                                setFollowers(data);
+                            } else {
+                                console.error("Fetched data is not an array:", data);
+                            }
                         } else {
-                            console.error("Fetched data is not an array:", data);
+                            console.error("Expected JSON response but got", contentType);
                         }
                     } else {
-                        console.error("Expected JSON response but got", contentType);
+                        console.error("Failed to fetch followers", response.statusText);
                     }
-                } else {
-                    console.error("Failed to fetch followers", response.statusText);
                 }
             } catch (error) {
                 console.error("Failed to fetch followers:", error);
             }
         };
-
+    
         fetchFollowers();
-    }, [user.userId, token]);
+    }, [user, token]);
 
 
     useEffect(() => {

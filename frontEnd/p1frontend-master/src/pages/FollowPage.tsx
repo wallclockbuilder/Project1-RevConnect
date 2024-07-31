@@ -9,62 +9,55 @@ import { useAuth } from '../context/AuthContext';
 
 
 const sampleFolloweesArray: User[] = [
-    { userId: 4, username: 'michael_scott', email: 'michael@example.com', firstName: 'Michael', lastName: 'Scott' },
-    { userId: 5, username: 'pam_beesly', email: 'pam@example.com', firstName: 'Pam', lastName: 'Beesly' },
-    { userId: 6, username: 'jim_halpert', email: 'jim@example.com', firstName: 'Jim', lastName: 'Halpert' }
+    { userId: 4, username: 'michael_scott', email: 'michael@example.com', firstName: 'Michael', lastName: 'Scott', active: true , admin: false},
+    { userId: 5, username: 'pam_beesly', email: 'pam@example.com', firstName: 'Pam', lastName: 'Beesly' , active: true , admin: false},
+    { userId: 6, username: 'jim_halpert', email: 'jim@example.com', firstName: 'Jim', lastName: 'Halpert' , active: true , admin: false}
 ];
 
 const FollowPage: React.FC = () => {
-<<<<<<< HEAD
     const { user, token } = useAuth();
-    const [usersArray, setUsers] = useState<User[]>([]);
 
-    console.log("Initial users state in FollowPage:", usersArray);
-=======
     const [followees, setFollowees] = useState<User[]>(sampleFolloweesArray);
-    const {token, user } = useAuth();
->>>>>>> b16607016e5cc7f04bbea16873a1d6c65fc3126e
+
+    console.log("Initial users state in FollowPage:", followees);
 
     useEffect(() => {
         const fetchFollowees = async () => {
             try {
-                const url = `http://localhost:9090/api/users/${user.userId}/followees`;
-                const response = await fetch(url, {
-                    method: "GET",
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const contentType = response.headers.get("Content-Type");
-                    if (contentType && contentType.includes("application/json")) {
-                        const data = await response.json();
-                        if (Array.isArray(data)) {
-                            setFollowees(data);
+                if (user && user.userId) {
+                    const url = `http://localhost:9090/api/users/${user.userId}/followees`;
+                    const response = await fetch(url, {
+                        method: "GET",
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+    
+                    if (response.ok) {
+                        const contentType = response.headers.get("Content-Type");
+                        if (contentType && contentType.includes("application/json")) {
+                            const data = await response.json();
+                            if (Array.isArray(data)) {
+                                setFollowees(data);
+                            } else {
+                                console.error("Fetched data is not an array:", data);
+                            }
                         } else {
-                            console.error("Fetched data is not an array:", data);
+                            console.error("Expected JSON response but got", contentType);
                         }
                     } else {
-                        console.error("Expected JSON response but got", contentType);
+                        console.error("Failed to fetch followees", response.statusText);
                     }
-                } else {
-                    console.error("Failed to fetch followees", response.statusText);
                 }
             } catch (error) {
                 console.error("Failed to fetch followees:", error);
             }
         };
-
-<<<<<<< HEAD
-        fetchUsers();
-    }, [token]);
-=======
+    
         fetchFollowees();
-    }, [user.userId, token]);
->>>>>>> b16607016e5cc7f04bbea16873a1d6c65fc3126e
+    }, [user?.userId, token]);
 
     useEffect(() => {
         setFollowees(sampleFolloweesArray);

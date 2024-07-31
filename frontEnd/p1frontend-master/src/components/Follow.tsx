@@ -70,7 +70,7 @@ const Follow: React.FC<FollowProps> = ({ onFollow }: FollowProps) => {
                                 <h5>{userN.firstName} {userN.lastName}</h5>
                                 <p>{userN.email}</p>
                             </div>
-                            <button className="btn btn-primary folllow-btn" onClick={() => onFollow(userN.userId, user.userId)}>
+                            <button className="btn btn-primary folllow-btn" onClick={() => user && onFollow(userN.userId, user.userId)}>
                                 Follow
                             </button>
                         </div>
