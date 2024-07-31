@@ -32,6 +32,8 @@ const Profile: React.FC = () => {
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [editingPostContent, setEditingPostContent] = useState<string>('');
     const [connectionStatus, setConnectionStatus] = useState<string | null>(null);
+    const [shareUrl, setShareUrl] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
 
     const fetchData = async () => {
@@ -199,13 +201,13 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
- 
+
             });
             // Update posts state
             const updatedPosts = posts.filter(post => post.postId !== postId);
             const updatedContents = singlePostContents.filter((_, index) => posts[index].postId !== postId);
             const updatedDates = postDates.filter((_, index) => posts[index].postId !== postId);
- 
+
             setPosts(updatedPosts);
             setSinglePostContents(updatedContents);
             setPostDates(updatedDates);
@@ -241,6 +243,17 @@ const Profile: React.FC = () => {
         }
     };
 
+    const handleSharePost = (postId: any) => {
+        const url = `${window.location.origin}/post/${postId}`;
+        setShareUrl(url);
+        setShowModal(true);
+    };
+
+    const handleCopyUrl = () => {
+        navigator.clipboard.writeText(shareUrl);
+        alert('URL copied to clipboard!');
+    };
+
 
 
     return (
@@ -266,9 +279,11 @@ const Profile: React.FC = () => {
                             </div>
                             {!isCurrentUserProfile ? (
                                 <div className="profile-message-btn center-block text-center">
-                                    <Link to={`/chat/${userId}`} className="btn btn-success">
-                                        <i className="fa fa-envelope"></i> Message
-                                    </Link>
+                                    {connectionStatus === 'ACCEPTED' ? (
+                                        <Link to={`/chat/${userId}`} className="btn btn-success">
+                                            <i className="fa fa-envelope"></i> Message
+                                        </Link>
+                                    ) : <p>You need to connect to send Message.</p>}
                                     {connectionStatus === null ? (
                                         <button onClick={sendConnectionRequest} className="btn btn-primary">
                                             <i className="fa fa-user-plus"></i> Connect
@@ -287,7 +302,7 @@ const Profile: React.FC = () => {
                                         </button>
                                     )}
                                 </div>
-                            ): null}
+                            ) : null}
                         </div>
                     </div>
 
@@ -373,7 +388,9 @@ const Profile: React.FC = () => {
                                                             <tr key={index}>
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
+
                                                                 </td>
+
 
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
@@ -398,7 +415,9 @@ const Profile: React.FC = () => {
                                                                                     <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
                                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
                                                                                     <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
+                                                                                <button className="btn btn-info btn-sm small-btn" onClick={() => handleSharePost(posts[index].postId)}>Share</button>
                                                                             </div>
+
                                                                         </div>
                                                                     )}
                                                                 </td>
@@ -413,6 +432,26 @@ const Profile: React.FC = () => {
                                                                 No posts available.
                                                             </td>
                                                         </tr>
+                                                    )}
+                                                    {showModal && (
+                                                        <div className="modal" tabIndex={-1} style={{ display: 'block' }}>
+                                                            <div className="modal-dialog">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h5 className="modal-title">Share Post</h5>
+
+                                                                    </div>
+                                                                    <div className="modal-body">
+                                                                        <p>Copy the URL below to share the post:</p>
+                                                                        <input type="text" className="form-control" value={shareUrl} readOnly />
+                                                                    </div>
+                                                                    <div className="modal-footer">
+                                                                        <button type="button" className="btn btn-primary" onClick={handleCopyUrl}>Copy URL</button>
+                                                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     )}
                                                 </tbody>
                                             </table>
@@ -480,7 +519,7 @@ const Profile: React.FC = () => {
                 </div>
             </div>
         </div>
-        
+
     );
 };
 
