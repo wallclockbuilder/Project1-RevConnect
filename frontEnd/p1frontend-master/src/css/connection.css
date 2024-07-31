@@ -1,0 +1,83 @@
+.connection-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.connection-page h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.connection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.connection-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.connection-item:hover {
+    background-color: #f1f1f1;
+}
+
+.connection-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.connection-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.connection-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.connection-actions button.accept-btn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.connection-actions button.accept-btn:hover {
+    background-color: #45a049;
+}
+
+.connection-actions button.reject-btn {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.connection-actions button.reject-btn:hover {
+    background-color: #e53935;
+}
+
+.connection-actions button.remove-btn {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.connection-actions button.remove-btn:hover {
+    background-color: #fb8c00;
+}

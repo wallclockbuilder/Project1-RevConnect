@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 public class ConnectionDto {
     private Long connectionId;
     private Long requesterId;
+    private String requesterUsername;
     private Long receiverId;
+    private String receiverUsername;
     private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -56,5 +58,21 @@ public class ConnectionDto {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getRequesterUsername() {
+        return requesterUsername;
+    }
+
+    public void setRequesterUsername(String requesterUsername) {
+        this.requesterUsername = requesterUsername;
+    }
+
+    public String getReceiverUsername() {
+        return receiverUsername;
+    }
+
+    public void setReceiverUsername(String receiverUsername) {
+        this.receiverUsername = receiverUsername;
     }
 }

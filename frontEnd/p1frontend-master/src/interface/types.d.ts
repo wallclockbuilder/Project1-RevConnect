@@ -7,7 +7,9 @@ export interface User {
     firstName?: string;
     lastName?: string;
     bio?: string;
-    active?: boolean;
+    active: boolean;
+    admin: boolean;
+
 }
 
 export interface Post {
@@ -24,9 +26,12 @@ export interface Comment {
     commentId: number;
     postId: number;
     userId: number;
+    username: string;
     content: string;
     createdAt: string;
     updatedAt: string;
+    user: User;
+    post: Post;
 }
 
 export interface Like {
@@ -34,6 +39,15 @@ export interface Like {
     postId: number;
     userId: number;
     createdAt: string;
+}
+
+export interface Connection {
+    connectionId: number;
+    requesterId: number;
+    requesterUsername: string;
+    receiverId: number;
+    receiverUsername: string;
+    status: string;
 }
 
 export interface Chat {
@@ -47,6 +61,6 @@ export interface Chat {
 }
 
 export interface FollowDTO {
-    followerId: number;
-    followeeId: number;
+    followerUserId: number;
+    followeeUserId: number;
 }

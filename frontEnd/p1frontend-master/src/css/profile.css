@@ -636,3 +636,11 @@ textarea.form-control {
     color: #2aa493; /* Change to your preferred color */
     background-color: #f0f0f0; /* Light background color for hover */
 }
+
+.small-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin-left: 5px;
+}

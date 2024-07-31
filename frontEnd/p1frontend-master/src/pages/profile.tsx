@@ -31,6 +31,9 @@ const Profile: React.FC = () => {
     const [newPostContent, setNewPostContent] = useState<string>('');
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [editingPostContent, setEditingPostContent] = useState<string>('');
+    const [connectionStatus, setConnectionStatus] = useState<string | null>(null);
+    const [shareUrl, setShareUrl] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
 
     const fetchData = async () => {
@@ -93,18 +96,44 @@ const Profile: React.FC = () => {
     };
 
     useEffect(() => {
+
         fetchData();
 
+
+        const fetchConnectionStatus = async () => {
+            try {
+                const response = await fetch(`${config.BASE_URL}/api/connections/${user?.userId}/${userId}`, {
+                    credentials: 'include',
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setConnectionStatus(data.status);
+                } else {
+                    setConnectionStatus(null);
+                }
+            } catch (error) {
+                console.error('Error fetching connection status:', error);
+            }
+        };
+
+        if (user && user.userId !== Number(userId)) {
+            fetchConnectionStatus();
+        }
         const intervalId = setInterval(() => {
             fetchData();
         }, 10000);
 
         return () => clearInterval(intervalId);
+
+
+
     }, [userId, user, token]);
 
     if (!profileUser) return <p>Loading user...</p>;
 
-    const isCurrentUserProfile = user && user.userId === Number(userId);
+    const isCurrentUserProfile = user?.userId === Number(profileUser.userId);
+
 
     const handleCreatePost = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -116,7 +145,7 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
-                body: JSON.stringify({ content: newPostContent, user: { userId: user.userId } })
+                body: JSON.stringify({ content: newPostContent, user: { userId: user?.userId } })
             });
             const newPost = await response.json();
 
@@ -148,7 +177,7 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
-                body: JSON.stringify({ content: editingPostContent, user: { userId: user.userId } })
+                body: JSON.stringify({ content: editingPostContent, user: { userId: user?.userId } })
             });
             const updatedPost = await response.json();
 
@@ -172,13 +201,13 @@ const Profile: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 credentials: 'include',
- 
+
             });
             // Update posts state
             const updatedPosts = posts.filter(post => post.postId !== postId);
             const updatedContents = singlePostContents.filter((_, index) => posts[index].postId !== postId);
             const updatedDates = postDates.filter((_, index) => posts[index].postId !== postId);
- 
+
             setPosts(updatedPosts);
             setSinglePostContents(updatedContents);
             setPostDates(updatedDates);
@@ -186,6 +215,46 @@ const Profile: React.FC = () => {
             console.error("Error deleting post:", error);
         }
     };
+
+    const sendConnectionRequest = async () => {
+        try {
+            const response = await fetch(`${config.BASE_URL}/api/connections`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    requester: { userId: user?.userId },
+                    receiver: { userId: Number(userId) },
+                    status: 'PENDING'
+                })
+            });
+
+            if (response.ok) {
+                setConnectionStatus('PENDING');
+                alert('Connection request sent!');
+            } else {
+                alert('Failed to send connection request.');
+            }
+        } catch (error) {
+            console.error('Error sending connection request:', error);
+        }
+    };
+
+    const handleSharePost = (postId: any) => {
+        const url = `${window.location.origin}/post/${postId}`;
+        setShareUrl(url);
+        setShowModal(true);
+    };
+
+    const handleCopyUrl = () => {
+        navigator.clipboard.writeText(shareUrl);
+        alert('URL copied to clipboard!');
+    };
+
+
 
     return (
         <div id='profileBody'>
@@ -208,14 +277,32 @@ const Profile: React.FC = () => {
                                     <li><i className="fa-li fa fa-comment"></i>Posts: <span>{singlePostContents.length}</span></li>
                                 </ul>
                             </div>
-
-                            {user && user.userId !== Number(userId) && (
+                            {!isCurrentUserProfile ? (
                                 <div className="profile-message-btn center-block text-center">
-                                    <Link to={`/chat/${userId}`} className="btn btn-success">
-                                        <i className="fa fa-envelope"></i> Message
-                                    </Link>
+                                    {connectionStatus === 'ACCEPTED' ? (
+                                        <Link to={`/chat/${userId}`} className="btn btn-success">
+                                            <i className="fa fa-envelope"></i> Message
+                                        </Link>
+                                    ) : <p>You need to connect to send Message.</p>}
+                                    {connectionStatus === null ? (
+                                        <button onClick={sendConnectionRequest} className="btn btn-primary">
+                                            <i className="fa fa-user-plus"></i> Connect
+                                        </button>
+                                    ) : connectionStatus === 'PENDING' ? (
+                                        <button className="btn btn-warning" disabled>
+                                            Pending
+                                        </button>
+                                    ) : connectionStatus === 'ACCEPTED' ? (
+                                        <button className="btn btn-success" disabled>
+                                            Connected
+                                        </button>
+                                    ) : (
+                                        <button className="btn btn-danger" disabled>
+                                            Declined
+                                        </button>
+                                    )}
                                 </div>
-                            )}
+                            ) : null}
                         </div>
                     </div>
 
@@ -223,7 +310,7 @@ const Profile: React.FC = () => {
                         <div className="main-box clearfix">
                             <div className="profile-header">
                                 <h3><span>User info</span></h3>
-                                {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                     <a href="/edit-profile" className="btn btn-primary edit-profile">
                                         <i className="fa fa-pencil-square fa-lg"></i> Edit profile
                                     </a>
@@ -279,7 +366,7 @@ const Profile: React.FC = () => {
 
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-posts">
-                                        {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
+                                        {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                             <form onSubmit={handleCreatePost} className="mb-4">
                                                 <div className="form-group">
                                                     <textarea
@@ -301,6 +388,7 @@ const Profile: React.FC = () => {
                                                             <tr key={index}>
                                                                 <td className="text-center">
                                                                     <i className="fa fa-comment"></i>
+
                                                                 </td>
 
                                                               
@@ -349,32 +437,53 @@ const Profile: React.FC = () => {
                                                                     ) : (
                                                                         <div>
                                                                             <div>
-                                                                            <p>{content}</p>
-                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>):null} 
-                                                                            {location.pathname === '/profile' || location.pathname === `/profile/${user.userId}` ? (
-                                                                            <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>):null}                                           
+                                                                                <p>{content}</p>
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+                                                                                    <button className="btn btn-warning btn-sm" onClick={() => handleEditPost(posts[index].postId, content)}>Edit</button>) : null}
+                                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+                                                                                    <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeletePost(posts[index].postId)}>Delete</button>) : null}
+                                                                                <button className="btn btn-info btn-sm small-btn" onClick={() => handleSharePost(posts[index].postId)}>Share</button>
                                                                             </div>
+
                                                                         </div>
                                                                     )}
                                                                 </td>
-
-<td>
-    {postDates[index] || 'No date available'}
-</td>
-                                                            </tr >
+                                                                <td>
+                                                                    {postDates[index] || 'No date available'}
+                                                                </td>
+                                                            </tr>
                                                         ))
                                                     ) : (
-    <tr>
-        <td colSpan={3} className="text-center">
-            No posts available.
-        </td>
-    </tr>
-)}
-                                                </tbody >
-                                            </table >
-                                        </div >
-                                    </div >
+                                                        <tr>
+                                                            <td colSpan={3} className="text-center">
+                                                                No posts available.
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                    {showModal && (
+                                                        <div className="modal" tabIndex={-1} style={{ display: 'block' }}>
+                                                            <div className="modal-dialog">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h5 className="modal-title">Share Post</h5>
+
+                                                                    </div>
+                                                                    <div className="modal-body">
+                                                                        <p>Copy the URL below to share the post:</p>
+                                                                        <input type="text" className="form-control" value={shareUrl} readOnly />
+                                                                    </div>
+                                                                    <div className="modal-footer">
+                                                                        <button type="button" className="btn btn-primary" onClick={handleCopyUrl}>Copy URL</button>
+                                                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
                                     <div className="tab-pane fade" id="tab-followers">
                                         <ul className="widget-users row">
@@ -425,23 +534,20 @@ const Profile: React.FC = () => {
                                             </div>
                                             <div className="conversation-new-message">
 
-                                                <div className="clearfix">
-                                                    <Link to={`/chat/${userId}`}>
-                                                        <button type="submit" className="btn btn-success float-end">Send Message</button>
-                                                    </Link>
-
-                                                </div>
 
                                             </div>
+
                                         </div>
                                     </div>
-                                </div >
-                            </div >
-                        </div >
-                    </div >
-                </div >
-            </div >
-        </div >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     );
 };
 
