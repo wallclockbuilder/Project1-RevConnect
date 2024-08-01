@@ -64,7 +64,7 @@ public class FollowerController {
 
     @PostMapping("/followers")
 //    public FollowDto createFollower(@RequestBody Follower follower) {
-        public List<User> createFollower(@RequestBody FollowDto followDto){
+        public User createFollower(@RequestBody FollowDto followDto){
         System.out.println("-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--==--==-=-=-=-=-" +
                 "FollowDTO Incoming: " + followDto +
                 "followerUserID: " + followDto.getFollowerUserId() +
@@ -75,11 +75,8 @@ public class FollowerController {
                 .orElseThrow(() -> new RuntimeException("User to follow not found"));
 
         Follower follower = new Follower(userFollower, userToFollow);
-        followerService.createFollower(follower);
-        return followerService.getFollowersOfUser(userFollower.getUserId())
-                .stream()
-                .map(Follower::getFollower)
-                .toList();
+        return followerService.createFollower(follower).getFollower();
+
     }
 
 
