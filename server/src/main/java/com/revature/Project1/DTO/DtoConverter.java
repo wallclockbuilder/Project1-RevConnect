@@ -66,7 +66,7 @@ public class DtoConverter {
         FollowDto dto = new FollowDto();
         dto.setFollowerId(follow.getFollowerId());
         dto.setFollowerUserId(follow.getFollower().getUserId());
-        dto.setFollowingUserId(follow.getFollowing().getUserId());
+        dto.setFolloweeUserId(follow.getFollowing().getUserId());
         dto.setCreatedAt(follow.getCreatedAt());
         return dto;
     }

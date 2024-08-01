@@ -8,9 +8,9 @@ interface FollowProps {
 }
 
 const sampleUsersArray: User[] = [
-    { userId: 1, username: 'john_doe', email: 'john@example.com', firstName: 'John', lastName: 'Doe' },
-    { userId: 2, username: 'jane_smith', email: 'jane@example.com', firstName: 'Jane', lastName: 'Smith' },
-    { userId: 3, username: 'alice_jones', email: 'alice@example.com', firstName: 'Alice', lastName: 'Jones' }
+    // { userId: 1, username: 'john_doe', email: 'john@example.com', firstName: 'John', lastName: 'Doe' },
+    // { userId: 2, username: 'jane_smith', email: 'jane@example.com', firstName: 'Jane', lastName: 'Smith' },
+    // { userId: 3, username: 'alice_jones', email: 'alice@example.com', firstName: 'Alice', lastName: 'Jones' }
 ];
 
 const Follow: React.FC<FollowProps> = ({ onFollow }: FollowProps) => {
@@ -70,7 +70,7 @@ const Follow: React.FC<FollowProps> = ({ onFollow }: FollowProps) => {
                                 <h5>{userN.firstName} {userN.lastName}</h5>
                                 <p>{userN.email}</p>
                             </div>
-                            <button className="btn btn-primary folllow-btn" onClick={() => onFollow(userN.userId, user.userId)}>
+                            <button className="btn btn-primary folllow-btn" onClick={() => user && onFollow(userN.userId, user.userId)}>
                                 Follow
                             </button>
                         </div>
