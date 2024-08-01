@@ -386,10 +386,7 @@ const Profile: React.FC = () => {
                                                     {singlePostContents.length > 0 ? (
                                                         singlePostContents.map((content, index) => (
                                                             <tr key={index}>
-                                                                <td className="text-center">
-                                                                    <i className="fa fa-comment"></i>
-
-                                                                </td>
+                                                               
                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
                                                                     <td>
                                                                         {editingPostId === posts[index].postId ? (
