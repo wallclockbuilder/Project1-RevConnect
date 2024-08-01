@@ -159,7 +159,7 @@ const AdminPage = () => {
                         subHeader
                         subHeaderComponent={
                             <div className="d-flex p-3  optionsBar">
-                                <Link to="/" className="p-1 mt-2 bg-success btnSize"> Home </Link>
+                                <Link to="/Home" className="p-1 mt-2 bg-success btnSize"> Home </Link>
 
                                 <Button variant="success" className="p-1 mt-2 bg-warning btnSize"
                                     onClick={handleBanUser} >
@@ -171,7 +171,7 @@ const AdminPage = () => {
                                     Unban User
                                 </Button>
 
-                                <Link to="/profile" className="p-1 mt-2 bg-info btnSize"> View Profile </Link>
+                                <Link to={`/profile/${selectedRowUserId}`} className="p-1 mt-2 bg-info btnSize"> View Profile </Link>
 
                                 <div className="divForSearch">
                                     <label> <b>Search By Id:</b> </label>
