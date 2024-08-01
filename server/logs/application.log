@@ -1,0 +1,1115 @@
+2024-08-01T10:20:39.847-05:00 DEBUG 27928 --- [Project1] [postgres housekeeper] com.zaxxer.hikari.pool.HikariPool        : postgres - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-08-01T10:20:39.861-05:00 DEBUG 27928 --- [Project1] [postgres housekeeper] com.zaxxer.hikari.pool.HikariPool        : postgres - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-08-01T10:20:41.643-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/users/3
+2024-08-01T10:20:41.644-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/users/3
+2024-08-01T10:20:41.647-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@3c5dada0
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@1178547432 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@400466210 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@1549002909 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@1734676123 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@1480785643 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@989303664 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@2040759219 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@914181066 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@2038910536 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@2137861659 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@448169054 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:41.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 334804756
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:41.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:41.707-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@1e8df4f4
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/users/3
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/users/3", parameters={}
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.UserController#getUserById(Long)
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1696853345<open>)] for JPA transaction
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@2014939671 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:41.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@37d71c5]
+2024-08-01T10:20:41.709-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = IGNORE
+2024-08-01T10:20:41.709-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User.receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User.receivedChats)@620592847 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User.receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User.receivedConnections)@1582286804 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+	  com.revature.Project1.Models.User.sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User.sentConnections)@1781708600 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User.posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User.posts)@36245730 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User.notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User.notifications)@1298992494 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User.likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User.likes)@1832649328 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User -> EntityResultInitializer(com.revature.Project1.Models.User)@306766744 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User.comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User.comments)@1479298867 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User.followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User.followers)@2106535717 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User.following -> DelayedCollectionInitializer(com.revature.Project1.Models.User.following)@1890422118 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User.sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User.sentChats)@632091848 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+
+2024-08-01T10:20:41.709-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.user_id=?
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User): 3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.comments#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.followers#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.following#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.likes#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.notifications#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.posts#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.receivedChats#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.receivedConnections#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.sentChats#3
+2024-08-01T10:20:41.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.sentConnections#3
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User#3] : 124516606
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [1] - [Loving artist, making the world a better place.]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:12:44.043208]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [3] - [anna.kim@example.com]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [4] - [Anna]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [7] - [Kim]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$2oK.8qpu8Gl/Q4Py2pH2nOe4NkpTMM0KbnrU5x3uNELeJQrjPjd0W]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [9] - [anna_kim]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User#3
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@244bc04
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1696853345<open>)]
+2024-08-01T10:20:41.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@2014939671 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:41.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.revature.Project1.DTO.UserDto@2cc3f79a]
+2024-08-01T10:20:41.770-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.770-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:41.772-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/posts
+2024-08-01T10:20:41.774-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/posts
+2024-08-01T10:20:41.774-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@625ef016
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@31960399 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@338436901 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@1977163104 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@899081191 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@161983951 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@2087162581 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@1097376292 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@1139009589 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@1998515283 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@925841759 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@869450780 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:41.775-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 561716389
+2024-08-01T10:20:41.803-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:41.804-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@67f703e4
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/posts
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/posts", parameters={}
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.PostController#getAllPosts()
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1755384573<open>)] for JPA transaction
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@1853201683 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:41.805-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6252c72a]
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Created new SQL alias : p1_0
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Post(1777047225327900))] with identifierForTableGroup [com.revature.Project1.Models.Post] for NavigablePath [com.revature.Project1.Models.Post] 
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@77aa5c12] with identifierForTableGroup [com.revature.Project1.Models.Post.user] for NavigablePath [com.revature.Project1.Models.Post.user] 
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Post(1777047225327900)]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.Post(1777047225327900).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777047225327900).content]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777047225327900).createdAt]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.Post(1777047225327900).likes]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777047225327900).updatedAt]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Post(1777047225327900).user]
+
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (p1 : com.revature.Project1.Models.Post(1777047225327900)) {
+          primaryTableReference : posts as p1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Post(1777047225327900).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Post(1777047225327900).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.Post(1777047225327900).likes)@1632893581 (PluralAttribute(com.revature.Project1.Models.Post.likes))
+	  com.revature.Project1.Models.Post(1777047225327900).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.Post(1777047225327900).comments)@1225551505 (PluralAttribute(com.revature.Project1.Models.Post.comments))
+	  com.revature.Project1.Models.Post(1777047225327900).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Post(1777047225327900).user)@1793528902 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Post.user])@1796083982)
+	  com.revature.Project1.Models.Post(1777047225327900) -> EntityResultInitializer(com.revature.Project1.Models.Post(1777047225327900))@1325961156 (SingleTableEntityPersister(com.revature.Project1.Models.Post))
+
+2024-08-01T10:20:41.806-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.SQL                        : select p1_0.post_id,p1_0.content,p1_0.created_at,p1_0.updated_at,p1_0.user_id from posts p1_0
+2024-08-01T10:20:41.837-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:41.838-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1755384573<open>)]
+2024-08-01T10:20:41.838-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@1853201683 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:41.866-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:41.867-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.867-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:41.869-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/comments
+2024-08-01T10:20:41.871-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/comments
+2024-08-01T10:20:41.873-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:41.873-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:41.873-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@56194c21
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@2086030622 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@1622306545 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@781912908 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@488621132 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@1399800908 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@542731574 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@1458492186 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@892358703 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@475283425 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@1997525376 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@1473882744 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:41.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 1413738657
+2024-08-01T10:20:41.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:41.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@b8b1bf5
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/comments
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/comments", parameters={}
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.CommentController#getAllComments()
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2105248814<open>)] for JPA transaction
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@145435003 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:41.904-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7bc0553d]
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Created new SQL alias : c1_0
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Comment(1777047323944300))] with identifierForTableGroup [com.revature.Project1.Models.Comment] for NavigablePath [com.revature.Project1.Models.Comment] 
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@4167ac33] with identifierForTableGroup [com.revature.Project1.Models.Comment.post] for NavigablePath [com.revature.Project1.Models.Comment.post] 
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@773095ab] with identifierForTableGroup [com.revature.Project1.Models.Comment.user] for NavigablePath [com.revature.Project1.Models.Comment.user] 
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Comment(1777047323944300)]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777047323944300).content]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777047323944300).createdAt]
+ |  +-CircularFetchImpl [com.revature.Project1.Models.Comment(1777047323944300).post]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777047323944300).updatedAt]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Comment(1777047323944300).user]
+
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (c1 : com.revature.Project1.Models.Comment(1777047323944300)) {
+          primaryTableReference : comments as c1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (p1 : com.revature.Project1.Models.Comment(1777047323944300).post) {
+            }
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Comment(1777047323944300).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Comment(1777047323944300).post -> EntitySelectFetchInitializer(com.revature.Project1.Models.Comment(1777047323944300).post)@404919146 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Comment.post])@1587917127)
+	  com.revature.Project1.Models.Comment(1777047323944300).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Comment(1777047323944300).user)@134989385 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Comment.user])@1215265733)
+	  com.revature.Project1.Models.Comment(1777047323944300) -> EntityResultInitializer(com.revature.Project1.Models.Comment(1777047323944300))@1953625423 (SingleTableEntityPersister(com.revature.Project1.Models.Comment))
+
+2024-08-01T10:20:41.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.SQL                        : select c1_0.comment_id,c1_0.content,c1_0.created_at,c1_0.post_id,c1_0.updated_at,c1_0.user_id from comments c1_0
+2024-08-01T10:20:41.933-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:41.933-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2105248814<open>)]
+2024-08-01T10:20:41.933-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:41.961-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@145435003 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:41.962-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:41.965-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/likes
+2024-08-01T10:20:41.966-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/likes
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@41951867
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:41.967-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@597907725 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@1251748670 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@1337335911 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@2008901527 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@1324299100 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@1702962276 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@457872811 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@123197578 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@806715119 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@1549524621 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@326365024 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:41.968-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:42.022-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:42.023-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 864884913
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:42.024-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:42.025-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:42.025-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@19fe07ba
+2024-08-01T10:20:42.028-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/likes
+2024-08-01T10:20:42.028-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/likes", parameters={}
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.LikeController#getAllLikes()
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(3075118<open>)] for JPA transaction
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@1528187885 wrapping org.postgresql.jdbc.PgConnection@18418c47] read-only
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:42.029-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:42.030-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@179182a8]
+2024-08-01T10:20:42.030-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Created new SQL alias : l1_0
+2024-08-01T10:20:42.030-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Like(1777047448981400))] with identifierForTableGroup [com.revature.Project1.Models.Like] for NavigablePath [com.revature.Project1.Models.Like] 
+2024-08-01T10:20:42.030-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@7e48fe5] with identifierForTableGroup [com.revature.Project1.Models.Like.post] for NavigablePath [com.revature.Project1.Models.Like.post] 
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@68afe4dc] with identifierForTableGroup [com.revature.Project1.Models.Like.user] for NavigablePath [com.revature.Project1.Models.Like.user] 
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Like(1777047448981400)]
+ |  +-BasicFetch [com.revature.Project1.Models.Like(1777047448981400).createdAt]
+ |  +-CircularFetchImpl [com.revature.Project1.Models.Like(1777047448981400).post]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Like(1777047448981400).user]
+
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (l1 : com.revature.Project1.Models.Like(1777047448981400)) {
+          primaryTableReference : likes as l1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (p1 : com.revature.Project1.Models.Like(1777047448981400).post) {
+            }
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Like(1777047448981400).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Like(1777047448981400) -> EntityResultInitializer(com.revature.Project1.Models.Like(1777047448981400))@1834191102 (SingleTableEntityPersister(com.revature.Project1.Models.Like))
+	  com.revature.Project1.Models.Like(1777047448981400).post -> EntitySelectFetchInitializer(com.revature.Project1.Models.Like(1777047448981400).post)@161545392 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Like.post])@1146761876)
+	  com.revature.Project1.Models.Like(1777047448981400).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Like(1777047448981400).user)@714654150 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Like.user])@1234770332)
+
+2024-08-01T10:20:42.031-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.hibernate.SQL                        : select l1_0.like_id,l1_0.created_at,l1_0.post_id,l1_0.user_id from likes l1_0
+2024-08-01T10:20:42.058-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:42.058-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(3075118<open>)]
+2024-08-01T10:20:42.058-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:42.088-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:42.088-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@1528187885 wrapping org.postgresql.jdbc.PgConnection@18418c47]
+2024-08-01T10:20:42.088-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:42.088-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:42.089-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:42.089-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:42.089-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:42.089-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:51.648-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/users/3
+2024-08-01T10:20:51.649-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/users/3
+2024-08-01T10:20:51.650-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:51.650-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:51.650-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@568f229b
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@1608159558 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@1886317532 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@687580346 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@583162270 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@697941025 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@774804165 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@1527070158 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@1807450521 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@262619259 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@1430602736 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@660402139 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:51.651-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:51.705-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 1525196418
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:51.706-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@b06bafc
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/users/3
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/users/3", parameters={}
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.UserController#getUserById(Long)
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(187076403<open>)] for JPA transaction
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@2012630509 wrapping org.postgresql.jdbc.PgConnection@12b9e737] read-only
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@44ba2440]
+2024-08-01T10:20:51.708-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = IGNORE
+2024-08-01T10:20:51.709-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User.receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User.receivedChats)@497412711 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User.receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User.receivedConnections)@583377399 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+	  com.revature.Project1.Models.User.sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User.sentConnections)@1738086759 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User.posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User.posts)@1913960944 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User.notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User.notifications)@1087406855 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User.likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User.likes)@1326794995 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User -> EntityResultInitializer(com.revature.Project1.Models.User)@1617437271 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User.comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User.comments)@937745555 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User.followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User.followers)@1936243155 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User.following -> DelayedCollectionInitializer(com.revature.Project1.Models.User.following)@375334301 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User.sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User.sentChats)@931452827 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+
+2024-08-01T10:20:51.709-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.user_id=?
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User): 3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.comments#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.followers#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.following#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.likes#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.notifications#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.posts#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.receivedChats#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.receivedConnections#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.sentChats#3
+2024-08-01T10:20:51.736-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User.sentConnections#3
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User#3] : 2132392668
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [1] - [Loving artist, making the world a better place.]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:12:44.043208]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [3] - [anna.kim@example.com]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [4] - [Anna]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [7] - [Kim]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$2oK.8qpu8Gl/Q4Py2pH2nOe4NkpTMM0KbnrU5x3uNELeJQrjPjd0W]
+2024-08-01T10:20:51.737-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results                : Extracted JDBC value [9] - [anna_kim]
+2024-08-01T10:20:51.738-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User#3
+2024-08-01T10:20:51.738-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@6a8dff5f
+2024-08-01T10:20:51.738-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:51.738-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(187076403<open>)]
+2024-08-01T10:20:51.738-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:51.766-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:51.767-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@2012630509 wrapping org.postgresql.jdbc.PgConnection@12b9e737]
+2024-08-01T10:20:51.767-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:51.767-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:51.767-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:51.768-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.revature.Project1.DTO.UserDto@1f2ffe5b]
+2024-08-01T10:20:51.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.769-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:51.774-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/posts
+2024-08-01T10:20:51.776-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/posts
+2024-08-01T10:20:51.777-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:51.777-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:51.777-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:51.777-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@4cb1e4d0
+2024-08-01T10:20:51.777-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:51.778-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:51.778-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:51.778-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:51.778-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@2126215768 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@1039107643 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@2059307890 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@510336472 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@1000857079 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@2058902246 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@1960033240 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@848358727 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@937285255 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@260752880 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@1718526626 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:51.778-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:51.835-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 1408101639
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:51.836-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:51.837-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@30caced2
+2024-08-01T10:20:51.841-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/posts
+2024-08-01T10:20:51.841-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/posts", parameters={}
+2024-08-01T10:20:51.841-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.PostController#getAllPosts()
+2024-08-01T10:20:51.841-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.842-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(665307078<open>)] for JPA transaction
+2024-08-01T10:20:51.842-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:51.842-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@1219756028 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:51.842-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:51.842-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:51.843-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:51.843-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:51.843-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4fcf1ebc]
+2024-08-01T10:20:51.843-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Created new SQL alias : p1_0
+2024-08-01T10:20:51.843-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Post(1777057262658500))] with identifierForTableGroup [com.revature.Project1.Models.Post] for NavigablePath [com.revature.Project1.Models.Post] 
+2024-08-01T10:20:51.844-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@6e7a3eb2] with identifierForTableGroup [com.revature.Project1.Models.Post.user] for NavigablePath [com.revature.Project1.Models.Post.user] 
+2024-08-01T10:20:51.844-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Post(1777057262658500)]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.Post(1777057262658500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777057262658500).content]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777057262658500).createdAt]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.Post(1777057262658500).likes]
+ |  +-BasicFetch [com.revature.Project1.Models.Post(1777057262658500).updatedAt]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Post(1777057262658500).user]
+
+2024-08-01T10:20:51.844-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (p1 : com.revature.Project1.Models.Post(1777057262658500)) {
+          primaryTableReference : posts as p1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Post(1777057262658500).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:51.845-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:51.845-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Post(1777057262658500) -> EntityResultInitializer(com.revature.Project1.Models.Post(1777057262658500))@1087158844 (SingleTableEntityPersister(com.revature.Project1.Models.Post))
+	  com.revature.Project1.Models.Post(1777057262658500).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Post(1777057262658500).user)@1674135945 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Post.user])@1796083982)
+	  com.revature.Project1.Models.Post(1777057262658500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.Post(1777057262658500).likes)@425176446 (PluralAttribute(com.revature.Project1.Models.Post.likes))
+	  com.revature.Project1.Models.Post(1777057262658500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.Post(1777057262658500).comments)@644321096 (PluralAttribute(com.revature.Project1.Models.Post.comments))
+
+2024-08-01T10:20:51.846-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.hibernate.SQL                        : select p1_0.post_id,p1_0.content,p1_0.created_at,p1_0.updated_at,p1_0.user_id from posts p1_0
+2024-08-01T10:20:51.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:51.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(665307078<open>)]
+2024-08-01T10:20:51.874-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@1219756028 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:51.902-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:51.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.903-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:51.905-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/comments
+2024-08-01T10:20:51.906-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/comments
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@62cfd55
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:51.907-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:51.908-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:51.908-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@1751983806 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@155891891 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@1130787595 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@879720606 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@892792955 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@1768249678 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@426479938 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@1452257657 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@1421354747 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@399817227 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@1383127090 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:51.908-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 1584609827
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:51.937-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@5eab6c66
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/comments
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/comments", parameters={}
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.CommentController#getAllComments()
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1473563859<open>)] for JPA transaction
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@314105926 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:51.939-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5f6707e8]
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Created new SQL alias : c1_0
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Comment(1777057359093000))] with identifierForTableGroup [com.revature.Project1.Models.Comment] for NavigablePath [com.revature.Project1.Models.Comment] 
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@b9c202c] with identifierForTableGroup [com.revature.Project1.Models.Comment.post] for NavigablePath [com.revature.Project1.Models.Comment.post] 
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@2ac16bf] with identifierForTableGroup [com.revature.Project1.Models.Comment.user] for NavigablePath [com.revature.Project1.Models.Comment.user] 
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Comment(1777057359093000)]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777057359093000).content]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777057359093000).createdAt]
+ |  +-CircularFetchImpl [com.revature.Project1.Models.Comment(1777057359093000).post]
+ |  +-BasicFetch [com.revature.Project1.Models.Comment(1777057359093000).updatedAt]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Comment(1777057359093000).user]
+
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (c1 : com.revature.Project1.Models.Comment(1777057359093000)) {
+          primaryTableReference : comments as c1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (p1 : com.revature.Project1.Models.Comment(1777057359093000).post) {
+            }
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Comment(1777057359093000).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Comment(1777057359093000).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Comment(1777057359093000).user)@634871260 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Comment.user])@1215265733)
+	  com.revature.Project1.Models.Comment(1777057359093000) -> EntityResultInitializer(com.revature.Project1.Models.Comment(1777057359093000))@502963677 (SingleTableEntityPersister(com.revature.Project1.Models.Comment))
+	  com.revature.Project1.Models.Comment(1777057359093000).post -> EntitySelectFetchInitializer(com.revature.Project1.Models.Comment(1777057359093000).post)@2005746446 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Comment.post])@1587917127)
+
+2024-08-01T10:20:51.940-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.hibernate.SQL                        : select c1_0.comment_id,c1_0.content,c1_0.created_at,c1_0.post_id,c1_0.updated_at,c1_0.user_id from comments c1_0
+2024-08-01T10:20:51.968-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:51.968-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1473563859<open>)]
+2024-08-01T10:20:51.968-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:51.996-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:51.996-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@314105926 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:51.996-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:51.996-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:51.997-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:51.997-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:51.998-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:51.998-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:52.003-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/likes
+2024-08-01T10:20:52.005-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/likes
+2024-08-01T10:20:52.006-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.User(1775727227042500))] with identifierForTableGroup [com.revature.Project1.Models.User] for NavigablePath [com.revature.Project1.Models.User] 
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@817fb2a
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.revature.Project1.Models.User(1775727227042500).username) 
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.User(1775727227042500)]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).bio]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).comments]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).createdAt]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).email]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).firstName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).followers]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).following]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isActive]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).isAdmin]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).lastName]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).likes]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).notifications]
+ |  +-BasicFetch [com.revature.Project1.Models.User(1775727227042500).password]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).posts]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).receivedConnections]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentChats]
+ |  +-DelayedCollectionFetch [com.revature.Project1.Models.User(1775727227042500).sentConnections]
+ |  \-BasicFetch [com.revature.Project1.Models.User(1775727227042500).username]
+
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.revature.Project1.Models.User(1775727227042500)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.User(1775727227042500) -> EntityResultInitializer(com.revature.Project1.Models.User(1775727227042500))@2003412147 (SingleTableEntityPersister(com.revature.Project1.Models.User))
+	  com.revature.Project1.Models.User(1775727227042500).sentChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentChats)@1074843615 (PluralAttribute(com.revature.Project1.Models.User.sentChats))
+	  com.revature.Project1.Models.User(1775727227042500).notifications -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).notifications)@788289802 (PluralAttribute(com.revature.Project1.Models.User.notifications))
+	  com.revature.Project1.Models.User(1775727227042500).comments -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).comments)@561621747 (PluralAttribute(com.revature.Project1.Models.User.comments))
+	  com.revature.Project1.Models.User(1775727227042500).followers -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).followers)@454020691 (PluralAttribute(com.revature.Project1.Models.User.followers))
+	  com.revature.Project1.Models.User(1775727227042500).receivedChats -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedChats)@1562871002 (PluralAttribute(com.revature.Project1.Models.User.receivedChats))
+	  com.revature.Project1.Models.User(1775727227042500).following -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).following)@291480189 (PluralAttribute(com.revature.Project1.Models.User.following))
+	  com.revature.Project1.Models.User(1775727227042500).likes -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).likes)@2099096727 (PluralAttribute(com.revature.Project1.Models.User.likes))
+	  com.revature.Project1.Models.User(1775727227042500).sentConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).sentConnections)@411408433 (PluralAttribute(com.revature.Project1.Models.User.sentConnections))
+	  com.revature.Project1.Models.User(1775727227042500).posts -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).posts)@2036715183 (PluralAttribute(com.revature.Project1.Models.User.posts))
+	  com.revature.Project1.Models.User(1775727227042500).receivedConnections -> DelayedCollectionInitializer(com.revature.Project1.Models.User(1775727227042500).receivedConnections)@356898740 (PluralAttribute(com.revature.Project1.Models.User.receivedConnections))
+
+2024-08-01T10:20:52.007-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.created_at,u1_0.email,u1_0.first_name,u1_0.is_active,u1_0.is_admin,u1_0.last_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [0] - [2]
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Hydrated EntityKey (com.revature.Project1.Models.User(1775727227042500)): 2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).comments#2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).followers#2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).following#2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).likes#2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).notifications#2
+2024-08-01T10:20:52.035-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).posts#2
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedChats#2
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).receivedConnections#2
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentChats#2
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.o.r.l.o.h.o.r.loading.collection     : (DelayedCollectionInitializer) Current row collection key : com.revature.Project1.Models.User(1775727227042500).sentConnections#2
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Created new entity instance [com.revature.Project1.Models.User(1775727227042500)#2] : 1721457705
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [1] - [just a test]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [2] - [2024-08-01T10:10:05.500105]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [3] - [test@example.com]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [4] - [test1]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [5] - [true]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [6] - [false]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [7] - [test]
+2024-08-01T10:20:52.036-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [8] - [$2a$10$L3JhwY/9f5ajk35AUbaqvOAYaBgZTGhi20qOIIyniMIiYytoCJVmu]
+2024-08-01T10:20:52.037-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Extracted JDBC value [9] - [testt]
+2024-08-01T10:20:52.037-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.hibernate.orm.results.loading.entity   : (EntityResultInitializer) Done materializing entityInstance : com.revature.Project1.Models.User(1775727227042500)#2
+2024-08-01T10:20:52.037-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.loading        : Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@7ce9b84d
+2024-08-01T10:20:52.040-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/likes
+2024-08-01T10:20:52.040-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/likes", parameters={}
+2024-08-01T10:20:52.040-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.revature.Project1.Controllers.LikeController#getAllLikes()
+2024-08-01T10:20:52.040-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1958410855<open>)] for JPA transaction
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@320962761 wrapping org.postgresql.jdbc.PgConnection@54defd69] read-only
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setReadOnly = true
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : begin
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setAutoCommit = false
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2f089783]
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Created new SQL alias : l1_0
+2024-08-01T10:20:52.041-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.revature.Project1.Models.Like(1777057461092100))] with identifierForTableGroup [com.revature.Project1.Models.Like] for NavigablePath [com.revature.Project1.Models.Like] 
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@3bdc2231] with identifierForTableGroup [com.revature.Project1.Models.Like.post] for NavigablePath [com.revature.Project1.Models.Like.post] 
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [org.hibernate.sql.ast.tree.from.LazyTableGroup@6585ba54] with identifierForTableGroup [com.revature.Project1.Models.Like.user] for NavigablePath [com.revature.Project1.Models.Like.user] 
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.revature.Project1.Models.Like(1777057461092100)]
+ |  +-BasicFetch [com.revature.Project1.Models.Like(1777057461092100).createdAt]
+ |  +-CircularFetchImpl [com.revature.Project1.Models.Like(1777057461092100).post]
+ |  \-CircularFetchImpl [com.revature.Project1.Models.Like(1777057461092100).user]
+
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (l1 : com.revature.Project1.Models.Like(1777057461092100)) {
+          primaryTableReference : likes as l1_0
+          TableGroupJoins {
+            left  join LazyTableGroup (p1 : com.revature.Project1.Models.Like(1777057461092100).post) {
+            }
+            left  join LazyTableGroup (u1 : com.revature.Project1.Models.Like(1777057461092100).user) {
+            }
+          }
+        }
+      }
+    }
+
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.orm.results                : Initializer list:
+	  com.revature.Project1.Models.Like(1777057461092100).user -> EntitySelectFetchInitializer(com.revature.Project1.Models.Like(1777057461092100).user)@1671636280 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Like.user])@1234770332)
+	  com.revature.Project1.Models.Like(1777057461092100).post -> EntitySelectFetchInitializer(com.revature.Project1.Models.Like(1777057461092100).post)@2003368383 (ToOneAttributeMapping(NavigableRole[com.revature.Project1.Models.Like.post])@1146761876)
+	  com.revature.Project1.Models.Like(1777057461092100) -> EntityResultInitializer(com.revature.Project1.Models.Like(1777057461092100))@763334857 (SingleTableEntityPersister(com.revature.Project1.Models.Like))
+
+2024-08-01T10:20:52.042-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.hibernate.SQL                        : select l1_0.like_id,l1_0.created_at,l1_0.post_id,l1_0.user_id from likes l1_0
+2024-08-01T10:20:52.070-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2024-08-01T10:20:52.070-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1958410855<open>)]
+2024-08-01T10:20:52.071-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.h.e.t.internal.TransactionImpl         : committing
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setAutoCommit = true
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@320962761 wrapping org.postgresql.jdbc.PgConnection@54defd69]
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] org.postgresql.jdbc.PgConnection         :   setReadOnly = false
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [[]]
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2024-08-01T10:20:52.099-05:00 DEBUG 27928 --- [Project1] [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-01T10:20:57.870-05:00 DEBUG 27928 --- [Project1] [SIGINT handler] java.lang.Runtime                        : Runtime.exit() called with status: 130
+
+java.lang.Throwable: Runtime.exit(130)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179) ~[na:na]
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160) ~[na:na]
+	at java.base/java.lang.Terminator$1.handle(Terminator.java:51) ~[na:na]
+	at java.base/jdk.internal.misc.Signal$1.run(Signal.java:218) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-08-01T10:20:57.871-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2024-08-01T10:20:57.871-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@12299890, started on Thu Aug 01 09:58:37 CDT 2024
+2024-08-01T10:20:57.872-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2024-08-01T10:20:57.873-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Bean 'applicationTaskExecutor' completed its stop procedure
+2024-08-01T10:20:57.873-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147482623
+2024-08-01T10:20:57.874-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Bean 'webServerGracefulShutdown' completed its stop procedure
+2024-08-01T10:20:57.874-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147481599
+2024-08-01T10:20:57.877-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Bean 'webServerStartStop' completed its stop procedure
+2024-08-01T10:20:57.877-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase -2147483647
+2024-08-01T10:20:57.877-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.c.support.DefaultLifecycleProcessor  : Bean 'springBootLoggingLifecycle' completed its stop procedure
+2024-08-01T10:20:57.878-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2024-08-01T10:20:57.879-05:00  INFO 27928 --- [Project1] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-01T10:20:57.879-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.hibernate.internal.SessionFactoryImpl  : HHH000031: Closing
+2024-08-01T10:20:57.879-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@39b9cab0] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@5507584d]
+2024-08-01T10:20:57.879-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.h.s.i.AbstractServiceRegistryImpl      : Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+2024-08-01T10:20:57.879-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] o.h.b.r.i.BootstrapServiceRegistryImpl   : Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
+2024-08-01T10:20:57.880-05:00  INFO 27928 --- [Project1] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : postgres - Shutdown initiated...
+2024-08-01T10:20:57.880-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] com.zaxxer.hikari.pool.HikariPool        : postgres - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2024-08-01T10:20:57.880-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@54defd69: (connection evicted)
+2024-08-01T10:20:57.911-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@12b9e737: (connection evicted)
+2024-08-01T10:20:57.939-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@18418c47: (connection evicted)
+2024-08-01T10:20:57.967-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@5d43012b: (connection evicted)
+2024-08-01T10:20:58.000-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@9ed5eb: (connection evicted)
+2024-08-01T10:20:58.027-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@7863f21a: (connection evicted)
+2024-08-01T10:20:58.056-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@4bab55af: (connection evicted)
+2024-08-01T10:20:58.086-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@473abd9: (connection evicted)
+2024-08-01T10:20:58.116-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@63677a6f: (connection evicted)
+2024-08-01T10:20:58.143-05:00 DEBUG 27928 --- [Project1] [postgres connection closer] com.zaxxer.hikari.pool.PoolBase          : postgres - Closing connection org.postgresql.jdbc.PgConnection@392227b9: (connection evicted)
+2024-08-01T10:20:58.172-05:00 DEBUG 27928 --- [Project1] [SpringApplicationShutdownHook] com.zaxxer.hikari.pool.HikariPool        : postgres - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2024-08-01T10:20:58.172-05:00  INFO 27928 --- [Project1] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : postgres - Shutdown completed.
