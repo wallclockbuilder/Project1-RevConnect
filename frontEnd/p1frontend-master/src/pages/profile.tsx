@@ -382,8 +382,14 @@ const Profile: React.FC = () => {
                                                 <tbody>
                                                     {singlePostContents.length > 0 ? (
                                                         singlePostContents.map((content, index) => (
+
                                                             <tr key={index}>                                                             
                                                                 {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+
+                                                            <tr key={index}>
+                                                               
+                                                                {/* {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+
                                                                     <td>
                                                                         {editingPostId === posts[index].postId ? (
                                                                             <form onSubmit={handleUpdatePost}>
@@ -401,7 +407,14 @@ const Profile: React.FC = () => {
                                                                             </form>
                                                                         ) : null}
                                                                     </td>
+
                                                                 ) : null}
+                                                              ) : null} */}
+
+
+
+
+
                                                                 <td>
                                                                     {editingPostId === posts[index].postId ? (
                                                                         <form onSubmit={handleUpdatePost}>
