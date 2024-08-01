@@ -358,10 +358,7 @@ const Profile: React.FC = () => {
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item">
                                         <a className="nav-link active" href="#tab-posts" data-bs-toggle="tab">Posts</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#tab-followers" data-bs-toggle="tab">Followers</a>
-                                    </li>
+                                    </li>                                
                                 </ul>
 
                                 <div className="tab-content">
@@ -385,9 +382,14 @@ const Profile: React.FC = () => {
                                                 <tbody>
                                                     {singlePostContents.length > 0 ? (
                                                         singlePostContents.map((content, index) => (
+
+                                                            <tr key={index}>                                                             
+                                                                {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+
                                                             <tr key={index}>
                                                                
                                                                 {/* {location.pathname === '/profile' || location.pathname === `/profile/${user?.userId}` ? (
+
                                                                     <td>
                                                                         {editingPostId === posts[index].postId ? (
                                                                             <form onSubmit={handleUpdatePost}>
@@ -405,7 +407,10 @@ const Profile: React.FC = () => {
                                                                             </form>
                                                                         ) : null}
                                                                     </td>
-                                                                ) : null} */}
+
+                                                                ) : null}
+                                                              ) : null} */}
+
 
 
 
