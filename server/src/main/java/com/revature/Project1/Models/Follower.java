@@ -1,7 +1,6 @@
 package com.revature.Project1.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -27,8 +26,7 @@ public class Follower {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Follower() {
-    }
+    public Follower() {}
 
     public Follower(User follower, User following) {
         this.follower = follower;
@@ -56,7 +54,7 @@ public class Follower {
         return following;
     }
 
-    public void setfollowing(User following) {
+    public void setFollowing(User following) {
         this.following = following;
     }
 
