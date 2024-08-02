@@ -4,6 +4,7 @@ package com.revature.Project1.Services;
 import com.revature.Project1.Models.Notification;
 import com.revature.Project1.Models.User;
 import com.revature.Project1.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-
+    @Transactional
     public User updateUser(User user) {
         return userRepository.save(user);
     }
@@ -77,24 +78,24 @@ public class UserService {
         }
     }
 
-//
-//    public boolean isUserTablePopulated() {
-//        long userRepoCount = userRepository.count();
-//        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
-//        System.out.println("userRepository.count() = " + userRepoCount);
-//        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
-//        return userRepoCount > 3;
-//    }
-//
-//    public void populateSampleUsers() {
-//        List<User> sampleUsers = new ArrayList<>();
-//        User user1 = new User("john_doe", "john.doe@example.com", "password", "John", "Doe", "Software Engineer", false, true);
-//        sampleUsers.add(user1);
-//        User user2 =new User("jane_doe", "jane.doe@example.com", "password", "Jane", "Doe", "Chief Technololgy Officer", false, true);
-//        sampleUsers.add(user2);
-//        User user3 = new User("jim_beam", "jim.beam@example.com", "password", "Jim", "Beam", "Chief Information Officer", false, true);
-//        sampleUsers.add(user3);
-//
-//        userRepository.saveAll(sampleUsers);
-//    }
+
+    public boolean isUserTablePopulated() {
+        long userRepoCount = userRepository.count();
+        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("userRepository.count() = " + userRepoCount);
+        System.out.println("-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-=-=-=");
+        return userRepoCount > 3;
+    }
+
+    public void populateSampleUsers() {
+        List<User> sampleUsers = new ArrayList<>();
+        User user1 = new User("john_doe", "john.doe@example.com", "password", "John", "Doe", "Software Engineer", false, true);
+        sampleUsers.add(user1);
+        User user2 =new User("jane_doe", "jane.doe@example.com", "password", "Jane", "Doe", "Chief Technololgy Officer", false, true);
+        sampleUsers.add(user2);
+        User user3 = new User("jim_beam", "jim.beam@example.com", "password", "Jim", "Beam", "Chief Information Officer", false, true);
+        sampleUsers.add(user3);
+
+        userRepository.saveAll(sampleUsers);
+    }
 }

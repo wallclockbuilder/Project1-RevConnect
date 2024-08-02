@@ -1,8 +1,6 @@
 package com.revature.Project1.Models;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -45,48 +43,42 @@ public class User {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Like> likes = new HashSet<>();
-
 
     @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL)
     private Set<Connection> sentConnections = new HashSet<>();
 
-
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private Set<Connection> receivedConnections = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "followers",
+            joinColumns = @JoinColumn(name = "following_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_user_id")
+    )
+    private Set<User> followers = new HashSet<>();
 
-    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL)
-    private Set<Follower> followers = new HashSet<>();
-
-
-    @OneToMany(mappedBy = "following", cascade = CascadeType.ALL)
-    private Set<Follower> following = new HashSet<>();
-
+    @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
+    private Set<User> following = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Notification> notifications = new HashSet<>();
 
-
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private Set<Chat> sentChats = new HashSet<>();
-
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private Set<Chat> receivedChats = new HashSet<>();
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String email, String password, String firstName, String lastName, String bio, Boolean isAdmin, Boolean isActive) {
         this.username = username;
@@ -98,7 +90,6 @@ public class User {
         this.isAdmin = isAdmin;
         this.isActive = isActive;
         this.createdAt = LocalDateTime.now();
-
     }
 
     public Long getUserId() {
@@ -221,19 +212,19 @@ public class User {
         this.receivedConnections = receivedConnections;
     }
 
-    public Set<Follower> getFollowers() {
+    public Set<User> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(Set<Follower> followers) {
+    public void setFollowers(Set<User> followers) {
         this.followers = followers;
     }
 
-    public Set<Follower> getfollowing() {
+    public Set<User> getFollowing() {
         return following;
     }
 
-    public void setfollowing(Set<Follower> following) {
+    public void setFollowing(Set<User> following) {
         this.following = following;
     }
 
@@ -261,4 +252,3 @@ public class User {
         this.receivedChats = receivedChats;
     }
 }
-

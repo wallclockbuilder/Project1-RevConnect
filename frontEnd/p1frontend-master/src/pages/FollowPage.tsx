@@ -7,13 +7,6 @@ import { useAuth } from '../context/AuthContext';
 import Followee from '../components/Followees';
 
 
-
-const samplefollowedUsersArray: User[] = [
-    { userId: 4, username: 'michael_scott', email: 'michael@example.com', firstName: 'Michael', lastName: 'Scott', active: true , admin: false},
-    { userId: 5, username: 'pam_beesly', email: 'pam@example.com', firstName: 'Pam', lastName: 'Beesly' , active: true , admin: false},
-    { userId: 6, username: 'jim_halpert', email: 'jim@example.com', firstName: 'Jim', lastName: 'Halpert' , active: true , admin: false}
-];
-
 const FollowPage: React.FC = () => {
     const { user, token } = useAuth();
     const [usersToFollow, setUsersToFollow] = useState<User[]>([]);
@@ -26,47 +19,6 @@ const FollowPage: React.FC = () => {
     const [loadingFollowers, setLoadingFollowers] = useState<boolean>(true);
 
     console.log("Initial usersToFollow state in FollowPage:", followedUsers);
-
-
-    useEffect(() => {
-        const fetchUsersToFollow = async () => {
-            try {
-                const req = {
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                };
-                const url = `http://localhost:9090/api/users`;
-                const response = await fetch(url, req);
-                console.log("Response:", response);
-                if (response.ok) {
-                    const contentType = response.headers.get("Content-Type");
-                    if (contentType && contentType.includes("application/json")) {
-                        const data = await response.json();
-                        console.log("Fetched usersToFollow data:", data);
-                        if (Array.isArray(data)) {
-                            setUsersToFollow(data.filter((userToFollow: User) => user && userToFollow.userId !== user.userId));
-                        } else {
-                            console.error("Fetched data is not an array:", data);
-                        }
-                    } else {
-                        console.error("Expected JSON response but got", contentType);
-                    }
-                } else {
-                    console.error("Failed to fetch users", response.statusText);
-                }
-            } catch (error) {
-                console.error("Failed to fetch users:", error);
-            } finally {
-                setLoadingUsersToFollow(false);
-            }
-        };
-
-        fetchUsersToFollow();
-    }, [user, token]);
-
 
     useEffect(() => {
         const fetchfollowedUsers = async () => {
@@ -109,6 +61,49 @@ const FollowPage: React.FC = () => {
     
         fetchfollowedUsers();
     }, [user, token, refresh]);
+
+
+    useEffect(() => {
+        const fetchUsersToFollow = async () => {
+            try {
+                const req = {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                const url = `http://localhost:9090/api/users/${user?.userId}/users-to-follow`;
+                const response = await fetch(url, req);
+                console.log("Response:", response);
+                if (response.ok) {
+                    const contentType = response.headers.get("Content-Type");
+                    if (contentType && contentType.includes("application/json")) {
+                        const data = await response.json();
+                        console.log("Fetched usersToFollow data:", data);
+                        if (Array.isArray(data)) {
+                            setUsersToFollow(data.filter((userToFollow: User) => user && userToFollow.userId !== user.userId));
+                        } else {
+                            console.error("Fetched data is not an array:", data);
+                        }
+                    } else {
+                        console.error("Expected JSON response but got", contentType);
+                    }
+                } else {
+                    console.error("Failed to fetch users", response.statusText);
+                }
+            } catch (error) {
+                console.error("Failed to fetch users:", error);
+            } finally {
+                setLoadingUsersToFollow(false);
+            }
+        };
+
+        fetchUsersToFollow();
+    }, [user, token]);
+
+
+    
 
     const handleFollow = async (followerUserId: number, followeeUserId: number) => {
         try {
@@ -163,6 +158,28 @@ const FollowPage: React.FC = () => {
         }
     };
 
+    const handleUnfollow = async (followeeUserId: number) => {
+        try {
+            const response = await fetch(`http://localhost:9090/api/users/${user?.userId}/unfollow/${followeeUserId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (response.ok) {
+                setFollowedUsers(prev => prev.filter(user => user.userId !== followeeUserId));
+                const unfollowedUser = followedUsers.find(user => user.userId === followeeUserId);
+                if (unfollowedUser) {
+                    setUsersToFollow(prev => [...prev, unfollowedUser]);
+                }
+            } else {
+                console.error("Failed to unfollow user:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Failed to unfollow user:", error);
+        }
+    };
 
     useEffect(() => {
         const fetchFollowers = async () => {
@@ -216,7 +233,7 @@ const FollowPage: React.FC = () => {
             </div>
             <div className="follow-column">
                 <h2>Followed Users</h2>
-                <Followee followedUsers={followedUsers} loading = {loadingFollowedUsers}/>
+                <Followee onUnFollow={handleUnfollow} followedUsers={followedUsers} loading = {loadingFollowedUsers}/>
             </div>
             <div className="follow-column">
                 <h2>Followers</h2>
